@@ -1,9 +1,7 @@
 package org.mingtaoz.leetcode.graph;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 // TODO incomplete
 public class MaxPointsOnALine {
@@ -19,26 +17,22 @@ public class MaxPointsOnALine {
 	}
 
 	public int maxPoints(Point[] points) {
-		Map<String, Set<Point>> lineToPointSet = new HashMap<String, Set<Point>>();
 		int max = 0;
 		for (int i = 0; i < points.length; i++) {
+			Map<String, Integer> lineToCount = new HashMap<String, Integer>();
 			for (int j = i + 1; j < points.length; j++) {
 				String key = getLineRep(points[i], points[j]);
-				if (lineToPointSet.containsKey(key)) {
-					Set<Point> set = lineToPointSet.get(key);
-					set.add(points[i]);
-					set.add(points[j]);
-					if (set.size() > max) {
-						max = set.size();
+				if (lineToCount.containsKey(key)) {
+					int count = lineToCount.get(key);
+					if (count + 1 > max) {
+						max = count + 1;
 					}
+					lineToCount.put(key, count + 1);
 				} else {
-					Set<Point> set = new HashSet<Point>();
-					set.add(points[i]);
-					set.add(points[j]);
-					if (set.size() > max) {
-						max = set.size();
+					if (2 > max) {
+						max = 2;
 					}
-					lineToPointSet.put(key, set);
+					lineToCount.put(key, 2);
 				}
 			}
 		}
@@ -71,24 +65,10 @@ public class MaxPointsOnALine {
 		x = Math.abs(x);
 		y = Math.abs(y);
 
-		int z = getLargestDenominator(y, x);
+		double z = (double) y / x;
 
-		ret.append(y / z).append("/").append(x / z);
+		ret.append(z);
 
 		return ret.toString();
-	}
-
-	public int getLargestDenominator(int x, int y) {
-		if (x < y) {
-			int t = x;
-			x = y;
-			y = t;
-		}
-		// x >= y now
-		if ((x / y) * y == x) {
-			return y;
-		} else {
-			return getLargestDenominator(x - y, y);
-		}
 	}
 }

@@ -20,23 +20,24 @@ public class MaxPointsOnALineTest extends TestCase {
 	}
 
 	public void testMaxPoints1() {
-		Point[] input = { new Point(2, 4), new Point(1, 2)};
+		Point[] input = { new Point(2, 4), new Point(1, 2), new Point(2, 2)};
 		int expected = 2;
+		assertEquals(expected, sut.maxPoints(input));
+	}
+
+	public void testMaxPoints2() {
+		Point[] input = { new Point(2, 4), new Point(1, 2), new Point(2, 2), new Point(2, 1)};
+		int expected = 3;
 		assertEquals(expected, sut.maxPoints(input));
 	}
 	
 	public void testGetDivideByRep1() {
-		String expected = "1/1";
-		assertEquals(expected, sut.getDivideByRep(2, 2));
+		String expected = (double) 3/2 + "";
+		assertEquals(expected, sut.getDivideByRep(3, 2));
 	}
 	
 	public void testGetDivideByRep2() {
-		String expected = "2/1";
-		assertEquals(expected, sut.getDivideByRep(4, 2));
-	}
-	
-	public void testGetDivideByRep3() {
-		String expected = "2/3";
-		assertEquals(expected, sut.getDivideByRep(4, 6));
+		String expected = "-" + (double) 2/2 + "";
+		assertEquals(expected, sut.getDivideByRep(-2, 2));
 	}
 }
