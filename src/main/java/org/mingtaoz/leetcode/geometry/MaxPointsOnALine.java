@@ -1,11 +1,8 @@
 package org.mingtaoz.leetcode.geometry;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
-// TODO incomplete
 public class MaxPointsOnALine {
 
 	public static class Point {
@@ -18,25 +15,6 @@ public class MaxPointsOnALine {
 		}
 	}
 
-	public static class PointWrapper {
-		Point p;
-
-		PointWrapper(Point p) {
-			this.p = p;
-		}
-
-		@Override
-		public int hashCode() {
-			return (p.x << 8) + p.y;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			PointWrapper pw = (PointWrapper) obj;
-			return p.x == pw.p.x && p.y == pw.p.y;
-		}
-	}
-
 	public int maxPoints(Point[] points) {
 		if (points == null)
 			return 0;
@@ -44,25 +22,34 @@ public class MaxPointsOnALine {
 			return 1;
 		int max = 0;
 		for (int i = 0; i < points.length; i++) {
-			Map<String, Set<PointWrapper>> lineToPointSet = new HashMap<String, Set<PointWrapper>>();
+			Map<String, Integer> lineToCount = new HashMap<String, Integer>();
+			int overlap = 0, tempMax = 0;
 			for (int j = i + 1; j < points.length; j++) {
-				String key = getLineRep(points[i], points[j]);
-				if (lineToPointSet.containsKey(key)) {
-					Set<PointWrapper> set = lineToPointSet.get(key);
-					set.add(new PointWrapper(points[i]));
-					set.add(new PointWrapper(points[j]));
-					if (set.size() > max) {
-						max = set.size();
-					}
+				// TODO get rid of this special case
+				if (points[i].x == points[j].x && points[i].y == points[j].y) {
+					overlap++;
 				} else {
-					Set<PointWrapper> set = new HashSet<PointWrapper>();
-					set.add(new PointWrapper(points[i]));
-					set.add(new PointWrapper(points[j]));
-					if (set.size() > max) {
-						max = set.size();
+					String key = getLineRep(points[i], points[j]);
+					if (lineToCount.containsKey(key)) {
+						int count = lineToCount.get(key) + 1;
+						if (count > tempMax) {
+							tempMax = count;
+						}
+						lineToCount.put(key, count);
+					} else {
+						if (2 > tempMax) {
+							tempMax = 2;
+						}
+						lineToCount.put(key, 2);
 					}
-					lineToPointSet.put(key, set);
 				}
+			}
+			if (tempMax == 0) {
+				tempMax = 1;
+			}
+			tempMax = tempMax + overlap;
+			if (max < tempMax) {
+				max = tempMax;
 			}
 		}
 		return max;
@@ -71,13 +58,14 @@ public class MaxPointsOnALine {
 	public String getLineRep(Point p1, Point p2) {
 		if (p1.x == p2.x) {
 			return "i " + p1.x;
-		} else if (p1.y == p2.y) {
-			return "0 " + p1.y;
-		} else {
-			String k = getDivideByRep((p1.y - p2.y), (p1.x - p2.x));
-			String b = getDivideByRep(p1.x * p2.y - p2.x * p1.y, p1.x - p2.x);
-			return k + " " + b;
 		}
+		if (p1.y == p2.y) {
+			return "0 " + p1.y;
+		}
+
+		String k = getDivideByRep((p1.y - p2.y), (p1.x - p2.x));
+		String b = getDivideByRep(p1.x * p2.y - p2.x * p1.y, p1.x - p2.x);
+		return k + " " + b;
 	}
 
 	public String getDivideByRep(int y, int x) {

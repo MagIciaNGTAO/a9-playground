@@ -34,11 +34,17 @@ public class MaxPointsOnALineTest extends TestCase {
 
 	public void testMaxPoints3() {
 		Point[] input = { new Point(0, 0), new Point(-1, -1), new Point(0, 0) };
-		int expected = 2;
+		int expected = 3;
 		assertEquals(expected, sut.maxPoints(input));
 	}
 
 	public void testMaxPoints4() {
+		Point[] input = { new Point(0, 0), new Point(0, 0), new Point(0, 0) };
+		int expected = 3;
+		assertEquals(expected, sut.maxPoints(input));
+	}
+	
+	public void testMaxPoints5() {
 		Point[] input = { new Point(0, 0) };
 		int expected = 1;
 		assertEquals(expected, sut.maxPoints(input));
