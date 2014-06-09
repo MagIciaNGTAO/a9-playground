@@ -81,4 +81,33 @@ public class SortList {
 
 		return ret.next;
 	}
+
+	public ListNode insertionSortList(ListNode head) {
+		ListNode front = head, newHead = null;
+
+		while (front != null) {
+			ListNode prev = null;
+			ListNode curr = newHead;
+			// find the place
+			while (curr != null && front.val > curr.val && curr != front) {
+				prev = curr;
+				curr = curr.next;
+			}
+			// insert and moving forward
+			ListNode next = front.next;
+			if (prev == null) {
+				// insert at the beginning
+				front.next = newHead;
+				newHead = front;
+			} else {
+				// insert at the end or in the middle
+				ListNode temp = prev.next;
+				prev.next = front;
+				front.next = temp;
+			}
+			front = next;
+		}
+
+		return newHead;
+	}
 }

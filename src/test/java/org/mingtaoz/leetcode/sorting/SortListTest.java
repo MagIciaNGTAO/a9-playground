@@ -89,4 +89,17 @@ public class SortListTest extends TestCase {
 		ListNode result = sut.sortList(n1);
 		assertEquals(2, result.val);
 	}
+	
+	public void testInsertionSortList1() {
+		ListNode n1 = new ListNode(3);
+		ListNode n2 = new ListNode(4);
+		ListNode n3 = new ListNode(1);
+		n1.next = n2;
+		n2.next = n3;
+
+		ListNode result = sut.insertionSortList(n1);
+		assertEquals(1, result.val);
+		assertEquals(3, result.next.val);
+		assertEquals(4, result.next.next.val);
+	}
 }
