@@ -7,6 +7,22 @@ import java.util.Set;
 
 public class WordBreak {
 
+	/**
+	 * 
+	 * Given a string s and a dictionary of words dict, add spaces in s to
+	 * construct a sentence where each word is a valid dictionary word.
+	 * 
+	 * Return true/false whether string is formable by dictionary.
+	 * 
+	 * For example, given s = "catsanddog", dict = ["cat", "cats", "and",
+	 * "sand", "dog"].
+	 * 
+	 * return true as two solution exist ["cats and dog", "cat sand dog"].
+	 * 
+	 * @param s
+	 * @param dict
+	 * @return
+	 */
 	public boolean wordBreak1(String s, Set<String> dict) {
 		Set<String> looked = new HashSet<String>();
 		return wordBreak1Helper(s, dict, looked);
@@ -68,11 +84,6 @@ public class WordBreak {
 		if (looked.contains(s)) {
 			return null;
 		}
-		if (dict.contains(s)) {
-			List<StringBuilder> ret = new LinkedList<StringBuilder>();
-			ret.add(new StringBuilder(s));
-			return ret;
-		}
 		char[] chars = s.toCharArray();
 		StringBuilder stringBuilder = new StringBuilder();
 		List<StringBuilder> ret = new LinkedList<StringBuilder>();
@@ -81,18 +92,26 @@ public class WordBreak {
 			stringBuilder.append(c);
 			String temp = stringBuilder.toString();
 			if (dict.contains(temp)) {
-				List<StringBuilder> recurse = wordBreak2Helper(
-						s.substring(stringBuilder.length()), dict, looked);
-				if (recurse != null) {
-					for(StringBuilder sb: recurse) {
-						sb.insert(0, temp + " "); // add this string at the beginning
+				String sub = s.substring(stringBuilder.length());
+				if(sub.length() == 0) {
+					ret.add(new StringBuilder().append(temp));
+				} else {
+					List<StringBuilder> recurse = wordBreak2Helper(
+							sub, dict, looked);
+					if (recurse != null) {
+						for(StringBuilder sb: recurse) {
+							sb.insert(0, temp + " "); // add this string at the beginning
+						}
+						ret.addAll(recurse);
 					}
-					ret.addAll(recurse);
 				}
 			}
 		}
-
-		looked.add(s);
+		
+		if(ret.size() == 0) {
+			// nothing found, avoid later lookup
+			looked.add(s);
+		}
 
 		return ret;
 	}
