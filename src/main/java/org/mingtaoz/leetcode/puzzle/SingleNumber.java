@@ -51,6 +51,7 @@ public class SingleNumber {
     public int singleNumberFrom3DuplicatesConstantMemory(int[] A) {
     	int ret = 0;
         
+    	
     	return ret;
     }
 }
