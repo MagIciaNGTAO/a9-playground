@@ -1,9 +1,9 @@
 package org.mingtaoz.leetcode.puzzle;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+// for some reason, leetcode doesn't import Entry by default
+import java.util.Map.Entry;
 
 public class SingleNumber {
 	
@@ -33,14 +33,15 @@ public class SingleNumber {
     	for(int a : A) {
     		if(!visited.containsKey(a)) {
     			visited.put(a, 1);
+    			ret = a;
     		} else {
     			visited.put(a, visited.get(a) + 1);
     		}
     	}
-
-    	for(int a : A) {
-    		if(visited.get(a) == 1) {
-    			ret = a;
+    	
+    	for(Entry<Integer, Integer> entry : visited.entrySet()) {
+    		if(entry.getValue() == 1) {
+    			ret = entry.getKey();
     		}
     	}
     	
