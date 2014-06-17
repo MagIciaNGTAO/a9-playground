@@ -24,7 +24,6 @@ public class CopyRandomListTest extends TestCase {
 		assertEquals(-1, sut.copyRandomList(head).label);
 	}
 
-
 	public void testCopyRandomList2() {
 		RandomListNode head = new RandomListNode(-1);
 		RandomListNode next = new RandomListNode(-1);
