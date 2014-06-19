@@ -1,9 +1,11 @@
 package org.mingtaoz.leetcode.toolbox.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
@@ -38,8 +40,38 @@ public class UndirectedGraph {
 	 * @return
 	 */
 	public static UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+		if(node == null) return node;
 		
-		return null;
+		Map<Integer, UndirectedGraphNode> newNodes = new HashMap<>(); // mapping label with new graph node
+		Set<Integer> marked = new HashSet<>(); // marking visited label in old graph
+		Queue<UndirectedGraphNode> toBeVisit = new LinkedList<>();
+		toBeVisit.add(node);
+		UndirectedGraphNode newSource = new UndirectedGraphNode(node.label);
+		newNodes.put(node.label, newSource);
+		marked.add(node.label);
+		
+		while(!toBeVisit.isEmpty()) {
+			UndirectedGraphNode visiting = toBeVisit.poll();
+			UndirectedGraphNode copyTo = newNodes.get(visiting.label);
+			for(UndirectedGraphNode neighbour : visiting.neighbors) {
+				UndirectedGraphNode newNode;
+				if(!marked.contains(neighbour.label)) {
+					// add to be visited
+					toBeVisit.add(neighbour);
+					// haven't created newNode
+					newNode = new UndirectedGraphNode(neighbour.label);
+					newNodes.put(neighbour.label, newNode);
+					// mark
+					marked.add(neighbour.label);
+				} else {
+					newNode = newNodes.get(neighbour.label);
+				}
+				
+				copyTo.neighbors.add(newNode);
+			}
+		}
+
+		return newSource;
 	}
 
 	/**
