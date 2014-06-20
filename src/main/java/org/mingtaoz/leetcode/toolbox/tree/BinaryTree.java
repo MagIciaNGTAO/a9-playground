@@ -50,6 +50,30 @@ public class BinaryTree {
 		return ret;
 	}
 
+    public int sumNumbers(TreeNode root) {
+    	return sumNumbersHelper(root, 0);
+    }
+    
+    // TODO huhuh not sure why it's working, need to revisit
+    public int sumNumbersHelper(TreeNode root, int prev) {
+    	if(root == null) return prev;
+    	
+    	int ret = 0;
+    	if(root.left != null) {
+    		ret += sumNumbersHelper(root.left, (prev + root.val) * 10);
+    	}
+
+    	if(root.right != null) {
+    		ret += sumNumbersHelper(root.right, (prev + root.val) * 10);
+    	}
+    	
+    	if(ret == 0) {
+    		ret = prev + root.val;
+    	}
+    	
+    	return ret;
+    }
+    
 //	public List<Integer> postorderTraversalIterativel(TreeNode root) {
 //		List<Integer> ret = new LinkedList<Integer>();
 //		Stack<TreeNode> stack = new Stack<TreeNode>();

@@ -45,4 +45,14 @@ public class BinaryTreeTest extends TestCase {
 
 		assertEquals(list.toString(), sut.postorderTraversal(root).toString());
 	}
+	
+	public void testSumNumbers1() {
+		TreeNode root = new TreeNode(1);
+		TreeNode left = new TreeNode(2);
+		TreeNode right = new TreeNode(3);
+		root.left = left;
+		root.right = right;
+
+		assertEquals(25, sut.sumNumbers(root));
+	}
 }

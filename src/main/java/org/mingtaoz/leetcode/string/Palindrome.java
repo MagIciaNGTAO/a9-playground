@@ -81,7 +81,20 @@ public class Palindrome {
 	 * @return
 	 */
 	public int minCut(String s) {
-		return 0;
+		if (isPalindrome(s)) {
+			return 0;
+		}
+		
+		int ret = s.length();
+		StringBuilder subString = new StringBuilder();
+		for(char c :s.toCharArray()) {
+			subString.append(c);
+			if(isPalindrome(subString.toString())) {
+				ret = Math.min(ret, minCut(s.substring(subString.length())));
+			}
+		}
+		
+		return ret + 1;
 	}
 
 }

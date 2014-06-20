@@ -20,7 +20,7 @@ public class PalindromeTest extends TestCase {
 		return new TestSuite(PalindromeTest.class);
 	}
 
-	public void testPartition() {
+	public void testPartition1() {
 		List<List<String>> expected = new LinkedList<List<String>>();
 		List<String> list1 = new LinkedList<String>();
 		list1.add("aa");
@@ -47,6 +47,14 @@ public class PalindromeTest extends TestCase {
 	}
 	
 	public void testMinCut1() {
-		assertEquals(1, sut.minCut(""));
+		assertEquals(1, sut.minCut("aab"));
+	}
+	
+	public void testMinCut2() {
+		assertEquals(2, sut.minCut("abc"));
+	}
+	
+	public void testMinCut3() {
+		assertEquals(0, sut.minCut("aba"));
 	}
 }
