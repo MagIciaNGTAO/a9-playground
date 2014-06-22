@@ -45,16 +45,92 @@ public class PalindromeTest extends TestCase {
 	public void testIsPalindrome3() {
 		assertTrue(sut.isPalindrome("a"));
 	}
-	
+
+	public void testBuildPalintable1() {
+		boolean[][] expected = { { true, true, false }, { false, true, false },
+				{ false, false, true } };
+		int n = expected.length;
+		boolean[][] result = sut.buildPalintable("aab");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				assertEquals(expected[i][j], result[i][j]);
+			}
+		}
+	}
+
+	public void testBuildPalintable2() {
+		boolean[][] expected = { { true, false, false },
+				{ false, true, false }, { false, false, true } };
+		int n = expected.length;
+		boolean[][] result = sut.buildPalintable("abc");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				assertEquals(expected[i][j], result[i][j]);
+			}
+		}
+	}
+
+	public void testBuildPalintable3() {
+		boolean[][] expected = {
+				{ true, false, false, false, false, false, false, false, false,
+						false },
+				{ false, true, false, true, false, true, false, false, false,
+						false },
+				{ false, false, true, false, true, false, true, false, false,
+						false },
+				{ false, false, false, true, false, true, false, false, false,
+						false },
+				{ false, false, false, false, true, false, true, false, false,
+						false },
+				{ false, false, false, false, false, true, false, false, false,
+						false },
+				{ false, false, false, false, false, false, true, false, true,
+						false },
+				{ false, false, false, false, false, false, false, true, false,
+						true },
+				{ false, false, false, false, false, false, false, false, true,
+						false },
+				{ false, false, false, false, false, false, false, false,
+						false, true } };
+		int n = expected.length;
+		boolean[][] result = sut.buildPalintable("cabababcbc");
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				assertEquals(expected[i][j], result[i][j]);
+			}
+		}
+	}
+
 	public void testMinCut1() {
 		assertEquals(1, sut.minCut("aab"));
 	}
-	
+
 	public void testMinCut2() {
 		assertEquals(2, sut.minCut("abc"));
 	}
-	
+
 	public void testMinCut3() {
 		assertEquals(0, sut.minCut("aba"));
 	}
+
+	public void testMinCut4() {
+		int expected = 3;
+		int result = sut.minCut("cabababcbc");
+		assertEquals(expected, result);
+	}
+
+	public void testMinCut5() {
+		int expected = 75;
+		int result = sut
+				.minCut("fifgbeajcacehiicccfecbfhhgfiiecdcjjffbghdidbhbdbfbfjccgbbdcjheccfbhafehieabbdfeigbiaggchaeghaijfbjhi");
+		assertEquals(expected, result);
+	}
+
+	public void testMinCut6() {
+		int expected = 1;
+		int result = sut
+				.minCut("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		assertEquals(expected, result);
+	}
+
 }
