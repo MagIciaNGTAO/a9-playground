@@ -22,9 +22,9 @@ Gas Station<br>
 Clone Graph<br>
 *Palindrome Partitioning II<br>
 Palindrome Partitioning<br>
-//TODO Surrounded Regions<br>
+Surrounded Regions<br>
 Sum Root to Leaf Numbers<br>
-//TODO Longest Consecutive Sequence<br>
+Longest Consecutive Sequence<br>
 //TODO Word Ladder II<br>
 //TODO Word Ladder<br>
 //TODO Valid Palindrome<br>
