@@ -50,53 +50,58 @@ public class BinaryTree {
 		return ret;
 	}
 
-    public int sumNumbers(TreeNode root) {
-    	return sumNumbersHelper(root, 0);
-    }
-    
-    // TODO huhuh not sure why it's working, need to revisit
-    public int sumNumbersHelper(TreeNode root, int prev) {
-    	if(root == null) return prev;
-    	
-    	int ret = 0;
-    	if(root.left != null) {
-    		ret += sumNumbersHelper(root.left, (prev + root.val) * 10);
-    	}
+	public int sumNumbers(TreeNode root) {
+		return sumNumbersHelper(root, 0);
+	}
 
-    	if(root.right != null) {
-    		ret += sumNumbersHelper(root.right, (prev + root.val) * 10);
-    	}
-    	
-    	if(ret == 0) {
-    		ret = prev + root.val;
-    	}
-    	
-    	return ret;
-    }
-    
-//	public List<Integer> postorderTraversalIterativel(TreeNode root) {
-//		List<Integer> ret = new LinkedList<Integer>();
-//		Stack<TreeNode> stack = new Stack<TreeNode>();
-//		TreeNode cur = root, lastVisited = null;
-//		while (cur != null || !stack.isEmpty()) {
-//			if (cur != null) {
-//				stack.push(cur);
-//				cur = cur.left;
-//			} else {
-//				TreeNode parent = stack.peek();
-//				if (parent.right != null && lastVisited != parent.right) {
-//					// make sure pop all the node has right child of the
-//					// previous pop
-//					cur = parent.right;
-//				} else {
-//					stack.pop();
-//					ret.add(parent.val);
-//					lastVisited = parent;
-//				}
-//			}
-//		}
-//		return ret;
-//	}
+	// TODO huhuh not sure why it's working, need to revisit
+	public int sumNumbersHelper(TreeNode root, int prev) {
+		if (root == null)
+			return prev;
+
+		int ret = 0;
+		if (root.left != null) {
+			ret += sumNumbersHelper(root.left, (prev + root.val) * 10);
+		}
+
+		if (root.right != null) {
+			ret += sumNumbersHelper(root.right, (prev + root.val) * 10);
+		}
+
+		if (ret == 0) {
+			ret = prev + root.val;
+		}
+
+		return ret;
+	}
+
+	public int maxPathSum(TreeNode root) {
+		return 0;
+	}
+
+	// public List<Integer> postorderTraversalIterativel(TreeNode root) {
+	// List<Integer> ret = new LinkedList<Integer>();
+	// Stack<TreeNode> stack = new Stack<TreeNode>();
+	// TreeNode cur = root, lastVisited = null;
+	// while (cur != null || !stack.isEmpty()) {
+	// if (cur != null) {
+	// stack.push(cur);
+	// cur = cur.left;
+	// } else {
+	// TreeNode parent = stack.peek();
+	// if (parent.right != null && lastVisited != parent.right) {
+	// // make sure pop all the node has right child of the
+	// // previous pop
+	// cur = parent.right;
+	// } else {
+	// stack.pop();
+	// ret.add(parent.val);
+	// lastVisited = parent;
+	// }
+	// }
+	// }
+	// return ret;
+	// }
 
 	public List<Integer> postorderTraversalIterativel(TreeNode root) {
 		List<Integer> ret = new LinkedList<Integer>();
