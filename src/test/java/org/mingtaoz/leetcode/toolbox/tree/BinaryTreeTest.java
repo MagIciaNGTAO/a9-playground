@@ -45,7 +45,7 @@ public class BinaryTreeTest extends TestCase {
 
 		assertEquals(list.toString(), sut.postorderTraversal(root).toString());
 	}
-	
+
 	public void testSumNumbers1() {
 		TreeNode root = new TreeNode(1);
 		TreeNode left = new TreeNode(2);
@@ -54,5 +54,65 @@ public class BinaryTreeTest extends TestCase {
 		root.right = right;
 
 		assertEquals(25, sut.sumNumbers(root));
+	}
+
+	public void testMaxPathSum1() {
+		TreeNode root = new TreeNode(1);
+		TreeNode left = new TreeNode(2);
+		TreeNode right = new TreeNode(3);
+		root.left = left;
+		root.right = right;
+
+		assertEquals(6, sut.maxPathSum(root));
+	}
+
+	public void testMaxPathSum2() {
+		TreeNode n1 = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		TreeNode n3 = new TreeNode(3);
+		TreeNode n4 = new TreeNode(4);
+
+		n1.left = n2;
+		n2.right = n3;
+		n3.left = n4;
+
+		assertEquals(10, sut.maxPathSum(n1));
+	}
+
+	public void testMaxPathSum3() {
+		TreeNode n1 = new TreeNode(1);
+		TreeNode n2 = new TreeNode(2);
+		TreeNode n3 = new TreeNode(3);
+		TreeNode n4 = new TreeNode(4);
+		TreeNode n5 = new TreeNode(5);
+
+		n1.left = n2;
+		n1.right = n3;
+		n3.left = n4;
+		n3.right = n5;
+
+		assertEquals(12, sut.maxPathSum(n1));
+	}
+
+	public void testMaxPathSum4() {
+		TreeNode n1 = new TreeNode(-3);
+		assertEquals(-3, sut.maxPathSum(n1));
+	}
+
+	public void testMaxPathSum5() {
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(-1);
+		n1.left = n2;
+		assertEquals(2, sut.maxPathSum(n1));
+	}
+
+	public void testMaxPathSum6() {
+		TreeNode n1 = new TreeNode(-6);
+		TreeNode n2 = new TreeNode(3);
+		TreeNode n3 = new TreeNode(2);
+		n1.left = null;
+		n1.right = n2;
+		n2.left = n3;
+		assertEquals(5, sut.maxPathSum(n1));
 	}
 }

@@ -76,7 +76,35 @@ public class BinaryTree {
 	}
 
 	public int maxPathSum(TreeNode root) {
-		return 0;
+		Data ret = maxPathSumHelper(root);
+		return Math.max(ret.maxCanGrow, ret.maxCantGrow);
+	}
+
+	public static class Data {
+		public int maxCantGrow;
+		public int maxCanGrow;
+
+		public Data() {
+		}
+
+		public Data(int maxCantGrow, int maxCanGrow) {
+			this.maxCantGrow = maxCantGrow;
+			this.maxCanGrow = maxCanGrow;
+		}
+	}
+
+	public Data maxPathSumHelper(TreeNode node) {
+		if (node == null)
+			return new Data(Integer.MIN_VALUE, Integer.MIN_VALUE);
+		Data left = maxPathSumHelper(node.left);
+		Data right = maxPathSumHelper(node.right);
+		int maxCanGrow = Math.max(left.maxCanGrow > 0 ? left.maxCanGrow : 0,
+				right.maxCanGrow > 0 ? right.maxCanGrow : 0) + node.val;
+		int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0)
+				+ node.val + (right.maxCanGrow > 0 ? right.maxCanGrow : 0),
+				Math.max(left.maxCantGrow, right.maxCantGrow)); // TODO this part is tricky
+
+		return new Data(maxCantGrow, maxCanGrow);
 	}
 
 	// public List<Integer> postorderTraversalIterativel(TreeNode root) {
