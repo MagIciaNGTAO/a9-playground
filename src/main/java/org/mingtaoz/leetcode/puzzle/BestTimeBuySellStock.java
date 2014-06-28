@@ -77,6 +77,41 @@ public class BestTimeBuySellStock {
 	 * @return
 	 */
 	public int maxProfit3(int[] prices) {
-		return 0;
+		if (prices == null || prices.length == 0 || prices.length == 1)
+			return 0;
+		int n = prices.length;
+		int[] profitOneBuy = new int[n];
+		int min = Integer.MAX_VALUE;
+
+		for (int i = 0; i < n; i++) {
+			if (prices[i] <= min) {
+				min = prices[i];
+				// profitOneBuy[i] = 0;
+			} else {
+				profitOneBuy[i] = prices[i] - min;
+			}
+		}
+
+		int profit = 0;
+		int oneBuyProfie = 0;
+
+		for (int i = 0; i < n; i++) {
+			int tempProfit = 0;
+			min = prices[i];
+			if (oneBuyProfie < profitOneBuy[i]) {
+				// pruning very strict, leetcode narrowed the timer for this :(
+				for (int j = i; j < n; j++) {
+					if (prices[j] <= min) {
+						min = prices[j];
+					} else {
+						tempProfit = Math.max(tempProfit, prices[j] - min);
+					}
+				}
+				profit = Math.max(profit, profitOneBuy[i] + tempProfit);
+			}
+			oneBuyProfie = Math.max(oneBuyProfie, profitOneBuy[i]);
+		}
+
+		return profit;
 	}
 }
