@@ -25,9 +25,9 @@ Palindrome Partitioning<br>
 Surrounded Regions<br>
 Sum Root to Leaf Numbers<br>
 Longest Consecutive Sequence<br>
-//TODO Word Ladder II<br>
-//TODO Word Ladder<br>
-//TODO Valid Palindrome<br>
+*Word Ladder II<br>
+Word Ladder<br>
+Valid Palindrome<br>
 Binary Tree Maximum Path Sum<br>
 *Best Time to Buy and Sell Stock III<br>
 Best Time to Buy and Sell Stock II<br>
