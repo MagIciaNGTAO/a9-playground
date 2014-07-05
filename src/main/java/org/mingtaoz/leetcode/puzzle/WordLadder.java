@@ -115,8 +115,8 @@ public class WordLadder {
 	public List<List<String>> findLadders(String start, String end,
 			Set<String> dict) {
 		List<List<String>> ret = new LinkedList<>();
-		Map<String, List<String>> subGraph = new HashMap<>();
-		Map<String, List<String>> tempSubGraph = new HashMap<>();
+		// to avoid duplicate neighbours
+		Map<String, List<String>> subGraph = new HashMap<>(), tempSubGraph = new HashMap<>();
 		Set<String> visited = new HashSet<String>();
 		Queue<String> curLevel = new LinkedList<String>();
 		Queue<String> nextLevel = new LinkedList<String>();
@@ -144,14 +144,13 @@ public class WordLadder {
 				}
 			}
 			if (curLevel.isEmpty()) {
+				// after reachShortest, exhaust the current BFS
 				curLevel = nextLevel; // nextLevel
 				nextLevel = new LinkedList<String>();
 				subGraph.putAll(tempSubGraph);
 				tempSubGraph = new HashMap<String, List<String>>();
 				if (reachShortest) {
-					// after reachShortest, exhaust the current BFS
-					generateResult(ret, subGraph, start, end);
-					return ret;
+					return generateResult(subGraph, start, end);
 				}
 			}
 		}
@@ -159,8 +158,9 @@ public class WordLadder {
 	}
 
 	// DFS iterative
-	private void generateResult(List<List<String>> result,
+	private List<List<String>> generateResult(
 			Map<String, List<String>> mapVisited, String start, String end) {
+		List<List<String>> result = new LinkedList<>();
 		Map<String, Integer> visited = new HashMap<String, Integer>();
 		// null, 0, 1
 		Stack<String> stack = new Stack<String>();
@@ -191,6 +191,8 @@ public class WordLadder {
 				}
 			}
 		}
+
+		return result;
 	}
 
 	private List<String> reverseCopy(List<String> source) {
