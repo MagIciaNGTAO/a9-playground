@@ -32,12 +32,12 @@ Binary Tree Maximum Path Sum<br>
 *Best Time to Buy and Sell Stock III<br>
 Best Time to Buy and Sell Stock II<br>
 Best Time to Buy and Sell Stock<br>
-//TODO Triangle<br>
-//TODO Pascal's Triangle II<br>
-//TODO Pascal's Triangle<br>
-//TODO Populating Next Right Pointers in Each Node II<br>
-//TODO Populating Next Right Pointers in Each Node<br>
-//TODO Distinct Subsequences<br>
+Triangle<br>
+Pascal's Triangle II<br>
+Pascal's Triangle<br>
+Populating Next Right Pointers in Each Node II<br>
+Populating Next Right Pointers in Each Node<br>
+*Distinct Subsequences<br>
 //TODO Flatten Binary Tree to Linked List<br>
 //TODO Path Sum II<br>
 //TODO Path Sum<br>
