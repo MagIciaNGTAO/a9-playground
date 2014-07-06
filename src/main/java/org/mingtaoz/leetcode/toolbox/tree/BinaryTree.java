@@ -2,15 +2,24 @@ package org.mingtaoz.leetcode.toolbox.tree;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Stack;
 
 public class BinaryTree {
 	public static class TreeNode {
-		int val;
-		TreeNode left;
-		TreeNode right;
+		public int val;
+		public TreeNode left, right;
 
-		TreeNode(int x) {
+		public TreeNode(int x) {
+			val = x;
+		}
+	}
+
+	public class TreeLinkNode {
+		public int val;
+		public TreeLinkNode left, right, next;
+
+		public TreeLinkNode(int x) {
 			val = x;
 		}
 	}
@@ -102,7 +111,9 @@ public class BinaryTree {
 				right.maxCanGrow > 0 ? right.maxCanGrow : 0) + node.val;
 		int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0)
 				+ node.val + (right.maxCanGrow > 0 ? right.maxCanGrow : 0),
-				Math.max(left.maxCantGrow, right.maxCantGrow)); // TODO this part is tricky
+				Math.max(left.maxCantGrow, right.maxCantGrow)); // TODO this
+																// part is
+																// tricky
 
 		return new Data(maxCantGrow, maxCanGrow);
 	}
@@ -155,5 +166,32 @@ public class BinaryTree {
 			}
 		}
 		return ret;
+	}
+
+	// layers traversal ~= BFS
+	// working: both i and ii for populating-next-right-pointers-in-each-node
+	public void connect(TreeLinkNode root) {
+		if (root == null)
+			return;
+		Queue<TreeLinkNode> curLayer = new LinkedList<>(), nextLayer = new LinkedList<>();
+		TreeLinkNode next = null;
+		curLayer.add(root);
+		while (!curLayer.isEmpty()) {
+			TreeLinkNode cur = curLayer.poll();
+			cur.next = next;
+			next = cur;
+			if (cur.right != null) {
+				nextLayer.add(cur.right);
+			}
+			if (cur.left != null) {
+				nextLayer.add(cur.left);
+			}
+			if (curLayer.isEmpty()) {
+				// next layer
+				curLayer = nextLayer;
+				nextLayer = new LinkedList<>();
+				next = null;
+			}
+		}
 	}
 }
