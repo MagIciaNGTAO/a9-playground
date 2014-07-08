@@ -38,11 +38,11 @@ Pascal's Triangle<br>
 Populating Next Right Pointers in Each Node II<br>
 Populating Next Right Pointers in Each Node<br>
 *Distinct Subsequences<br>
-//TODO Flatten Binary Tree to Linked List<br>
-//TODO Path Sum II<br>
-//TODO Path Sum<br>
-//TODO Minimum Depth of Binary Tree<br>
-//TODO Balanced Binary Tree<br>
+Flatten Binary Tree to Linked List<br>
+Path Sum II<br>
+Path Sum<br>
+Minimum Depth of Binary Tree<br>
+*Balanced Binary Tree<br>
 //TODO Convert Sorted List to Binary Search Tree<br>
 //TODO Convert Sorted Array to Binary Search Tree<br>
 //TODO Binary Tree Level Order Traversal II<br>
