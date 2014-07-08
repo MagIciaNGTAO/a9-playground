@@ -9,6 +9,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
 
+import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList;
+
 public class WordLadder {
 
 	/**
@@ -178,7 +180,7 @@ public class WordLadder {
 				retEntry.add(cur);
 				visited.put(cur, 1);
 				if (cur.equals(start)) {
-					result.add(reverseCopy(retEntry));
+					result.add(SinglyLinkedList.reverseCopy(retEntry));
 				}
 				List<String> neighbors = mapVisited.get(cur);
 				if (neighbors != null) {
@@ -193,13 +195,5 @@ public class WordLadder {
 		}
 
 		return result;
-	}
-
-	private List<String> reverseCopy(List<String> source) {
-		List<String> ret = new LinkedList<>();
-		for (String s : source) {
-			ret.add(0, s);
-		}
-		return ret;
 	}
 }

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
+import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList;
+
 public class BinaryTree {
 	public static class TreeNode {
 		public int val;
@@ -193,5 +195,148 @@ public class BinaryTree {
 				next = null;
 			}
 		}
+	}
+
+	/**
+	 * Given a binary tree, flatten it to a linked list in-place.
+	 * 
+	 * TODO still need the stack space?
+	 * 
+	 * @param root
+	 */
+	public void flatten(TreeNode root) {
+		if (root == null)
+			return;
+		TreeNode dummyHead = new TreeNode(-1), dummyCur = dummyHead;
+		Stack<TreeNode> stack = new Stack<>();
+		stack.push(root);
+		while (!stack.isEmpty()) {
+			TreeNode cur = stack.pop();
+			dummyCur.right = cur;
+			dummyCur.left = null;
+			dummyCur = cur;
+			if (cur.right != null) {
+				stack.push(cur.right);
+			}
+			if (cur.left != null) {
+				stack.push(cur.left);
+			}
+		}
+		root = dummyHead.right;
+	}
+
+	/**
+	 * 
+	 * Given a binary tree, find its minimum depth.
+	 * 
+	 * The minimum depth is the number of nodes along the shortest path from the
+	 * root node down to the nearest leaf node.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public int minDepth(TreeNode root) {
+		if (root == null)
+			return 0;
+		if (root.left == null && root.right == null) {
+			// leaf
+			return 1;
+		}
+		if (root.left == null) {
+			return minDepth(root.right) + 1;
+		}
+		if (root.right == null) {
+			return minDepth(root.left) + 1;
+		}
+		return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+	}
+
+	public boolean hasPathSum(TreeNode root, int sum) {
+		if (root == null)
+			return false;
+		if (root.left == null && root.right == null) {
+			return sum - root.val == 0;
+		}
+		if (root.left == null) {
+			return hasPathSum(root.right, sum - root.val);
+		}
+		if (root.right == null) {
+			return hasPathSum(root.left, sum - root.val);
+		}
+		return hasPathSum(root.left, sum - root.val)
+				|| hasPathSum(root.right, sum - root.val);
+	}
+
+	public List<List<Integer>> pathSum(TreeNode root, int sum) {
+		List<List<Integer>> ret = new LinkedList<>();
+		pathSumHelper(root, sum, ret, new LinkedList<>());
+		return ret;
+	}
+
+	private void pathSumHelper(TreeNode root, int sum, List<List<Integer>> ret,
+			List<Integer> cur) {
+		if (root == null)
+			return;
+		if (root.left == null && root.right == null) {
+			cur.add(root.val);
+			if (sum - root.val == 0) {
+				ret.add(SinglyLinkedList.copy(cur));
+			}
+			cur.remove(cur.size() - 1);
+			return;
+		}
+		if (root.left == null) {
+			cur.add(root.val);
+			pathSumHelper(root.right, sum - root.val, ret, cur);
+			cur.remove(cur.size() - 1);
+			return;
+		}
+		if (root.right == null) {
+			cur.add(root.val);
+			pathSumHelper(root.left, sum - root.val, ret, cur);
+			cur.remove(cur.size() - 1);
+			return;
+		}
+		cur.add(root.val);
+		pathSumHelper(root.right, sum - root.val, ret, cur);
+		pathSumHelper(root.left, sum - root.val, ret, cur);
+		cur.remove(cur.size() - 1);
+	}
+
+	/**
+	 * 
+	 * Given a binary tree, determine if it is height-balanced.
+	 * 
+	 * For this problem, a height-balanced binary tree is defined as a binary
+	 * tree in which the depth of the two subtrees of every node never differ by
+	 * more than 1.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public boolean isBalanced(TreeNode root) {
+		if (root == null)
+			return true;
+		return isBalancedHelper(root) != -1;
+	}
+
+	private int isBalancedHelper(TreeNode root) {
+		if (root.left == null && root.right == null) {
+			return 1;
+		}
+		int left = 0, right = 0;
+		if (root.left != null) {
+			left = isBalancedHelper(root.left);
+			if (left == -1)
+				return -1;
+		}
+		if (root.right != null) {
+			right = isBalancedHelper(root.right);
+			if (right == -1)
+				return -1;
+		}
+		int diff = Math.abs(right - left);
+		int depth = Math.max(left, right) + 1;
+		return diff <= 1 ? depth : -1;
 	}
 }
