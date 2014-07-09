@@ -6,6 +6,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList;
+import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList.ListNode;
 
 public class BinaryTree {
 	public static class TreeNode {
@@ -338,5 +339,159 @@ public class BinaryTree {
 		int diff = Math.abs(right - left);
 		int depth = Math.max(left, right) + 1;
 		return diff <= 1 ? depth : -1;
+	}
+
+	/**
+	 * 
+	 * Convert Sorted Array to Binary Search Tree
+	 * 
+	 * Given an array where elements are sorted in ascending order, convert it
+	 * to a height balanced BST.
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public TreeNode sortedArrayToBST(int[] num) {
+		if (num == null || num.length == 0)
+			return null;
+		return sortedArrayToBSTHelper(num, 0, num.length - 1);
+	}
+
+	private TreeNode sortedArrayToBSTHelper(int[] num, int start, int end) {
+		if (start > end)
+			return null;
+		int mid = start + (end - start + 1) / 2;
+		TreeNode cur = new TreeNode(num[mid]);
+		cur.left = sortedArrayToBSTHelper(num, start, mid - 1);
+		cur.right = sortedArrayToBSTHelper(num, mid + 1, end);
+		return cur;
+	}
+
+	/**
+	 * 
+	 * Given a singly linked list where elements are sorted in ascending order,
+	 * convert it to a height balanced BST.
+	 * 
+	 * @param head
+	 * @return
+	 */
+	public TreeNode sortedListToBST(ListNode head) {
+		if (head == null)
+			return null;
+		int n = 0;
+		ListNode cur = head;
+		while (cur != null) {
+			cur = cur.next;
+			n++;
+		}
+		return sortedListToBSTHelper(head, n);
+	}
+
+	// length is number of nodes
+	private TreeNode sortedListToBSTHelper(ListNode start, int length) {
+		if (length < 1) {
+			return null;
+		}
+		if (length == 1) {
+			return new TreeNode(start.val);
+		}
+		int mid = length / 2 + 1, n = 1;
+		ListNode findMid = start;
+		while (n < mid) {
+			findMid = findMid.next;
+			n++;
+		}
+		TreeNode cur = new TreeNode(findMid.val);
+		cur.left = sortedListToBSTHelper(start, mid - 1);
+		cur.right = sortedListToBSTHelper(findMid.next, length - mid);
+		return cur;
+	}
+
+	/**
+	 * 
+	 * Given a binary tree, return the bottom-up level order traversal of its
+	 * nodes' values. (ie, from left to right, level by level from leaf to
+	 * root).
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> levelOrderBottom(TreeNode root) {
+		List<List<Integer>> ret = new LinkedList<>();
+		if (root == null)
+			return ret;
+		Queue<TreeNode> curLevel = new LinkedList<>(), nextLevel = new LinkedList<>();
+		curLevel.add(root);
+		while (!curLevel.isEmpty()) {
+			List<Integer> tempLevel = new LinkedList<>();
+			while (!curLevel.isEmpty()) {
+				TreeNode cur = curLevel.poll();
+				tempLevel.add(cur.val);
+				if (cur.left != null) {
+					nextLevel.add(cur.left);
+				}
+				if (cur.right != null) {
+					nextLevel.add(cur.right);
+				}
+			}
+			curLevel = nextLevel;
+			nextLevel = new LinkedList<>();
+			ret.add(0, tempLevel);
+		}
+		return ret;
+	}
+
+	/**
+	 * Given preorder and inorder traversal of a tree, construct the binary
+	 * tree.
+	 * 
+	 * Note: You may assume that duplicates do not exist in the tree.
+	 * 
+	 * @param preorder
+	 * @param inorder
+	 * @return
+	 */
+	public TreeNode buildTree(int[] preorder, int[] inorder) {
+		return null;
+	}
+
+	/**
+	 * Given inorder and postorder traversal of a tree, construct the binary
+	 * tree.
+	 * 
+	 * Note: You may assume that duplicates do not exist in the tree.
+	 * 
+	 * @param inorder
+	 * @param postorder
+	 * @param dummy
+	 * @return
+	 */
+	public TreeNode buildTree(int[] inorder, int[] postorder, int dummy) {
+		return null;
+	}
+
+	/**
+	 * 
+	 * Given a binary tree, find its maximum depth. The maximum depth is the
+	 * number of nodes along the longest path from the root node down to the
+	 * farthest leaf node.
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public int maxDepth(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		if (root.left == null && root.right == null) {
+			return 1;
+		}
+		if (root.left == null) {
+			return maxDepth(root.right) + 1;
+		}
+		if (root.right == null) {
+			return maxDepth(root.left) + 1;
+		}
+		return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}
 }
