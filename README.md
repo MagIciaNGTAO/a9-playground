@@ -43,12 +43,12 @@ Path Sum II<br>
 Path Sum<br>
 Minimum Depth of Binary Tree<br>
 *Balanced Binary Tree<br>
-//TODO Convert Sorted List to Binary Search Tree<br>
-//TODO Convert Sorted Array to Binary Search Tree<br>
-//TODO Binary Tree Level Order Traversal II<br>
+Convert Sorted List to Binary Search Tree<br>
+Convert Sorted Array to Binary Search Tree<br>
+Binary Tree Level Order Traversal II<br>
 //TODO Construct Binary Tree from Inorder and Postorder Traversal<br>
 //TODO Construct Binary Tree from Preorder and Inorder Traversal<br>
-//TODO Maximum Depth of Binary Tree<br>
+Maximum Depth of Binary Tree<br>
 //TODO Binary Tree Zigzag Level Order Traversal<br>
 //TODO Binary Tree Level Order Traversal<br>
 //TODO Symmetric Tree<br>
