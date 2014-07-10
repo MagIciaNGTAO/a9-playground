@@ -562,4 +562,29 @@ public class BinaryTree {
 		}
 		return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 	}
+
+	public boolean isValidBST(TreeNode root) {
+		if (root == null)
+			return true;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		int pre = Integer.MIN_VALUE;
+		// inorder traversal
+		TreeNode cur = root;
+		while (!stack.isEmpty() || cur != null) {
+			if (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			} else {
+				TreeNode visiting = stack.pop();
+				if (pre >= visiting.val) {
+					return false;
+				}
+				pre = visiting.val;
+				if (visiting.right != null) {
+					cur = visiting.right;
+				}
+			}
+		}
+		return true;
+	}
 }
