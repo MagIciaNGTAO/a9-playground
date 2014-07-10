@@ -46,15 +46,15 @@ Minimum Depth of Binary Tree<br>
 Convert Sorted List to Binary Search Tree<br>
 Convert Sorted Array to Binary Search Tree<br>
 Binary Tree Level Order Traversal II<br>
-//TODO Construct Binary Tree from Inorder and Postorder Traversal<br>
-//TODO Construct Binary Tree from Preorder and Inorder Traversal<br>
+Construct Binary Tree from Inorder and Postorder Traversal<br>
+Construct Binary Tree from Preorder and Inorder Traversal<br>
 Maximum Depth of Binary Tree<br>
 //TODO Binary Tree Zigzag Level Order Traversal<br>
 //TODO Binary Tree Level Order Traversal<br>
 //TODO Symmetric Tree<br>
 //TODO Same Tree<br>
 //TODO Recover Binary Search Tree<br>
-//TODO Validate Binary Search Tree<br>
+Validate Binary Search Tree<br>
 //TODO Interleaving String<br>
 //TODO Unique Binary Search Trees II<br>
 //TODO Unique Binary Search Trees<br>
