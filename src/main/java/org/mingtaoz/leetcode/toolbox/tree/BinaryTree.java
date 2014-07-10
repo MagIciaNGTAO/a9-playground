@@ -452,7 +452,42 @@ public class BinaryTree {
 	 * @return
 	 */
 	public TreeNode buildTree(int[] preorder, int[] inorder) {
-		return null;
+		if (preorder == null || inorder == null) {
+			return null;
+		}
+		if (preorder.length == 0 || inorder.length == 0) {
+			return null;
+		}
+		if (preorder.length != inorder.length) {
+			return null; // exception?
+		}
+		return buildTreeHelper(preorder, inorder, 0, preorder.length - 1, 0,
+				preorder.length - 1);
+	}
+
+	private TreeNode buildTreeHelper(int[] preorder, int[] inorder,
+			int preStart, int preEnd, int inStart, int inEnd) {
+		if (preStart > preEnd) {
+			return null;
+		}
+		int currentValue = preorder[preStart];
+		TreeNode currentNode = new TreeNode(currentValue);
+		if (preStart == preEnd) {
+			return currentNode;
+		}
+		// find root in inorder array
+		int i = inStart;
+		for (; i < inEnd; i++) {
+			if (currentValue == inorder[i]) {
+				break;
+			}
+		}
+		// recursively find right and right, tricky part is figure out the index
+		currentNode.left = buildTreeHelper(preorder, inorder, preStart + 1,
+				preStart + i - inStart, inStart, i - 1);
+		currentNode.right = buildTreeHelper(preorder, inorder, preStart + i
+				- inStart + 1, preEnd, i + 1, inEnd);
+		return currentNode;
 	}
 
 	/**
@@ -466,8 +501,41 @@ public class BinaryTree {
 	 * @param dummy
 	 * @return
 	 */
-	public TreeNode buildTree(int[] inorder, int[] postorder, int dummy) {
-		return null;
+	public TreeNode buildTree2(int[] inorder, int[] postorder) {
+		if (postorder == null || inorder == null) {
+			return null;
+		}
+		if (postorder.length == 0 || inorder.length == 0) {
+			return null;
+		}
+		if (postorder.length != inorder.length) {
+			return null; // exception?
+		}
+		return buildTreeHelper2(inorder, postorder, 0, postorder.length - 1, 0,
+				postorder.length - 1);
+	}
+
+	public TreeNode buildTreeHelper2(int[] inorder, int[] postorder,
+			int inStart, int inEnd, int postStart, int postEnd) {
+		if (inStart > inEnd) {
+			return null;
+		}
+		TreeNode currentNode = new TreeNode(postorder[postEnd]);
+		if (inStart == inEnd) {
+			return currentNode;
+		}
+		// find root in inorder
+		int i = inStart;
+		for (; i < inEnd; i++) {
+			if (inorder[i] == postorder[postEnd]) {
+				break;
+			}
+		}
+		currentNode.left = buildTreeHelper2(inorder, postorder, inStart, i - 1,
+				postStart, postStart + i - 1 - inStart);
+		currentNode.right = buildTreeHelper2(inorder, postorder, i + 1, inEnd,
+				postEnd - (inEnd - i), postEnd - 1);
+		return currentNode;
 	}
 
 	/**

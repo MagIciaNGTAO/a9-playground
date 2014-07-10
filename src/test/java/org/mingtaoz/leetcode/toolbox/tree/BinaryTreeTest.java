@@ -173,7 +173,7 @@ public class BinaryTreeTest extends TestCase {
 		Boolean result = sut.isBalanced(n1);
 		assertTrue(result);
 	}
-	
+
 	public void testIsBalanced2() {
 		TreeNode n1 = new TreeNode(5);
 		TreeNode n2 = new TreeNode(4);
@@ -196,5 +196,32 @@ public class BinaryTreeTest extends TestCase {
 		n6.right = n10;
 		Boolean result = sut.isBalanced(n1);
 		assertFalse(result);
+	}
+
+	public void testBuildTree1() {
+		TreeNode root = sut.buildTree(new int[] { 1, 2 }, new int[] { 2, 1 });
+		assertEquals(1, root.val);
+		assertEquals(2, root.left.val);
+	}
+
+	public void testBuildTree2() {
+		TreeNode root = sut.buildTree(new int[] { 1, 2, 3 }, new int[] { 1, 3,
+				2 });
+		assertEquals(1, root.val);
+		assertEquals(2, root.right.val);
+		assertEquals(3, root.right.left.val);
+	}
+
+	public void testBuildTree21() {
+		TreeNode root = sut.buildTree2(new int[] { 1, 2 }, new int[] { 2, 1 });
+		assertEquals(1, root.val);
+		assertEquals(2, root.right.val);
+	}
+	
+	public void testBuildTree22() {
+		TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2, 1 });
+		assertEquals(1, root.val);
+		assertEquals(2, root.right.val);
+		assertEquals(3, root.right.left.val);
 	}
 }
