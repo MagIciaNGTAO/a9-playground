@@ -1,5 +1,6 @@
 package org.mingtaoz.leetcode.toolbox.tree;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -587,4 +588,79 @@ public class BinaryTree {
 		}
 		return true;
 	}
+
+	/**
+	 * 
+	 * Given a binary tree, return the level order traversal of its nodes'
+	 * values. (ie, from left to right, level by level).
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> levelOrder(TreeNode root) {
+		List<List<Integer>> ret = new LinkedList<>();
+		if (root == null)
+			return ret;
+		Queue<TreeNode> curLayer = new LinkedList<>(), nextLayer = new LinkedList<>();
+		curLayer.add(root);
+		while (!curLayer.isEmpty()) {
+			List<Integer> tempRet = new LinkedList<>();
+			while (!curLayer.isEmpty()) {
+				TreeNode current = curLayer.poll();
+				tempRet.add(current.val);
+				if (current.left != null) {
+					nextLayer.add(current.left);
+				}
+				if (current.right != null) {
+					nextLayer.add(current.right);
+				}
+			}
+			curLayer = nextLayer;
+			nextLayer = new LinkedList<>();
+			ret.add(tempRet);
+		}
+		return ret;
+	}
+
+	/**
+	 * 
+	 * Given a binary tree, return the zigzag level order traversal of its
+	 * nodes' values. (ie, from left to right, then right to left for the next
+	 * level and alternate between).
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+		List<List<Integer>> ret = new LinkedList<>();
+		if (root == null)
+			return ret;
+		Queue<TreeNode> curLayer = new LinkedList<>(), nextLayer = new LinkedList<>();
+		curLayer.add(root);
+		boolean even = false;
+		while (!curLayer.isEmpty()) {
+			List<Integer> tempRet = new LinkedList<>();
+			while (!curLayer.isEmpty()) {
+				TreeNode current = curLayer.poll();
+				if (even) {
+					tempRet.add(0, current.val);
+				} else {
+					tempRet.add(current.val);
+				}
+				if (current.left != null) {
+					nextLayer.add(current.left);
+				}
+				if (current.right != null) {
+					nextLayer.add(current.right);
+				}
+			}
+			curLayer = nextLayer;
+			nextLayer = new LinkedList<>();
+			ret.add(tempRet);
+			even = !even;
+		}
+		return ret;
+	}
+	
+	
 }
