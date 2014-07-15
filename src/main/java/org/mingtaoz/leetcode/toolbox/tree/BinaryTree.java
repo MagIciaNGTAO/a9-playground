@@ -661,6 +661,93 @@ public class BinaryTree {
 		}
 		return ret;
 	}
-	
-	
+
+	/**
+	 * Given a binary tree, check whether it is a mirror of itself (ie,
+	 * symmetric around its center).
+	 * 
+	 * @param root
+	 * @return
+	 */
+	public boolean isSymmetric(TreeNode root) {
+		if (root == null)
+			return true;
+		return symmetricHelper(root.left, root.right);
+	}
+
+	private boolean symmetricHelper(TreeNode left, TreeNode right) {
+		if (left == null && right == null) {
+			return true;
+		}
+		if (left == null || right == null) {
+			return false;
+		}
+		if (left.val != right.val) {
+			return false;
+		}
+		return symmetricHelper(left.left, right.right)
+				&& symmetricHelper(left.right, right.left);
+	}
+
+	/**
+	 * 
+	 * Given two binary trees, write a function to check if they are equal or
+	 * not.
+	 * 
+	 * Two binary trees are considered equal if they are structurally identical
+	 * and the nodes have the same value.
+	 * 
+	 * @param p
+	 * @param q
+	 * @return
+	 */
+	public boolean isSameTree(TreeNode p, TreeNode q) {
+		return isSameTreeHelper(p, q);
+	}
+
+	private boolean isSameTreeHelper(TreeNode left, TreeNode right) {
+		if (left == null && right == null) {
+			return true;
+		}
+		if (left == null || right == null) {
+			return false;
+		}
+		if (left.val != right.val) {
+			return false;
+		}
+		return isSameTree(left.right, right.right)
+				&& isSameTree(left.left, right.left);
+	}
+
+	public void recoverTree(TreeNode root) {
+		TreeNode first = null, second, cur = root, prev = root;
+		boolean foundFirst = false;
+
+		Stack<TreeNode> stack = new Stack<>();
+		while (cur != null || !stack.isEmpty()) {
+			if (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			} else {
+				cur = stack.pop();
+				// visit
+				if (cur.val < prev.val) {
+					if (!foundFirst) {
+						first = prev;
+						foundFirst = true;
+					} else {
+						second = cur;
+						int temp = first.val;
+						first.val = second.val;
+						second.val = temp;
+						break;
+					}
+				}
+				prev = cur;
+				// iterative inorder traversal
+				// TODO
+				
+			}
+		}
+	}
 }
