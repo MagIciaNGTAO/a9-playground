@@ -217,11 +217,40 @@ public class BinaryTreeTest extends TestCase {
 		assertEquals(1, root.val);
 		assertEquals(2, root.right.val);
 	}
-	
+
 	public void testBuildTree22() {
-		TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2, 1 });
+		TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2,
+				1 });
 		assertEquals(1, root.val);
 		assertEquals(2, root.right.val);
 		assertEquals(3, root.right.left.val);
+	}
+
+	public void testRecoverTree() {
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(1);
+		TreeNode n3 = new TreeNode(3);
+
+		n1.left = n3;
+		n1.right = n2;
+
+		sut.recoverTree(n1);
+		assertEquals(3, n2.val);
+		assertEquals(1, n3.val);
+	}
+
+	public void testInorderTraversal() {
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(1);
+		TreeNode n3 = new TreeNode(3);
+
+		n1.left = n2;
+		n1.right = n3;
+
+		List<Integer> ret = sut.inorderTraversal(n1);
+		assertEquals(3, ret.size());
+		assertEquals(1, ret.get(0).intValue());
+		assertEquals(2, ret.get(1).intValue());
+		assertEquals(3, ret.get(2).intValue());
 	}
 }

@@ -719,6 +719,7 @@ public class BinaryTree {
 				&& isSameTree(left.left, right.left);
 	}
 
+	// this is tricky when the first element is one of those
 	public void recoverTree(TreeNode root) {
 		TreeNode first = null, second, cur = root, prev = root;
 		boolean foundFirst = false;
@@ -744,10 +745,25 @@ public class BinaryTree {
 					}
 				}
 				prev = cur;
-				// iterative inorder traversal
-				// TODO
-				
+				cur = cur.right;
 			}
 		}
+	}
+
+	public List<Integer> inorderTraversal(TreeNode root) {
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		List<Integer> ret = new LinkedList<>();
+		TreeNode cur = root;
+		while (cur != null || !stack.isEmpty()) {
+			if (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			} else {
+				cur = stack.pop();
+				ret.add(cur.val);
+				cur = cur.right;
+			}
+		}
+		return ret;
 	}
 }
