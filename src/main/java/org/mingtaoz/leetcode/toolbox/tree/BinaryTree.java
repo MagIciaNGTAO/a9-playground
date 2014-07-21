@@ -719,9 +719,9 @@ public class BinaryTree {
 				&& isSameTree(left.left, right.left);
 	}
 
-	// this is tricky when the first element is one of those
+	// TODO this is tricky when the first element is one of those
 	public void recoverTree(TreeNode root) {
-		TreeNode first = null, second, cur = root, prev = root;
+		TreeNode first = null, second = null, cur = root, prev = null;
 		boolean foundFirst = false;
 
 		Stack<TreeNode> stack = new Stack<>();
@@ -732,22 +732,27 @@ public class BinaryTree {
 			} else {
 				cur = stack.pop();
 				// visit
-				if (cur.val < prev.val) {
+				if (prev != null && cur.val < prev.val) {
 					if (!foundFirst) {
 						first = prev;
+						second = cur;
 						foundFirst = true;
 					} else {
 						second = cur;
 						int temp = first.val;
 						first.val = second.val;
 						second.val = temp;
-						break;
+						return;
 					}
 				}
 				prev = cur;
 				cur = cur.right;
 			}
 		}
+
+		int temp = first.val;
+		first.val = second.val;
+		second.val = temp;		
 	}
 
 	public List<Integer> inorderTraversal(TreeNode root) {

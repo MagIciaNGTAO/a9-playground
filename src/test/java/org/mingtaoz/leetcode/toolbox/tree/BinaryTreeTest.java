@@ -226,7 +226,7 @@ public class BinaryTreeTest extends TestCase {
 		assertEquals(3, root.right.left.val);
 	}
 
-	public void testRecoverTree() {
+	public void testRecoverTree1() {
 		TreeNode n1 = new TreeNode(2);
 		TreeNode n2 = new TreeNode(1);
 		TreeNode n3 = new TreeNode(3);
@@ -239,6 +239,42 @@ public class BinaryTreeTest extends TestCase {
 		assertEquals(1, n3.val);
 	}
 
+	public void testRecoverTree2() {
+		TreeNode n1 = new TreeNode(0);
+		TreeNode n2 = new TreeNode(1);
+
+		n1.left = n2;
+
+		sut.recoverTree(n1);
+		assertEquals(1, n1.val);
+		assertEquals(0, n2.val);
+	}
+
+	public void testRecoverTree3() {
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(1);
+
+		n1.right = n2;
+
+		sut.recoverTree(n1);
+		assertEquals(1, n1.val);
+		assertEquals(2, n2.val);
+	}
+
+	public void testRecoverTree4() {
+		TreeNode n1 = new TreeNode(2);
+		TreeNode n2 = new TreeNode(1);
+		TreeNode n3 = new TreeNode(3);
+
+		n1.left = n2;
+		n2.right = n3;
+
+		sut.recoverTree(n1);
+		assertEquals(3, n1.val);
+		assertEquals(1, n2.val);
+		assertEquals(2, n3.val);
+	}
+	
 	public void testInorderTraversal() {
 		TreeNode n1 = new TreeNode(2);
 		TreeNode n2 = new TreeNode(1);
