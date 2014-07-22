@@ -274,7 +274,7 @@ public class BinaryTreeTest extends TestCase {
 		assertEquals(1, n2.val);
 		assertEquals(2, n3.val);
 	}
-	
+
 	public void testInorderTraversal() {
 		TreeNode n1 = new TreeNode(2);
 		TreeNode n2 = new TreeNode(1);
@@ -288,5 +288,24 @@ public class BinaryTreeTest extends TestCase {
 		assertEquals(1, ret.get(0).intValue());
 		assertEquals(2, ret.get(1).intValue());
 		assertEquals(3, ret.get(2).intValue());
+	}
+
+	public void testNumTrees1() {
+		assertEquals(1, sut.numTrees(1));
+		assertEquals(2, sut.numTrees(2));
+		assertEquals(5, sut.numTrees(3));
+		assertEquals(14, sut.numTrees(4));
+		assertEquals(42, sut.numTrees(5));
+		assertEquals(4862, sut.numTrees(9));
+	}
+
+	public void testGenerateTrees1() {
+		assertEquals(0, sut.generateTrees(0).size());
+		assertEquals(1, sut.generateTrees(1).size());
+		assertEquals(2, sut.generateTrees(2).size());
+		assertEquals(5, sut.generateTrees(3).size());
+		assertEquals(14, sut.generateTrees(4).size());
+		assertEquals(42, sut.generateTrees(5).size());
+		assertEquals(4862, sut.generateTrees(9).size());
 	}
 }

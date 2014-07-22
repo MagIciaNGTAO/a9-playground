@@ -1,6 +1,5 @@
 package org.mingtaoz.leetcode.toolbox.tree;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -739,9 +738,7 @@ public class BinaryTree {
 						foundFirst = true;
 					} else {
 						second = cur;
-						int temp = first.val;
-						first.val = second.val;
-						second.val = temp;
+						exchange(first, second);
 						return;
 					}
 				}
@@ -749,10 +746,13 @@ public class BinaryTree {
 				cur = cur.right;
 			}
 		}
+		exchange(first, second);
+	}
 
-		int temp = first.val;
-		first.val = second.val;
-		second.val = temp;		
+	private static void exchange(TreeNode t1, TreeNode t2) {
+		int temp = t1.val;
+		t1.val = t2.val;
+		t2.val = temp;
 	}
 
 	public List<Integer> inorderTraversal(TreeNode root) {
@@ -770,5 +770,82 @@ public class BinaryTree {
 			}
 		}
 		return ret;
+	}
+
+	/**
+	 * 
+	 * Given n, how many structurally unique BST's (binary search trees) that
+	 * store values 1...n?
+	 * 
+	 * @param n
+	 * @return
+	 */
+	// TODO this output means everything is not strict
+	public int numTrees(int n) {
+		int[] table = new int[n + 1];
+		table[0] = 1;
+		for (int i = 0; i < n; i++) {
+			int sum = 0;
+			for (int j = 0; j <= i; j++) {
+				sum += table[j] * table[i - j];
+			}
+			table[i + 1] = sum;
+		}
+		return table[n];
+	}
+
+	/**
+	 * 
+	 * Given n, generate all structurally unique BST's (binary search trees)
+	 * that store values 1...n.
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public List<TreeNode> generateTrees(int n) {
+		List<TreeNode> list = new LinkedList<>();
+		if (n == 0) {
+			list.add(null);
+			return list;
+		}
+		if (n == 1) {
+			list.add(new TreeNode(1));
+			return list;
+		}
+		list = generateTrees(n - 1);
+		List<TreeNode> ret = new LinkedList<>();
+		// current value as root
+		for (TreeNode node : list) {
+			TreeNode root = new TreeNode(n);
+			root.left = node;
+			ret.add(deepCopy(root));
+		}
+		// current value as right most child and tweeks
+		for (TreeNode node : list) {
+			TreeNode cur = node, prev = node;
+			while (cur.right != null) {
+				TreeNode newNode = new TreeNode(n);
+				TreeNode tempRight = cur.right;
+				cur.right = newNode;
+				newNode.left = tempRight;
+				ret.add(deepCopy(node));
+				// changing state back
+				cur.right = tempRight;
+				prev = cur;
+				cur = cur.right;
+			}
+			cur.right = new TreeNode(n);
+			ret.add(node);
+		}
+		return ret;
+	}
+
+	private TreeNode deepCopy(TreeNode root) {
+		if (root == null)
+			return null;
+		TreeNode newRoot = new TreeNode(root.val);
+		newRoot.left = deepCopy(root.left);
+		newRoot.right = deepCopy(root.right);
+		return newRoot;
 	}
 }
