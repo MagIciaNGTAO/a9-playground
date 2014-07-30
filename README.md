@@ -49,16 +49,16 @@ Binary Tree Level Order Traversal II<br>
 Construct Binary Tree from Inorder and Postorder Traversal<br>
 Construct Binary Tree from Preorder and Inorder Traversal<br>
 Maximum Depth of Binary Tree<br>
-//TODO Binary Tree Zigzag Level Order Traversal<br>
-//TODO Binary Tree Level Order Traversal<br>
-//TODO Symmetric Tree<br>
-//TODO Same Tree<br>
-//TODO Recover Binary Search Tree<br>
+Binary Tree Zigzag Level Order Traversal<br>
+Binary Tree Level Order Traversal<br>
+Symmetric Tree<br>
+Same Tree<br>
+Recover Binary Search Tree<br>
 Validate Binary Search Tree<br>
-//TODO Interleaving String<br>
-//TODO Unique Binary Search Trees II<br>
-//TODO Unique Binary Search Trees<br>
-//TODO Binary Tree Inorder Traversal<br>
+* Interleaving String<br>
+Unique Binary Search Trees II<br>
+Unique Binary Search Trees<br>
+Binary Tree Inorder Traversal<br>
 //TODO Restore IP Addresses<br>
 //TODO Reverse Linked List II<br>
 //TODO Subsets II<br>
