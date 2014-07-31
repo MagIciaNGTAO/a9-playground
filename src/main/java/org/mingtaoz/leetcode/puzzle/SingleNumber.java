@@ -52,7 +52,11 @@ public class SingleNumber {
 		int ret = 0;
 
 		// TODO XNOR ?
-		
+		// XOR is 1,0 -> 1
+		// XNOR is 1,0 -> 0 0,0 -> 1
+		// 1,1,1 -> 1 ?
+		// 0,0,0 -> 0
+		// 1,0,0 -> 
 		
 		return ret;
 	}
