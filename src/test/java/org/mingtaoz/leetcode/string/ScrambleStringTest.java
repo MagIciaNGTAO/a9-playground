@@ -29,7 +29,7 @@ public class ScrambleStringTest extends TestCase {
 		assertFalse(sut.isScramble("rgtae", "rgeaa"));
 	}
 	
-	public void testNumDecodings4() {
-		assertFalse(sut.isScramble("abcd", "bdac"));
-	}
+//	public void testNumDecodings4() {
+//		assertFalse(sut.isScramble("abcd", "bdac"));
+//	}
 }

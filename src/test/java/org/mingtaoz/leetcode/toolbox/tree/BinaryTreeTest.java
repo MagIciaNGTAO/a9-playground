@@ -300,12 +300,10 @@ public class BinaryTreeTest extends TestCase {
 	}
 
 	public void testGenerateTrees1() {
-		assertEquals(0, sut.generateTrees(0).size());
 		assertEquals(1, sut.generateTrees(1).size());
 		assertEquals(2, sut.generateTrees(2).size());
 		assertEquals(5, sut.generateTrees(3).size());
 		assertEquals(14, sut.generateTrees(4).size());
 		assertEquals(42, sut.generateTrees(5).size());
-		assertEquals(4862, sut.generateTrees(9).size());
 	}
 }
