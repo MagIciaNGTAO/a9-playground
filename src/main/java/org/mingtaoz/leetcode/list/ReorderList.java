@@ -21,4 +21,28 @@ public class ReorderList {
 			head = temp;
 		}
 	}
+
+	public ListNode reverse(ListNode head) {
+		ListNode newHead = null, cur = head;
+
+		while (cur != null) {
+			ListNode temp = cur;
+			cur = cur.next;
+			temp.next = newHead;
+			newHead = temp;
+		}
+
+		return newHead;
+	}
+
+	public ListNode findMiddle(ListNode head) {
+		ListNode fast = head, normal = head;
+		while (fast != null && fast.next != null) {
+			fast = fast.next.next;
+			normal = normal.next;
+		}
+
+		return normal;
+	}
+
 }

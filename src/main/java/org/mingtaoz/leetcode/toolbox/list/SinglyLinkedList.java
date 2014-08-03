@@ -5,8 +5,6 @@ import java.util.List;
 
 public class SinglyLinkedList {
 
-	public ListNode head;
-
 	public static class ListNode {
 		public int val;
 		public ListNode next;
@@ -17,36 +15,7 @@ public class SinglyLinkedList {
 		}
 	}
 
-	public SinglyLinkedList() {
-	}
-
-	public ListNode findMiddle() {
-		return findMiddle(head);
-	}
-
-	public ListNode reverse() {
-		return reverse(head);
-	}
-
-	public boolean hasCycle() {
-		return hasCycle(head);
-	}
-
-	public ListNode detectCycle() {
-		return detectCycle(head);
-	}
-
-	public static ListNode findMiddle(ListNode head) {
-		ListNode fast = head, normal = head;
-		while (fast != null && fast.next != null) {
-			fast = fast.next.next;
-			normal = normal.next;
-		}
-
-		return normal;
-	}
-
-	public static ListNode reverse(ListNode head) {
+	public ListNode reverse(ListNode head) {
 		ListNode newHead = null, cur = head;
 
 		while (cur != null) {
@@ -59,7 +28,47 @@ public class SinglyLinkedList {
 		return newHead;
 	}
 
-	public static boolean hasCycle(ListNode head) {
+	// need revisit
+	public ListNode reverseBetween(ListNode head, int m, int n) {
+		if (m == n) {
+			return head;
+		}
+		ListNode reverseLeft = null, cur = head;
+
+		for (int i = 1; i < m && cur != null; i++) {
+			reverseLeft = cur;
+			cur = cur.next;
+		}
+
+		ListNode reverseHead = reverseLeft, reverseEnd = null;
+
+		if (cur == null) {
+			return head;
+		} else {
+			reverseEnd = cur;
+		}
+
+		int i = 0;
+		while (cur != null && i < n - m + 1) {
+			ListNode temp = cur;
+			cur = cur.next;
+			temp.next = reverseHead;
+			reverseHead = temp;
+			i++;
+		}
+
+		reverseEnd.next = cur;
+
+		if (reverseLeft != null) {
+			reverseLeft.next = reverseHead;
+		} else {
+			return reverseHead;
+		}
+
+		return head;
+	}
+
+	public boolean hasCycle(ListNode head) {
 		ListNode fast = head, normal = head;
 		while (fast != null && fast.next != null) {
 			if (fast.next == normal) {
@@ -74,7 +83,7 @@ public class SinglyLinkedList {
 	// fast enter cycle : k - k (normal) - cycle (fast)
 	// normal enter cycle: k - k - cycle (normal) - 2k (fast)
 	// meet: k - k - cycle normal 2k to cycle starting point
-	public static ListNode detectCycle(ListNode head) {
+	public ListNode detectCycle(ListNode head) {
 		ListNode ret = null;
 
 		ListNode fast = head, normal = head;
