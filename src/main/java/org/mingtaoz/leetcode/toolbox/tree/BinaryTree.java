@@ -840,7 +840,7 @@ public class BinaryTree {
 		return ret;
 	}
 
-	private TreeNode deepCopy(TreeNode root) {
+	public TreeNode deepCopy(TreeNode root) {
 		if (root == null)
 			return null;
 		TreeNode newRoot = new TreeNode(root.val);

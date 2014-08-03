@@ -59,13 +59,13 @@ Validate Binary Search Tree<br>
 Unique Binary Search Trees II<br>
 Unique Binary Search Trees<br>
 Binary Tree Inorder Traversal<br>
-//TODO Restore IP Addresses<br>
+Restore IP Addresses<br>
 //TODO Reverse Linked List II<br>
 //TODO Subsets II<br>
-//TODO Decode Ways<br>
-//TODO Gray Code<br>
-//TODO Merge Sorted Array<br>
-//TODO Scramble String<br>
+Decode Ways<br>
+Gray Code<br>
+Merge Sorted Array<br>
+* Scramble String<br>
 //TODO Partition List<br>
 //TODO Maximal Rectangle<br>
 //TODO Largest Rectangle in Histogram<br>

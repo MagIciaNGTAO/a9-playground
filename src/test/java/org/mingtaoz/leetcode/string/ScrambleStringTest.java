@@ -1,35 +1,58 @@
 package org.mingtaoz.leetcode.string;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.junit.Assert.*;
 
-public class ScrambleStringTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
+
+public class ScrambleStringTest {
 
 	private ScrambleString sut;
 
-	public ScrambleStringTest(String testName) {
-		super(testName);
+	@Before
+	public void setup() {
 		sut = new ScrambleString();
 	}
 
-	public static Test suite() {
-		return new TestSuite(ScrambleStringTest.class);
+	@Test
+	public void testReverse1() {
+		assertEquals("ba", sut.reverse("ab"));
 	}
 
-	public void testNumDecodings1() {
+	@Test
+	public void testIsScramble1() {
 		assertTrue(sut.isScramble("great", "rgeat"));
 	}
 
-	public void testNumDecodings2() {
+	@Test
+	public void testIsScramble2() {
 		assertTrue(sut.isScramble("rgtae", "rgeat"));
 	}
 
-	public void testNumDecodings3() {
+	@Test
+	public void testIsScramble3() {
 		assertFalse(sut.isScramble("rgtae", "rgeaa"));
 	}
+
+	@Test
+	public void testIsScramble4() {
+		assertFalse(sut.isScramble("abcd", "bdac"));
+	}
+
+	@Test
+	public void testIsScramble5() {
+		assertFalse(sut.isScramble("abcdefghijklmn", "efghijklmncadb"));
+	}
+
+	@Test
+	public void testIsScramble6() {
+		assertTrue(sut.isScramble("xstjzkfpkggnhjzkpfjoguxvkbuopi",
+				"xbouipkvxugojfpkzjhnggkpfkzjts"));
+	}
 	
-//	public void testNumDecodings4() {
-//		assertFalse(sut.isScramble("abcd", "bdac"));
-//	}
+	@Test
+	public void testIsScramble7() {
+		assertTrue(sut.isScramble("abb", "bab"));
+	}
+
 }

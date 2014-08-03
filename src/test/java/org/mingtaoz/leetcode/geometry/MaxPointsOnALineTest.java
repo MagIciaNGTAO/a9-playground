@@ -12,7 +12,7 @@ public class MaxPointsOnALineTest {
 	private MaxPointsOnALine sut;
 
 	@Before
-	public void setUpClass() {
+	public void setup() {
 		sut = new MaxPointsOnALine();
 	}
 
