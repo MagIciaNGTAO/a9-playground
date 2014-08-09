@@ -30,4 +30,27 @@ public class Subsets {
 		}
 		return ret;
 	}
+
+	public List<List<Integer>> subsets(int[] S) {
+		Arrays.sort(S);
+		List<List<Integer>> ret = new LinkedList<>();
+		Set<String> lookup = new HashSet<>();
+		List<Integer> empty = new LinkedList<>();
+		ret.add(empty);
+		lookup.add(empty.toString());
+		for (int i : S) {
+			List<List<Integer>> temp = new LinkedList<>();
+			for (List<Integer> oldList : ret) {
+				List<Integer> newList = new LinkedList<>();
+				newList.addAll(oldList);
+				newList.add(i);
+				if (!lookup.contains(newList.toString())) {
+					temp.add(newList);
+					lookup.add(newList.toString());
+				}
+			}
+			ret.addAll(temp);
+		}
+		return ret;
+	}
 }
