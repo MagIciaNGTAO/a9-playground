@@ -66,11 +66,11 @@ Decode Ways<br>
 ? Gray Code<br>
 Merge Sorted Array<br>
 * Scramble String<br>
-//TODO Partition List<br>
+Partition List<br>
 //TODO Maximal Rectangle<br>
-//TODO Largest Rectangle in Histogram<br>
-//TODO Remove Duplicates from Sorted List II<br>
-//TODO Remove Duplicates from Sorted List<br>
+** Largest Rectangle in Histogram<br>
+Remove Duplicates from Sorted List II<br>
+Remove Duplicates from Sorted List<br>
 //TODO Search in Rotated Sorted Array II<br>
 //TODO Remove Duplicates from Sorted Array II<br>
 //TODO Word Search<br>
