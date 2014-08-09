@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.truth0.Truth.ASSERT;
 
-public class LargestRectangleTest {
+public class RectangleTest {
 
-	private LargestRectangle sut;
+	private Rectangle sut;
 
 	@Before
 	public void setup() {
-		sut = new LargestRectangle();
+		sut = new Rectangle();
 	}
 
 	@Test
@@ -132,4 +132,23 @@ public class LargestRectangleTest {
 				.is(6);
 	}
 
+	@Test
+	public void testDeleteDuplicates19() {
+		char[][] input = { { '1', '1' }, { '1', '1' } };
+		ASSERT.that(sut.maximalRectangle(input)).is(4);
+	}
+
+	@Test
+	public void testDeleteDuplicates20() {
+		char[][] input = { { '1', '1', '0', '1', '0' },
+				{ '0', '1', '0', '0', '0' }, { '1', '1', '1', '1', '1' },
+				{ '0', '1', '1', '0', '0' }, { '0', '0', '0', '1', '0' } };
+		ASSERT.that(sut.maximalRectangle(input)).is(5);
+	}
+
+	@Test
+	public void testDeleteDuplicates21() {
+		char[][] input = { { '1' } };
+		ASSERT.that(sut.maximalRectangle(input)).is(1);
+	}
 }
