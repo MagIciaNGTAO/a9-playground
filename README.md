@@ -63,18 +63,18 @@ Restore IP Addresses<br>
 * Reverse Linked List II<br>
 Subsets II<br>
 Decode Ways<br>
-? Gray Code<br>
+// Gray Code<br>
 Merge Sorted Array<br>
 * Scramble String<br>
 Partition List<br>
-//TODO Maximal Rectangle<br>
-** Largest Rectangle in Histogram<br>
+Maximal Rectangle<br>
+* Largest Rectangle in Histogram<br>
 Remove Duplicates from Sorted List II<br>
 Remove Duplicates from Sorted List<br>
 //TODO Search in Rotated Sorted Array II<br>
 //TODO Remove Duplicates from Sorted Array II<br>
-//TODO Word Search<br>
-//TODO Subsets<br>
+Word Search<br>
+Subsets<br>
 //TODO Combinations<br>
 //TODO Minimum Window Substring<br>
 //TODO Sort Colors<br>

@@ -18,9 +18,10 @@ public class WordSearch {
 			return false;
 		}
 		int n = board.length, m = board[0].length;
+		boolean[][] mask = getNewMask(n, m);
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
-				if (existHelper(board, word, i, j, getNewMask(n, m))) {
+				if (existHelper(board, word, i, j, mask)) {
 					return true;
 				}
 			}
