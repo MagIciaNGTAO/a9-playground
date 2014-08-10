@@ -55,7 +55,7 @@ Symmetric Tree<br>
 Same Tree<br>
 Recover Binary Search Tree<br>
 Validate Binary Search Tree<br>
-* Interleaving String<br>
+*Interleaving String<br>
 Unique Binary Search Trees II<br>
 Unique Binary Search Trees<br>
 Binary Tree Inorder Traversal<br>
@@ -65,10 +65,10 @@ Subsets II<br>
 Decode Ways<br>
 // Gray Code<br>
 Merge Sorted Array<br>
-* Scramble String<br>
+*Scramble String<br>
 Partition List<br>
 Maximal Rectangle<br>
-* Largest Rectangle in Histogram<br>
+*Largest Rectangle in Histogram<br>
 Remove Duplicates from Sorted List II<br>
 Remove Duplicates from Sorted List<br>
 //TODO Search in Rotated Sorted Array II<br>
@@ -76,7 +76,7 @@ Remove Duplicates from Sorted List<br>
 Word Search<br>
 Subsets<br>
 //TODO Combinations<br>
-//TODO Minimum Window Substring<br>
+*Minimum Window Substring<br>
 //TODO Sort Colors<br>
 //TODO Search a 2D Matrix<br>
 //TODO Set Matrix Zeroes<br>
