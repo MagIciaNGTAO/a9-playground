@@ -1,34 +1,33 @@
 package org.mingtaoz.leetcode.string;
 
+import static org.truth0.Truth.ASSERT;
+
 import java.util.HashSet;
 import java.util.Set;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
+import org.junit.Test;
 
-public class WordBreakTest extends TestCase {
+public class WordBreakTest {
 
 	private WordBreak sut;
 
-	public WordBreakTest(String testName) {
-		super(testName);
+	@Before
+	public void setup() {
 		sut = new WordBreak();
 	}
 
-	public static Test suite() {
-		return new TestSuite(WordBreakTest.class);
-	}
-
+	@Test
 	public void testReverseWordsInString1() {
 		String input = "leetcode";
 		Set<String> dict = new HashSet<String>();
 		dict.add("leet");
 		dict.add("code");
-		
-		assertTrue(sut.wordBreak1(input, dict));
+
+		ASSERT.that(sut.wordBreak1(input, dict)).isTrue();
 	}
 
+	@Test
 	public void testReverseWordsInString2() {
 		String input = "catsanddog";
 		Set<String> dict = new HashSet<String>();
@@ -37,8 +36,8 @@ public class WordBreakTest extends TestCase {
 		dict.add("and");
 		dict.add("sand");
 		dict.add("dog");
-		
-		assertEquals("cat sand dog", sut.wordBreak2(input, dict).get(0));
-		assertEquals("cats and dog", sut.wordBreak2(input, dict).get(1));
+
+		ASSERT.that(sut.wordBreak2(input, dict).get(0)).is("cat sand dog");
+		ASSERT.that(sut.wordBreak2(input, dict).get(1)).is("cats and dog");
 	}
 }
