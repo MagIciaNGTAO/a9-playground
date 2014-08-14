@@ -15,8 +15,62 @@ public class ArraysTest {
 	}
 
 	@Test
+	public void testFindMinIndex1() {
+		int[] A = { 4, 5, 6, 7, 0, 1, 2 };
+		ASSERT.that(sut.findMinIndex(A)).is(4);
+	}
+
+	@Test
+	public void testFindMinIndex2() {
+		int[] A = { 4, 5, 6, 7, 8, 1, 2 };
+		ASSERT.that(sut.findMinIndex(A)).is(5);
+	}
+
+	@Test
+	public void testFindMinIndex3() {
+		int[] A = { 1, 3, 1, 1, 1 };
+		ASSERT.that(sut.findMinIndex(A)).is(2);
+	}
+
+	@Test
+	public void testFindMinIndex4() {
+		int[] A = { 3, 1, 1, 1, 1 };
+		ASSERT.that(sut.findMinIndex(A)).is(1);
+	}
+
+	@Test
+	public void testSearchn1() {
+		int[] A = { 3, 1 };
+		ASSERT.that(sut.search(A, 4)).is(-1);
+	}
+
+	@Test
+	public void testSearchn() {
+		int[] A = { 1, 3 };
+		ASSERT.that(sut.search(A, 0)).is(-1);
+	}
+
+	@Test
+	public void testSearchn2() {
+		int[] A = { 1, 3 };
+		ASSERT.that(sut.search(A, 4)).is(-1);
+	}
+
+	@Test
+	public void testSearch0() {
+		int[] A = { 1 };
+		ASSERT.that(sut.search(A, 0)).is(-1);
+	}
+
+	@Test
 	public void testSearch1() {
 		int[] A = { 4, 5, 6, 7, 0, 1, 2 };
+		ASSERT.that(sut.search(A, 7)).is(3);
+	}
+
+	@Test
+	public void testSearch4() {
+		int[] A = { 4, 4, 4, 7, 0, 1, 2 };
 		ASSERT.that(sut.search(A, 7)).is(3);
 	}
 
@@ -32,6 +86,24 @@ public class ArraysTest {
 		ASSERT.that(sut.search(A, 9)).is(-1);
 	}
 
+	@Test
+	public void testSearch6() {
+		int[] A = { 2, 4, 5, 7, 1 };
+		ASSERT.that(sut.search(A, 0)).is(-1);
+	}
+
+	@Test
+	public void testSearch7() {
+		int[] A = { 1, 3, 1, 1, 1 };
+		ASSERT.that(sut.search(A, 2)).is(-1);
+	}
+
+	@Test
+	public void testSearch8() {
+		int[] A = { 3, 1, 1, 1, 1 };
+		ASSERT.that(sut.search(A, 4)).is(-1);
+	}
+	
 	@Test
 	public void testMerge1() {
 		int[] A = { 1, 3, 5, 7, 0, 0, 0, 0 };

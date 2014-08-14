@@ -19,36 +19,73 @@ public class Arrays {
 	 * @return
 	 */
 	public int search(int[] A, int target) {
+		int minIndex = findMinIndex(A);
+		int left = minIndex, right = left - 1;
+		if (right < 0) {
+			right = A.length - 1;
+		}
+		return searchHelper(A, target, left, right);
+	}
+
+	public int findMinIndex(int[] A) {
 		int left = 0, right = A.length - 1;
 		while (left != right) {
 			int mid = (left + right) / 2;
+			if (A[mid] < A[right]) {
+				right = mid;
+			} else if (A[mid] > A[right]) {
+				left = mid + 1;
+			} else {
+				right = mid;
+			}
+		}
+		return left;
+	}
+
+	// binary search after knonwing the messed up spot
+	public int searchHelper(int[] A, int target, int left, int right) {
+		while (left != right) {
+			if (right - left == 1) {
+				if (A[left] == target) {
+					return left;
+				}
+				if (A[right] == target) {
+					return right;
+				}
+				return -1;
+			}
+			int length = (right - left + 1);
+			if (length <= 0) {
+				length = length + A.length;
+			}
+			int mid = left + length / 2;
+			if (mid >= A.length) {
+				mid = mid - A.length;
+			}
 			if (A[mid] == target) {
 				return mid;
 			} else {
 				if (A[mid] < target) {
-					// 78901236
-					if (A[left] > target && A[right] > target) {
-						left = mid;
-					} else if (A[left] > target && A[right] < target) {
-						left = mid;
-					} else if (A[left] < target && A[right] > target) {
-						left = mid;
-					} else if (A[left] < target && A[right] < target) {
-						// TODO
+					if (left == mid + 1) {
 						return -1;
 					}
+					left = mid + 1;
+					if (left >= A.length) {
+						left = left - A.length;
+					}
 				} else {
-					if (A[left] > target && A[right] > target) {
-						right = mid;
-					} else if (A[left] > target && A[right] < target) {
-
-					} else if (A[left] < target && A[right] > target) {
-
-					} else {
-
+					if (right == mid - 1) {
+						return -1;
+					}
+					right = mid - 1;
+					if (right < 0) {
+						right = right + A.length;
 					}
 				}
 			}
+		}
+		if (left == right && A[left] == target) {
+			return left;
 		}
 		return -1;
 	}
