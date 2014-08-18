@@ -71,19 +71,19 @@ Maximal Rectangle<br>
 *Largest Rectangle in Histogram<br>
 Remove Duplicates from Sorted List II<br>
 Remove Duplicates from Sorted List<br>
-//TODO Search in Rotated Sorted Array II<br>
+*Search in Rotated Sorted Array II<br>
 //TODO Remove Duplicates from Sorted Array II<br>
 Word Search<br>
 Subsets<br>
-//TODO Combinations<br>
+Combinations<br>
 *Minimum Window Substring<br>
 //TODO Sort Colors<br>
 //TODO Search a 2D Matrix<br>
 //TODO Set Matrix Zeroes<br>
-//TODO Edit Distance<br>
+Edit Distance<br>
 //TODO Simplify Path<br>
-//TODO Climbing Stairs<br>
-//TODO Sqrt(x)<br>
+Climbing Stairs<br>
+*Sqrt(x)<br>
 //TODO Text Justification<br>
 //TODO Plus One<br>
 //TODO Valid Number<br>
@@ -120,7 +120,7 @@ Subsets<br>
 //TODO Valid Sudoku<br>
 //TODO Search Insert Position<br>
 //TODO Search for a Range<br>
-//TODO Search in Rotated Sorted Array<br>
+Search in Rotated Sorted Array<br>
 //TODO Longest Valid Parentheses<br>
 //TODO Next Permutation<br>
 //TODO Substring with Concatenation of All Words<br>
