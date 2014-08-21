@@ -18,7 +18,7 @@ public class Arrays {
 	 * @param target
 	 * @return
 	 */
-	public int search(int[] A, int target) {
+	public int search1(int[] A, int target) {
 		int minIndex = findMinIndex(A);
 		int left = minIndex, right = left - 1;
 		if (right < 0) {
@@ -27,8 +27,24 @@ public class Arrays {
 		return searchHelper(A, target, left, right);
 	}
 
+	public boolean search(int[] A, int target) {
+		return search1(A, target) != -1;
+	}
+
 	public int findMinIndex(int[] A) {
 		int left = 0, right = A.length - 1;
+		while (left < right) {
+			// hack!!!
+			if (A[left] == A[left + 1]) {
+				left = left + 1;
+			} else {
+				if (A[right] == A[right - 1]) {
+					right = right - 1;
+				} else {
+					break;
+				}
+			}
+		}
 		while (left != right) {
 			int mid = (left + right) / 2;
 			if (A[mid] < A[right]) {
@@ -44,48 +60,26 @@ public class Arrays {
 
 	// binary search after knonwing the messed up spot
 	public int searchHelper(int[] A, int target, int left, int right) {
-		while (left != right) {
-			if (right - left == 1) {
-				if (A[left] == target) {
-					return left;
-				}
-				if (A[right] == target) {
-					return right;
-				}
-				return -1;
-			}
-			int length = (right - left + 1);
-			if (length <= 0) {
-				length = length + A.length;
-			}
-			int mid = left + length / 2;
-			if (mid >= A.length) {
-				mid = mid - A.length;
-			}
+		if (left > right) {
+			// hack!!! :)
+			int mid = A.length - 1;
 			if (A[mid] == target) {
 				return mid;
+			} else if (A[mid] < target) {
+				left = 0;
 			} else {
-				if (A[mid] < target) {
-					if (left == mid + 1) {
-						return -1;
-					}
-					left = mid + 1;
-					if (left >= A.length) {
-						left = left - A.length;
-					}
-				} else {
-					if (right == mid - 1) {
-						return -1;
-					}
-					right = mid - 1;
-					if (right < 0) {
-						right = right + A.length;
-					}
-				}
+				right = mid;
 			}
 		}
-		if (left == right && A[left] == target) {
-			return left;
+		while (left <= right) {
+			int mid = (left + right + 1) / 2;
+			if (A[mid] == target) {
+				return mid;
+			} else if (A[mid] < target) {
+				left = mid + 1;
+			} else {
+				right = mid - 1;
+			}
 		}
 		return -1;
 	}

@@ -39,6 +39,18 @@ public class ArraysTest {
 	}
 
 	@Test
+	public void testFindMinIndex5() {
+		int[] A = { 1, 1, 1, 3, 1 };
+		ASSERT.that(sut.findMinIndex(A)).is(4);
+	}
+
+	@Test
+	public void testFindMinIndex6() {
+		int[] A = { 2, 2, 2, 0, 2, 2 };
+		ASSERT.that(sut.findMinIndex(A)).is(3);
+	}
+	
+	@Test
 	public void testSearchn1() {
 		int[] A = { 3, 1 };
 		ASSERT.that(sut.search(A, 4)).is(-1);
@@ -93,15 +105,39 @@ public class ArraysTest {
 	}
 
 	@Test
+	public void testSearch10() {
+		int[] A = { 1, 1, 1, 3, 1 };
+		ASSERT.that(sut.search(A, 3)).is(3);
+	}
+	
+	@Test
 	public void testSearch7() {
 		int[] A = { 1, 3, 1, 1, 1 };
-		ASSERT.that(sut.search(A, 2)).is(-1);
+		ASSERT.that(sut.search(A, 3)).is(1);
 	}
 
 	@Test
 	public void testSearch8() {
 		int[] A = { 3, 1, 1, 1, 1 };
 		ASSERT.that(sut.search(A, 4)).is(-1);
+	}
+	
+	@Test
+	public void testSearch9() {
+		int[] A = { 1, 1, 1, 3, 1 };
+		ASSERT.that(sut.search(A, 3)).is(3);
+	}
+	
+	@Test
+	public void testSearch11() {
+		int[] A = { 1, 3 };
+		ASSERT.that(sut.search(A, 1)).is(1);
+	}
+	
+	@Test
+	public void testSearch12() {
+		int[] A = { 2, 0, 1, 1, 1 };
+		ASSERT.that(sut.search(A, 2)).is(0);
 	}
 	
 	@Test
