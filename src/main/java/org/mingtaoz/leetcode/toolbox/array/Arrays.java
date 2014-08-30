@@ -18,7 +18,7 @@ public class Arrays {
 	 * @param target
 	 * @return
 	 */
-	public int search1(int[] A, int target) {
+	public int search(int[] A, int target) {
 		int minIndex = findMinIndex(A);
 		int left = minIndex, right = left - 1;
 		if (right < 0) {
@@ -27,8 +27,8 @@ public class Arrays {
 		return searchHelper(A, target, left, right);
 	}
 
-	public boolean search(int[] A, int target) {
-		return search1(A, target) != -1;
+	public boolean search2(int[] A, int target) {
+		return search(A, target) != -1;
 	}
 
 	public int findMinIndex(int[] A) {

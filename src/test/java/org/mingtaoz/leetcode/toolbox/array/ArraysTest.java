@@ -131,7 +131,7 @@ public class ArraysTest {
 	@Test
 	public void testSearch11() {
 		int[] A = { 1, 3 };
-		ASSERT.that(sut.search(A, 1)).is(1);
+		ASSERT.that(sut.search(A, 1)).is(0);
 	}
 	
 	@Test
