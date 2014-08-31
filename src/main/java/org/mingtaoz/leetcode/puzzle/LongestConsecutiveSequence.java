@@ -44,4 +44,20 @@ public class LongestConsecutiveSequence {
 		}
 		return max;
 	}
+
+	// a random question
+	public int findMaxConsecutiveRepetitions(String s) {
+		char[] characters = s.toCharArray();
+		int max = 0, cur = 1;
+		for (int i = 1; i < characters.length; i++) {
+			if (characters[i - 1] == characters[i]) {
+				if (++cur > max) {
+					max = cur;
+				}
+			} else {
+				cur = 1;
+			}
+		}
+		return max;
+	}
 }

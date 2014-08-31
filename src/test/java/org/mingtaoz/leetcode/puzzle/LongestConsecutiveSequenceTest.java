@@ -37,4 +37,16 @@ public class LongestConsecutiveSequenceTest extends TestCase {
 						2, -1, 9, -9, 5, -3, 6, 1, 5, -1, -2, 9, -9, -4, -6,
 						-5, 6, -1, 3 }));
 	}
+
+	public void testLongestConsecutiveRepetitions1() {
+		assertEquals(2, sut.findMaxConsecutiveRepetitions("aacdefgs"));
+	}
+
+	public void testLongestConsecutiveRepetitions2() {
+		assertEquals(4, sut.findMaxConsecutiveRepetitions("aacdefaaaags"));
+	}
+
+	public void testLongestConsecutiveRepetitions3() {
+		assertEquals(6, sut.findMaxConsecutiveRepetitions("aacdebbbbbbfaaaags"));
+	}
 }
