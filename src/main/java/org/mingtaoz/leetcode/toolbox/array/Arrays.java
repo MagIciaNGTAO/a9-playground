@@ -112,4 +112,27 @@ public class Arrays {
 			A[i + n] = A[i];
 		}
 	}
+
+	public int[] plusOne(int[] digits) {
+		int carry = 1, i = digits.length - 1;
+		while (carry > 0 && i >= 0) {
+			int temp = digits[i] + carry;
+			if (temp >= 10) {
+				digits[i--] = temp - 10;
+				carry = 1;
+			} else {
+				digits[i--] = temp;
+				carry = 0;
+			}
+		}
+		if (carry > 0) {
+			int[] ret = new int[digits.length + 1];
+			ret[0] = 1;
+			for (i = 1; i < digits.length + 1; i++) {
+				ret[i] = digits[i - 1];
+			}
+			return ret;
+		}
+		return digits;
+	}
 }
