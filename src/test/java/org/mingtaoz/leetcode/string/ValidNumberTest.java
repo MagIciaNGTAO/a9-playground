@@ -24,18 +24,42 @@ public class ValidNumberTest {
 	}
 
 	@Test
+	public void testReverseWordsInString23() {
+		String i = " 005047e+6";
+		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
+	}
+	
+	
+	@Test
+	public void testReverseWordsInString22() {
+		String i = "46e0.3";
+		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
+	}
+
+	@Test
+	public void testReverseWordsInString20() {
+		String i = "46.e3";
+		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
+	}
+
+	@Test
+	public void testReverseWordsInString19() {
+		String i = "-.";
+		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
+	}
+
+	@Test
 	public void testReverseWordsInString18() {
 		String i = "-.";
 		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
 	}
 
-	
 	@Test
 	public void testReverseWordsInString17() {
 		String i = "+1.";
 		ASSERT.that(sut.isNumber(i)).is(isNumber(i));
 	}
-	
+
 	@Test
 	public void testReverseWordsInString16() {
 		String i = "-1.";

@@ -1,9 +1,10 @@
-package org.mingtaoz.leetcode.string;
+package org.mingtaoz.leetcode.recursion;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mingtaoz.leetcode.recursion.ScrambleString;
 
 public class ScrambleStringTest {
 

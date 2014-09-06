@@ -3,8 +3,8 @@ package org.mingtaoz.leetcode.puzzle;
 import static org.truth0.Truth.ASSERT;
 
 import org.junit.Test;
-
 import org.junit.Before;
+import org.mingtaoz.leetcode.recursion.Sqrt;
 
 public class SqrtTest {
 

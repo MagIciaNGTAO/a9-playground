@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.string;
+package org.mingtaoz.leetcode.recursion;
 
 import java.util.HashMap;
 import java.util.HashSet;

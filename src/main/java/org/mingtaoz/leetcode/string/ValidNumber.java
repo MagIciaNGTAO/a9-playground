@@ -13,24 +13,23 @@ public class ValidNumber {
 				return false;
 			}
 		}
-
 		for (int i = characters.length - 1; i >= 0; i--) {
 			if (characters[i] >= '0' && characters[i] <= '9') {
 				numberFlag = true;
 			} else if (characters[i] == 'e') {
-				if (eFlag || i == 0 || !numberFlag) {
+				if (eFlag || i == 0 || !numberFlag || dotFlag) {
 					return false;
 				}
-				eFlag = true;
 				numberFlag = false;
+				eFlag = true;
 			} else if (characters[i] == '.') {
-				if (dotFlag || (!numberFlag && eFlag)) {
+				if (dotFlag) {
 					// 000.000.000
 					return false;
 				}
 				dotFlag = true;
 			} else if (characters[i] == '-' || characters[i] == '+') {
-				if ((!numberFlag && eFlag) || i != 0) {
+				if ((!numberFlag) || (i != 0 && characters[i - 1] != 'e')) {
 					// 000.000.000
 					return false;
 				}
@@ -38,6 +37,9 @@ public class ValidNumber {
 				// eveything else
 				return false;
 			}
+		}
+		if (dotFlag && eFlag && !numberFlag) {
+			return false;
 		}
 		return true;
 	}

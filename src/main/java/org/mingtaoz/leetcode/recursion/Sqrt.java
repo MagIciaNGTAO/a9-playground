@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.puzzle;
+package org.mingtaoz.leetcode.recursion;
 
 // TODO it's terriable, but it's 120% by myself ...
 public class Sqrt {
