@@ -72,28 +72,28 @@ Maximal Rectangle<br>
 Remove Duplicates from Sorted List II<br>
 Remove Duplicates from Sorted List<br>
 *Search in Rotated Sorted Array II<br>
-//TODO Remove Duplicates from Sorted Array II<br>
+*Remove Duplicates from Sorted Array II<br>
 Word Search<br>
 Subsets<br>
 Combinations<br>
 *Minimum Window Substring<br>
-//TODO Sort Colors<br>
-//TODO Search a 2D Matrix<br>
-//TODO Set Matrix Zeroes<br>
+Sort Colors<br>
+Search a 2D Matrix<br>
+Set Matrix Zeroes<br>
 Edit Distance<br>
 //TODO Simplify Path<br>
 Climbing Stairs<br>
 *Sqrt(x)<br>
-//TODO Text Justification<br>
-//TODO Plus One<br>
-//TODO Valid Number<br>
-//TODO Add Binary<br>
-//TODO Merge Two Sorted Lists<br>
-//TODO Minimum Path Sum<br>
-//TODO Unique Paths II<br>
-//TODO Unique Paths<br>
-//TODO Rotate List<br>
-//TODO Permutation Sequence<br>
+Text Justification<br>
+Plus One<br>
+*Valid Number<br>
+Add Binary<br>
+Merge Two Sorted Lists<br>
+Minimum Path Sum<br>
+Unique Paths II<br>
+Unique Paths<br>
+Rotate List<br>
+*Permutation Sequence<br>
 //TODO Spiral Matrix II<br>
 //TODO Length of Last Word<br>
 //TODO Insert Interval<br>
