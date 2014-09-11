@@ -100,7 +100,7 @@ Rotate List<br>
 //TODO Merge Intervals<br>
 //TODO Jump Game<br>
 //TODO Spiral Matrix<br>
-//TODO Maximum Subarray<br>
+*Maximum Subarray<br>
 //TODO N-Queens II<br>
 //TODO N-Queens<br>
 //TODO Pow(x, n)<br>
