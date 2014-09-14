@@ -94,16 +94,16 @@ Unique Paths II<br>
 Unique Paths<br>
 Rotate List<br>
 *Permutation Sequence<br>
-//TODO Spiral Matrix II<br>
-//TODO Length of Last Word<br>
-//TODO Insert Interval<br>
-//TODO Merge Intervals<br>
+Spiral Matrix II<br>
+Length of Last Word<br>
+Insert Interval<br>
+Merge Intervals<br>
 Jump Game<br>
-//TODO Spiral Matrix<br>
+Spiral Matrix<br>
 *Maximum Subarray<br>
-//TODO N-Queens II<br>
-//TODO N-Queens<br>
-//TODO Pow(x, n)<br>
+N-Queens II<br>
+N-Queens<br>
+*Pow(x, n)<br>
 //TODO Anagrams<br>
 //TODO Rotate Image<br>
 //TODO Permutations II<br>
