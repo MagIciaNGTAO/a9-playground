@@ -98,7 +98,7 @@ Rotate List<br>
 //TODO Length of Last Word<br>
 //TODO Insert Interval<br>
 //TODO Merge Intervals<br>
-//TODO Jump Game<br>
+Jump Game<br>
 //TODO Spiral Matrix<br>
 *Maximum Subarray<br>
 //TODO N-Queens II<br>

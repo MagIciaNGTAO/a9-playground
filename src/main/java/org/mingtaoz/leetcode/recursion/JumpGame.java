@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class JumpGame {
 
-	
-
 	/**
 	 * Given an array of non-negative integers, you are initially positioned at
 	 * the first index of the array.
@@ -22,15 +20,24 @@ public class JumpGame {
 	 * 
 	 */
 	public boolean canJump(int[] A) {
-		return canJumpHelper(A, 0);
+		if (A.length == 0 || A.length == 1) {
+			return true;
+		}
+		int cl = 1;
+		for (int i = A.length - 2; i > 0; i--) {
+			if (A[i] >= cl) {
+				cl = 1;
+			} else {
+				cl++;
+			}
+		}
+		return A[0] >= cl;
 	}
 
-	// Impl2: backward
-	// TODO this is kinda DP, but not as efficient as Impl1
-	
+	// BAD
 	// Impl1: forward ->
 	private Map<Integer, Boolean> map = new HashMap<>();
-	
+
 	public boolean canJumpHelper(int[] A, int i) {
 		if (map.containsKey(i)) {
 			return map.get(i);
