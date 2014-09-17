@@ -105,10 +105,10 @@ N-Queens II<br>
 N-Queens<br>
 *Pow(x, n)<br>
 //TODO Anagrams<br>
-//TODO Rotate Image<br>
-//TODO Permutations II<br>
-//TODO Permutations<br>
-//TODO Jump Game II<br>
+Rotate Image<br>
+Permutations II<br>
+*Permutations<br>
+*Jump Game II<br>
 //TODO Wildcard Matching<br>
 //TODO Multiply Strings<br>
 //TODO Trapping Rain Water<br>
