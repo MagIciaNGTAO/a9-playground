@@ -1,6 +1,7 @@
 package org.mingtaoz.leetcode.permutation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,13 +9,12 @@ import java.util.Set;
 
 public class Permutations {
 
-	private Set<String> permutated = new HashSet<>();
-
 	public List<List<Integer>> permuteUnique(int[] num) {
 		List<Integer> candidates = new ArrayList<>();
 		for (int n : num) {
 			candidates.add(n);
 		}
+		Collections.sort(candidates);
 		return permuteUniqueHelper(candidates);
 	}
 
@@ -26,22 +26,23 @@ public class Permutations {
 			result.add(temp);
 			return result;
 		}
+		int prev = Integer.MAX_VALUE;
 		for (int i = 0; i < candidates.size(); i++) {
-			int current = candidates.remove(i);
-			List<List<Integer>> subs = permuteUniqueHelper(candidates);
-			candidates.add(i, current);
-			for (List<Integer> sub : subs) {
-				String repr = sub.toString();
-				if(!permutated.contains(repr)) {
-					permutated.add(repr);
+			int current = candidates.get(i);
+			if (current != prev) {
+				candidates.remove(i);
+				List<List<Integer>> subs = permuteUniqueHelper(candidates);
+				candidates.add(i, current);
+				for (List<Integer> sub : subs) {
 					sub.add(0, current);
 				}
+				result.addAll(subs);
+				prev = current;
 			}
-			result.addAll(subs);
 		}
 		return result;
 	}
-	
+
 	public List<List<Integer>> permute(int[] num) {
 		List<Integer> candidates = new ArrayList<>();
 		for (int n : num) {
