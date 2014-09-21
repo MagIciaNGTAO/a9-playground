@@ -109,12 +109,12 @@ Rotate Image<br>
 Permutations II<br>
 *Permutations<br>
 *Jump Game II<br>
-//TODO Wildcard Matching<br>
+*Wildcard Matching<br>
 //TODO Multiply Strings<br>
 //TODO Trapping Rain Water<br>
 First Missing Positive<br>
-//TODO Combination Sum II<br>
-//TODO Combination Sum<br>
+*Combination Sum II<br>
+*Combination Sum<br>
 //TODO Count and Say<br>
 //TODO Sudoku Solver<br>
 //TODO Valid Sudoku<br>
@@ -151,4 +151,4 @@ Search in Rotated Sorted Array<br>
 //TODO Add Two Numbers<br>
 //TODO Longest Substring Without Repeating Characters<br>
 *Median of Two Sorted Arrays<br>
-//TODO Two Sum<br>
+Two Sum<br>
