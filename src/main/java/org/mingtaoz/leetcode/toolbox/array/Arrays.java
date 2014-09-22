@@ -135,4 +135,44 @@ public class Arrays {
 		}
 		return digits;
 	}
+
+	public int[] searchRange(int[] A, int target) {
+		int[] ret = new int[2];
+		ret[0] = -1;
+		ret[1] = -1;
+		int left = 0, right = A.length - 1, mid;
+		while (left <= right && A[left] != A[right]) {
+			mid = (left + right + 1) / 2;
+			if (A[mid] > target) {
+				right = mid - 1;
+			} else if (A[mid] < target) {
+				left = mid + 1;
+			} else {
+				// find larget index -> right
+				int rMid = (mid + right + 1) / 2;
+				while (A[rMid] < target) {
+					rMid = (rMid + right + 1) / 2;
+				}
+				while (A[rMid] > target) {
+					rMid = (rMid + right + 1) / 2;
+				}
+				// find smallest index <- left
+				int lMid = (left + mid + 1) / 2;
+				while (A[rMid] < target) {
+					lMid = (lMid + right + 1) / 2;
+				}
+				while (A[rMid] > target) {
+					lMid = (lMid + right + 1) / 2;
+				}
+				left = lMid;
+				right = rMid;
+				break;
+			}
+		}
+		if (A[left] == A[right]) {
+			ret[0] = left;
+			ret[1] = right;
+		}
+		return ret;
+	}
 }
