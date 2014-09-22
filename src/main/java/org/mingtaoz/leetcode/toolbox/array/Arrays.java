@@ -141,7 +141,7 @@ public class Arrays {
 		ret[0] = -1;
 		ret[1] = -1;
 		int left = 0, right = A.length - 1, mid;
-		while (left <= right && A[left] != A[right]) {
+		while (left <= right) {
 			mid = (left + right + 1) / 2;
 			if (A[mid] > target) {
 				right = mid - 1;
@@ -149,27 +149,29 @@ public class Arrays {
 				left = mid + 1;
 			} else {
 				// find larget index -> right
-				int rMid = (mid + right + 1) / 2;
-				while (A[rMid] < target) {
-					rMid = (rMid + right + 1) / 2;
-				}
-				while (A[rMid] > target) {
-					rMid = (rMid + right + 1) / 2;
+				int rLeft = mid;
+				while (A[right] != A[mid]) {
+					int rMid = (right + rLeft + 1) / 2;
+					if (A[rMid] > A[mid]) {
+						right = rMid - 1;
+					} else {
+						rLeft = rMid;
+					}
 				}
 				// find smallest index <- left
-				int lMid = (left + mid + 1) / 2;
-				while (A[rMid] < target) {
-					lMid = (lMid + right + 1) / 2;
+				int lRight = mid;
+				while (A[left] != A[mid]) {
+					int lMid = (left + lRight) / 2;
+					if (A[lMid] < A[mid]) {
+						left = lMid + 1;
+					} else {
+						lRight = lMid;
+					}
 				}
-				while (A[rMid] > target) {
-					lMid = (lMid + right + 1) / 2;
-				}
-				left = lMid;
-				right = rMid;
 				break;
 			}
 		}
-		if (A[left] == A[right]) {
+		if (A[left] == A[right] && A[left] == target) {
 			ret[0] = left;
 			ret[1] = right;
 		}

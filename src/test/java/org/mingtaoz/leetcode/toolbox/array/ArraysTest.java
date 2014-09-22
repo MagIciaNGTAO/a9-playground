@@ -15,6 +15,13 @@ public class ArraysTest {
 	}
 
 	@Test
+	public void testSearchRange1() {
+		int[] A = { 1, 4 };
+		ASSERT.that(sut.searchRange(A, 4)).is(new int[]{1, 1});
+	}
+
+	
+	@Test
 	public void testPlusOne2() {
 		int[] i = { 9 };
 		int[] o = { 1, 0 };

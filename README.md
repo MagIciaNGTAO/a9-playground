@@ -115,11 +115,11 @@ Permutations II<br>
 First Missing Positive<br>
 *Combination Sum II<br>
 *Combination Sum<br>
-//TODO Count and Say<br>
+Count and Say<br>
 //TODO Sudoku Solver<br>
 //TODO Valid Sudoku<br>
 //TODO Search Insert Position<br>
-//TODO Search for a Range<br>
+Search for a Range<br>
 Search in Rotated Sorted Array<br>
 //TODO Longest Valid Parentheses<br>
 //TODO Next Permutation<br>
