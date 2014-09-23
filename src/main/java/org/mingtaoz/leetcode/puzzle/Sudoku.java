@@ -3,7 +3,7 @@ package org.mingtaoz.leetcode.puzzle;
 public class Sudoku {
 
 	public void solveSudoku(char[][] board) {
-		
+		// brute: keep trying 1-9; call valid
     }
 	
 	public boolean isValidSudoku(char[][] board) {

@@ -19,20 +19,21 @@ public class LongestValidParentheses {
 	 * @return
 	 */
 	public int longestValidParentheses(String s) {
-		Stack<Integer> leftIndexes = new Stack<>();
 		char[] cs = s.toCharArray();
-		int max = 0, n = cs.length, prev = 0, cur = 0;
+		Stack<Integer> stack = new Stack<>();
+		int max = 0, n = cs.length;
+		int[] rec = new int[n];
 		for (int i = 0; i < n; i++) {
 			if (cs[i] == '(') {
-				leftIndexes.push(i);
+				stack.push(i);
 			} else if (cs[i] == ')') {
-				if (!leftIndexes.isEmpty()) {
-					int index = leftIndexes.pop();
-					cur = i - index + 1 + prev;
-					max = Math.max(max, cur);
-				} else {
-					prev = 0;
-					cur = 0;
+				if (!stack.isEmpty()) {
+					int left = stack.pop();
+					rec[i] = i - left + 1;
+					if (left >= 1) {
+						rec[i] += rec[left - 1];
+					}
+					max = Math.max(rec[i], max);
 				}
 			} else {
 				// em ... alright

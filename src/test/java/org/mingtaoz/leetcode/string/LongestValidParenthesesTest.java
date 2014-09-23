@@ -15,15 +15,31 @@ public class LongestValidParenthesesTest {
 	}
 
 	@Test
+	public void testReverseWordsInString6() {
+		ASSERT.that(sut.longestValidParentheses("(()()))))")).is(6);
+	}
+
+	
+	@Test
+	public void testReverseWordsInString5() {
+		ASSERT.that(sut.longestValidParentheses("(()()))")).is(6);
+	}
+	
+	@Test
+	public void testReverseWordsInString4() {
+		ASSERT.that(sut.longestValidParentheses("(()()")).is(4);
+	}
+
+	@Test
 	public void testReverseWordsInString3() {
 		ASSERT.that(sut.longestValidParentheses("(()())")).is(6);
 	}
-	
+
 	@Test
 	public void testReverseWordsInString2() {
 		ASSERT.that(sut.longestValidParentheses("()")).is(2);
 	}
-	
+
 	@Test
 	public void testReverseWordsInString1() {
 		ASSERT.that(sut.longestValidParentheses("()(())")).is(6);

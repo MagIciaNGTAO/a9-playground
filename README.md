@@ -111,17 +111,17 @@ Permutations II<br>
 *Jump Game II<br>
 *Wildcard Matching<br>
 //TODO Multiply Strings<br>
-//TODO Trapping Rain Water<br>
+Trapping Rain Water<br>
 First Missing Positive<br>
 *Combination Sum II<br>
 *Combination Sum<br>
 Count and Say<br>
 //TODO Sudoku Solver<br>
-//TODO Valid Sudoku<br>
-//TODO Search Insert Position<br>
+Valid Sudoku<br>
+Search Insert Position<br>
 Search for a Range<br>
 Search in Rotated Sorted Array<br>
-//TODO Longest Valid Parentheses<br>
+*Longest Valid Parentheses<br>
 //TODO Next Permutation<br>
 //TODO Substring with Concatenation of All Words<br>
 //TODO Divide Two Integers<br>
@@ -147,8 +147,8 @@ Search in Rotated Sorted Array<br>
 //TODO String to Integer (atoi)<br>
 //TODO Reverse Integer<br>
 //TODO ZigZag Conversion<br>
-//TODO Longest Palindromic Substring<br>
+Longest Palindromic Substring<br>
 //TODO Add Two Numbers<br>
-//TODO Longest Substring Without Repeating Characters<br>
+Longest Substring Without Repeating Characters<br>
 *Median of Two Sorted Arrays<br>
 Two Sum<br>
