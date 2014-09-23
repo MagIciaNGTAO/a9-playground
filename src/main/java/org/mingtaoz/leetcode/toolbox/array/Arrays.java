@@ -177,4 +177,23 @@ public class Arrays {
 		}
 		return ret;
 	}
+
+	public int searchInsert(int[] A, int target) {
+		int left = 0, right = A.length - 1, mid;
+		while (left <= right) {
+			mid = (left + right + 1) / 2;
+			if (A[mid] == target) {
+				return mid;
+			} else if (A[mid] < target) {
+				left = mid + 1;
+			} else {
+				right = mid - 1;
+			}
+		}
+		if (right < 0) {
+			return 0;
+		} else {
+			return left;
+		}
+	}
 }
