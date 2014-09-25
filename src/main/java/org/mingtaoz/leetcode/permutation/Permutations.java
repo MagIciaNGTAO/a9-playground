@@ -2,12 +2,83 @@ package org.mingtaoz.leetcode.permutation;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 public class Permutations {
+
+	/**
+	 * 
+	 * Implement next permutation, which rearranges numbers into the
+	 * lexicographically next greater permutation of numbers.
+	 * 
+	 * If such arrangement is not possible, it must rearrange it as the lowest
+	 * possible order (ie, sorted in ascending order).
+	 * 
+	 * The replacement must be in-place, do not allocate extra memory.
+	 * 
+	 * Here are some examples. Inputs are in the left-hand column and its
+	 * corresponding outputs are in the right-hand column. 1,2,3 → 1,3,2 3,2,1 →
+	 * 1,2,3 1,1,5 → 1,5,1
+	 * 
+	 * no disorder until the end, switch last two: 1234->1243 some disorder but
+	 * one in order? 2134->2143 3214->3241 => find last piece of in order and
+	 * switch failed: 4321 => 'switching sort': keep switching left++ and
+	 * right-- 14315 -> 14351 1237654 -> 1247653 'switching sort' -> 1243567
+	 * 1257643 -> 1263457 -> ; 16375 -> 16537
+	 * 
+	 * @param num
+	 */
+	// TODO simplify?
+	public void nextPermutation(int[] num) {
+		int prev = num[0], cur;
+		if (num.length == 1) {
+			return;
+		}
+		int recentDown = num[0] > num[1] ? 0 : -1, recentUp = num[1] > num[0] ? 0
+				: -1, n = num.length;
+		for (int i = 1; i < n; i++) {
+			cur = num[i];
+			if (cur > prev) {
+				recentUp = i - 1;
+			} else if (cur < prev) {
+				recentDown = i - 1;
+			} else {
+				// TODO em ...
+			}
+			prev = cur;
+		}
+		if (recentUp > recentDown) {
+			// switch last two not equal
+			int last = n - 1;
+			while (num[last] == num[last - 1]) {
+				last--;
+			}
+			int temp = num[last - 1];
+			num[last - 1] = num[last];
+			num[last] = temp;
+		} else {
+			if (recentUp != -1) {
+				// find closest to recentUp and switch siwth recentUp
+				int temp = num[recentUp];
+				int search = n - 1;
+				// TODO could be a binary search as it's sorted desc
+				while (num[search] <= temp && search > recentUp) {
+					search--;
+				}
+				num[recentUp] = num[search];
+				num[search] = temp;
+				// switch sort
+			}
+			n--;
+			recentUp++;
+			while (n > recentUp) {
+				int temp = num[n];
+				num[n--] = num[recentUp];
+				num[recentUp++] = temp;
+			}
+		}
+	}
 
 	public List<List<Integer>> permuteUnique(int[] num) {
 		List<Integer> candidates = new ArrayList<>();

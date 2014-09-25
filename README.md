@@ -122,7 +122,7 @@ Search Insert Position<br>
 Search for a Range<br>
 Search in Rotated Sorted Array<br>
 *Longest Valid Parentheses<br>
-//TODO Next Permutation<br>
+*Next Permutation<br>
 //TODO Substring with Concatenation of All Words<br>
 //TODO Divide Two Integers<br>
 //TODO Implement strStr()<br>

@@ -4,8 +4,41 @@ public class Sudoku {
 
 	public void solveSudoku(char[][] board) {
 		// brute: keep trying 1-9; call valid
-    }
-	
+		int n = board.length, dots = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				if (board[i][j] == '.') {
+					dots++;
+				}
+			}
+		}
+		solveSudokuHelper(board, dots, 0);
+	}
+
+	// TOOD em ... still not good at this kind of recursion
+	public boolean solveSudokuHelper(char[][] board, int dots, int seq) {
+		if (dots == 0) {
+			// found one solution
+			return true;
+		}
+		int n = board.length;
+		int i = seq / n;
+		int j = seq % n;
+		if (board[i][j] == '.') {
+			for (int v = 0; v < 9; v++) {
+				board[i][j] = (char) (v + '1');
+				if (isValidSudoku(board)
+						&& solveSudokuHelper(board, dots - 1, seq + 1)) {
+					return true;
+				}
+			}
+			board[i][j] = '.';
+			return false;
+		} else {
+			return solveSudokuHelper(board, dots, seq + 1);
+		}
+	}
+
 	public boolean isValidSudoku(char[][] board) {
 		int n = board.length;
 		// rule 1
