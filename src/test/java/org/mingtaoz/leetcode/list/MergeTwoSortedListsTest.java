@@ -7,11 +7,11 @@ import static org.truth0.Truth.ASSERT;
 
 public class MergeTwoSortedListsTest {
 
-	private MergeTwoSortedLists sut;
+	private MergeSortedLists sut;
 
 	@Before
 	public void setup() {
-		sut = new MergeTwoSortedLists();
+		sut = new MergeSortedLists();
 	}
 
 	@Test
