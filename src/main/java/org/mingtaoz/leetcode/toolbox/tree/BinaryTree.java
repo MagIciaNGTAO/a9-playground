@@ -9,6 +9,7 @@ import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList;
 import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList.ListNode;
 
 public class BinaryTree {
+
 	public static class TreeNode {
 		public int val;
 		public TreeNode left, right;
@@ -56,8 +57,8 @@ public class BinaryTree {
 		List<Integer> ret = new LinkedList<Integer>();
 		if (root == null)
 			return ret;
-		ret.addAll(postorderTraversal(root.left));
-		ret.addAll(postorderTraversal(root.right));
+		ret.addAll(postorderTraversalIterativelMine(root.left));
+		ret.addAll(postorderTraversalIterativelMine(root.right));
 		ret.add(root.val);
 		return ret;
 	}
@@ -66,24 +67,32 @@ public class BinaryTree {
 		return sumNumbersHelper(root, 0);
 	}
 
-	// TODO huhuh not sure why it's working, need to revisit
+	/**
+	 * 
+	 * Sum Root to Leaf Numbers
+	 * 
+	 * @param root
+	 * @param prev
+	 * @return
+	 */
 	public int sumNumbersHelper(TreeNode root, int prev) {
-		if (root == null)
+		if (root == null) {
+			// guard the initial case
 			return prev;
-
+		}
 		int ret = 0;
 		if (root.left != null) {
+			// with left child
 			ret += sumNumbersHelper(root.left, (prev + root.val) * 10);
 		}
-
 		if (root.right != null) {
+			// with right child
 			ret += sumNumbersHelper(root.right, (prev + root.val) * 10);
 		}
-
 		if (ret == 0) {
+			// a leaf
 			ret = prev + root.val;
 		}
-
 		return ret;
 	}
 
@@ -105,47 +114,56 @@ public class BinaryTree {
 		}
 	}
 
+	public void test(Integer i) {
+		// ok it's immutable :)
+	}
+
+	// TODO refactor: could return a single integer, but keep the maxcantgrow as
+	// an object
 	public Data maxPathSumHelper(TreeNode node) {
 		if (node == null)
 			return new Data(Integer.MIN_VALUE, Integer.MIN_VALUE);
 		Data left = maxPathSumHelper(node.left);
 		Data right = maxPathSumHelper(node.right);
+		// after knowing the left and right return
+		// calculate maxCanGrow with either branch
+		// calculate maxCantGrow with both branch
 		int maxCanGrow = Math.max(left.maxCanGrow > 0 ? left.maxCanGrow : 0,
 				right.maxCanGrow > 0 ? right.maxCanGrow : 0) + node.val;
 		int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0)
 				+ node.val + (right.maxCanGrow > 0 ? right.maxCanGrow : 0),
-				Math.max(left.maxCantGrow, right.maxCantGrow)); // TODO this
-																// part is
-																// tricky
+				Math.max(left.maxCantGrow, right.maxCantGrow));
 
 		return new Data(maxCantGrow, maxCanGrow);
 	}
 
-	// public List<Integer> postorderTraversalIterativel(TreeNode root) {
-	// List<Integer> ret = new LinkedList<Integer>();
-	// Stack<TreeNode> stack = new Stack<TreeNode>();
-	// TreeNode cur = root, lastVisited = null;
-	// while (cur != null || !stack.isEmpty()) {
-	// if (cur != null) {
-	// stack.push(cur);
-	// cur = cur.left;
-	// } else {
-	// TreeNode parent = stack.peek();
-	// if (parent.right != null && lastVisited != parent.right) {
-	// // make sure pop all the node has right child of the
-	// // previous pop
-	// cur = parent.right;
-	// } else {
-	// stack.pop();
-	// ret.add(parent.val);
-	// lastVisited = parent;
-	// }
-	// }
-	// }
-	// return ret;
-	// }
+	// TODO more investigation needed
+	public List<Integer> postorderTraversalIterativelMine(TreeNode root) {
+		List<Integer> ret = new LinkedList<Integer>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		TreeNode cur = root, lastVisited = null;
+		while (cur != null || !stack.isEmpty()) {
+			if (cur != null) {
+				stack.push(cur);
+				cur = cur.left;
+			} else {
+				TreeNode parent = stack.peek();
+				if (parent.right != null && lastVisited != parent.right) {
+					// make sure pop all the node has right child of the
+					// previous pop
+					cur = parent.right;
+				} else {
+					stack.pop();
+					ret.add(parent.val);
+					lastVisited = parent;
+				}
+			}
+		}
+		return ret;
+	}
 
-	public List<Integer> postorderTraversalIterativel(TreeNode root) {
+	// tricky
+	public List<Integer> postorderTraversalIterative(TreeNode root) {
 		List<Integer> ret = new LinkedList<Integer>();
 		Stack<TreeNode> stack = new Stack<TreeNode>();
 		TreeNode cur = root;
@@ -171,11 +189,12 @@ public class BinaryTree {
 		return ret;
 	}
 
-	// layers traversal ~= BFS
-	// working: both i and ii for populating-next-right-pointers-in-each-node
+	// layered BFS
+	// working for populating-next-right-pointers-in-each-node i/ii
 	public void connect(TreeLinkNode root) {
-		if (root == null)
+		if (root == null) {
 			return;
+		}
 		Queue<TreeLinkNode> curLayer = new LinkedList<>(), nextLayer = new LinkedList<>();
 		TreeLinkNode next = null;
 		curLayer.add(root);
@@ -244,17 +263,22 @@ public class BinaryTree {
 			return 1;
 		}
 		if (root.left == null) {
+			// check right
 			return minDepth(root.right) + 1;
 		}
 		if (root.right == null) {
+			// check left
 			return minDepth(root.left) + 1;
 		}
+		// both
 		return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
 	}
 
 	public boolean hasPathSum(TreeNode root, int sum) {
-		if (root == null)
+		if (root == null) {
+			// guard initial case
 			return false;
+		}
 		if (root.left == null && root.right == null) {
 			return sum - root.val == 0;
 		}
@@ -281,7 +305,7 @@ public class BinaryTree {
 		if (root.left == null && root.right == null) {
 			cur.add(root.val);
 			if (sum - root.val == 0) {
-				ret.add(SinglyLinkedList.copy(cur));
+				ret.add(new LinkedList<>(cur));
 			}
 			cur.remove(cur.size() - 1);
 			return;
@@ -352,14 +376,18 @@ public class BinaryTree {
 	 * @return
 	 */
 	public TreeNode sortedArrayToBST(int[] num) {
-		if (num == null || num.length == 0)
+		if (num == null || num.length == 0) {
 			return null;
+		}
 		return sortedArrayToBSTHelper(num, 0, num.length - 1);
 	}
 
+	// TODO iterative?
 	private TreeNode sortedArrayToBSTHelper(int[] num, int start, int end) {
-		if (start > end)
+		if (start > end) {
 			return null;
+		}
+		// still depends on which one we believe is the mid
 		int mid = start + (end - start + 1) / 2;
 		TreeNode cur = new TreeNode(num[mid]);
 		cur.left = sortedArrayToBSTHelper(num, start, mid - 1);
@@ -422,6 +450,7 @@ public class BinaryTree {
 			return ret;
 		Queue<TreeNode> curLevel = new LinkedList<>(), nextLevel = new LinkedList<>();
 		curLevel.add(root);
+		// TODO refactor with single-loop-one-if like connect
 		while (!curLevel.isEmpty()) {
 			List<Integer> tempLevel = new LinkedList<>();
 			while (!curLevel.isEmpty()) {

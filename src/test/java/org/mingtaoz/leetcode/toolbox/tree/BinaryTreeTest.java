@@ -33,7 +33,8 @@ public class BinaryTreeTest extends TestCase {
 		list.add(1);
 		list.add(3);
 
-		assertEquals(list.toString(), sut.postorderTraversal(root).toString());
+		assertEquals(list.toString(), sut
+				.postorderTraversalIterativelMine(root).toString());
 	}
 
 	public void testPostorderTraversal2() {
@@ -45,7 +46,8 @@ public class BinaryTreeTest extends TestCase {
 		list.add(2);
 		list.add(1);
 
-		assertEquals(list.toString(), sut.postorderTraversal(root).toString());
+		assertEquals(list.toString(), sut
+				.postorderTraversalIterativelMine(root).toString());
 	}
 
 	public void testSumNumbers1() {
