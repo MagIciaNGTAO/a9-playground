@@ -33,8 +33,9 @@ public class PushZeroDownTest extends TestCase {
 		n2.right = n5;
 		n3.left = n6;
 		n3.right = n7;
-		System.out.println(n1);
-		// sut.pushZeroDown(n1);
-		// System.out.println(n1);
+
+		n1.printNode();
+		sut.pushZeroDown(n1);
+		n1.printNode();
 	}
 }
