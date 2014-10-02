@@ -1,47 +1,72 @@
 package org.mingtaoz.leetcode.string;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class SubstringwithConcatenationofAllWords {
 
-	// brute force
 	public List<Integer> findSubstring(String S, String[] L) {
 		List<Integer> ret = new LinkedList<>();
-
-		for (int i = 0; i < S.length(); i++) {
-			if (matchable(S.substring(i), toList(L))) {
+		int i = 0;
+		// int duplicate =
+		Map<String, Integer> map = toMap(L);
+		// ascending
+		char[] cs = S.toCharArray();
+		while (S.length() - i >= L[0].length() * L.length) {
+			// int matchedLength = ;
+			// if (matchedLength == L[0].length() * L.length) {
+			if (matchable(cs, i, new HashMap<String, Integer>(map),
+					L[0].length())) {
 				ret.add(i);
 			}
+			i += +1;
 		}
-
 		return ret;
 	}
 
-	public List<String> toList(String[] l) {
-		List<String> list = new ArrayList<>();
+	public Map<String, Integer> toMap(String[] l) {
+		Map<String, Integer> ret = new HashMap<>();
 		for (String t : l) {
-			list.add(t);
-		}
-		return list;
-	}
-
-	public boolean matchable(String S, List<String> list) {
-		// TODO change to iterative
-		if (list.size() == 0) {
-			return true;
-		}
-		if (S.length() == 0) {
-			return false;
-		}
-		for (int i = 0; i < list.size(); i++) {
-			if (S.startsWith(list.get(i))) {
-				// greedy
-				String temp = list.remove(i);
-				return matchable(S.substring(temp.length()), list);
+			if (ret.containsKey(t)) {
+				ret.put(t, ret.get(t) + 1);
+			} else {
+				ret.put(t, 1);
 			}
 		}
-		return false;
+		return ret;
+	}
+
+	public boolean matchable(char[] S, int start, HashMap<String, Integer> map,
+			int size) {
+		// int matchedLength = 0;
+		while (!map.isEmpty()) {
+			String sub = new String(S, start, size);
+			if (map.containsKey(sub)) {
+				int left = map.get(sub);
+				if (left == 1) {
+					map.remove(sub);
+				} else {
+					map.put(sub, map.get(sub) - 1);
+				}
+				start += size;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean startsWith(char[] s, int start, String temp) {
+		if (s.length - start < temp.length()) {
+			return false;
+		}
+		for (int i = 0; i < temp.length(); i++) {
+			if (temp.charAt(i) != s[start + i]) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

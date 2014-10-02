@@ -29,10 +29,10 @@ Title
 //TODO Multiply Strings<br>
 *Combination Sum II<br>
 *Combination Sum<br>
-//TODO Sudoku Solver<br>
+Sudoku Solver<br>
 *Longest Valid Parentheses<br>
 *Next Permutation<br>
-//TODO Substring with Concatenation of All Words<br>
+*Substring with Concatenation of All Words<br>
 //TODO Divide Two Integers<br>
 //TODO Implement strStr()<br>
 //TODO Remove Element<br>
