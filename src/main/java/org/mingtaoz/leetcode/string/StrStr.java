@@ -5,8 +5,14 @@ public class StrStr {
 	// it's KMP related
 	// TODO review suffix array/tree
 	public String strStr(String haystack, String needle) {
-		if (needle.length() == 0 || haystack.length() == 0) {
+		if (needle.length() == 0 && haystack.length() == 0) {
 			return "";
+		}
+		if (haystack.length() == 0) {
+			return null;
+		}
+		if (needle.length() == 0) {
+			return haystack;
 		}
 		char[] h = haystack.toCharArray();
 		char[] n = needle.toCharArray();
@@ -26,19 +32,22 @@ public class StrStr {
 			}
 		}
 		// 2. go through h
-		int match = 0;
-		for (int i = 0; i < h.length; i++) {
+		int match = 0, i = 0;
+		for (; i < h.length; i++) {
 			if (match == n.length) {
 				// TODO
-				return (i - n.length) + "";
+				return haystack.substring(i - n.length);
 			}
 			while (match != -1 && h[i] != n[match]) {
 				match = table[match];
 
 			}
-			i++;
 			match++;
 		}
-		return "";
+		if (match == n.length) {
+			// TODO
+			return haystack.substring(i - n.length);
+		}
+		return null;
 	}
 }
