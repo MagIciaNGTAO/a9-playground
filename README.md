@@ -34,10 +34,10 @@ Sudoku Solver<br>
 *Next Permutation<br>
 *Substring with Concatenation of All Words<br>
 //TODO Divide Two Integers<br>
-//TODO Implement strStr()<br>
-//TODO Remove Element<br>
+Implement strStr()<br>
+Remove Element<br>
 //TODO Remove Duplicates from Sorted Array<br>
-//TODO Reverse Nodes in k-Group<br>
+*Reverse Nodes in k-Group<br>
 //TODO Swap Nodes in Pairs<br>
 //TODO Merge k Sorted Lists<br>
 //TODO Generate Parentheses<br>
