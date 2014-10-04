@@ -5,13 +5,23 @@ import static org.truth0.Truth.ASSERT;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LongestValidParenthesesTest {
+public class ParentheseTest {
 
-	private LongestValidParentheses sut;
+	private Parenthese sut;
 
 	@Before
 	public void setup() {
-		sut = new LongestValidParentheses();
+		sut = new Parenthese();
+	}
+
+	@Test
+	public void testGenerateParenthesis2() {
+		ASSERT.that(sut.generateParenthesis(4).size()).is(14);
+	}
+
+	@Test
+	public void testGenerateParenthesis1() {
+		ASSERT.that(sut.generateParenthesis(3).size()).is(5);
 	}
 
 	@Test
@@ -19,12 +29,11 @@ public class LongestValidParenthesesTest {
 		ASSERT.that(sut.longestValidParentheses("(()()))))")).is(6);
 	}
 
-	
 	@Test
 	public void testReverseWordsInString5() {
 		ASSERT.that(sut.longestValidParentheses("(()()))")).is(6);
 	}
-	
+
 	@Test
 	public void testReverseWordsInString4() {
 		ASSERT.that(sut.longestValidParentheses("(()()")).is(4);

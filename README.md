@@ -40,7 +40,7 @@ Remove Element<br>
 *Reverse Nodes in k-Group<br>
 //TODO Swap Nodes in Pairs<br>
 //TODO Merge k Sorted Lists<br>
-//TODO Generate Parentheses<br>
+*Generate Parentheses<br>
 //TODO Valid Parentheses<br>
 //TODO Remove Nth Node From End of List<br>
 //TODO Letter Combinations of a Phone Number<br>

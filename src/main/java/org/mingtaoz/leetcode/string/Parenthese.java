@@ -1,8 +1,13 @@
 package org.mingtaoz.leetcode.string;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 import java.util.Stack;
 
-public class LongestValidParentheses {
+public class Parenthese {
 
 	/**
 	 * 
@@ -40,5 +45,41 @@ public class LongestValidParentheses {
 			}
 		}
 		return max;
+	}
+
+	/**
+	 * 
+	 * Given n pairs of parentheses, write a function to generate all
+	 * combinations of well-formed parentheses.
+	 * 
+	 * For example, given n = 3, a solution set is:
+	 * 
+	 * "((()))", "(()())", "(())()", "()(())", "()()()"
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public List<String> generateParenthesis(int n) {
+		return new LinkedList<String>(generateParenthesisHelper(n));
+	}
+
+	// (())(())
+	public Set<String> generateParenthesisHelper(int n) {
+		Set<String> ret = new HashSet<>();
+		if (n == 0) {
+			return ret;
+		}
+		if (n == 1) {
+			ret.add("()");
+			return ret;
+		} else {
+			Set<String> sub = generateParenthesisHelper(n - 1);
+			for (String s : sub) {
+				ret.add("()" + s);
+				ret.add("(" + s + ")");
+				ret.add(s + "()");
+			}
+		}
+		return ret;
 	}
 }
