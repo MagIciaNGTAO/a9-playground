@@ -1,6 +1,5 @@
 package org.mingtaoz.leetcode.string;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,26 +59,46 @@ public class Parenthese {
 	 * @return
 	 */
 	public List<String> generateParenthesis(int n) {
-		return new LinkedList<String>(generateParenthesisHelper(n));
+		return new LinkedList<String>(generateParenthesisHelper(0, 0, n,
+				new StringBuilder()));
 	}
 
 	// (())(())
-	public Set<String> generateParenthesisHelper(int n) {
+	// TODO clearer recursion needed!!
+	public Set<String> generateParenthesisHelper(int leftBrace, int rightBrace,
+			int total, StringBuilder stringBuilder) {
 		Set<String> ret = new HashSet<>();
-		if (n == 0) {
+		if (leftBrace == rightBrace && leftBrace == total) {
+			ret.add(stringBuilder.toString());
 			return ret;
 		}
-		if (n == 1) {
-			ret.add("()");
-			return ret;
-		} else {
-			Set<String> sub = generateParenthesisHelper(n - 1);
-			for (String s : sub) {
-				ret.add("()" + s);
-				ret.add("(" + s + ")");
-				ret.add(s + "()");
-			}
+		if (leftBrace > rightBrace) {
+			ret.addAll(generateParenthesisHelper(leftBrace, rightBrace + 1,
+					total, stringBuilder.append(")")));
+			stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+		}
+		if (leftBrace < total) {
+			ret.addAll(generateParenthesisHelper(leftBrace + 1, rightBrace,
+					total, stringBuilder.append("(")));
+			stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 		}
 		return ret;
+	}
+
+	public boolean isValid(String s) {
+		Stack<Character> stack = new Stack<>();
+		for (char c : s.toCharArray()) {
+			if (c == ')' && (stack.isEmpty() || stack.pop() != '(')) {
+				return false;
+			} else if (c == ']' && (stack.isEmpty() || stack.pop() != '[')) {
+				return false;
+			} else if (c == '}' && (stack.isEmpty() || stack.pop() != '{')) {
+				return false;
+			}
+			if (c == '(' || c == '{' || c == '[') {
+				stack.push(c);
+			}
+		}
+		return stack.isEmpty();
 	}
 }
