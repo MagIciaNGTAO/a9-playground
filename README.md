@@ -33,24 +33,24 @@ Sudoku Solver<br>
 *Longest Valid Parentheses<br>
 *Next Permutation<br>
 *Substring with Concatenation of All Words<br>
-//TODO Divide Two Integers<br>
+Divide Two Integers<br>
 Implement strStr()<br>
 Remove Element<br>
-//TODO Remove Duplicates from Sorted Array<br>
+Remove Duplicates from Sorted Array<br>
 *Reverse Nodes in k-Group<br>
-//TODO Swap Nodes in Pairs<br>
-//TODO Merge k Sorted Lists<br>
+Swap Nodes in Pairs<br>
+Merge k Sorted Lists<br>
 *Generate Parentheses<br>
-//TODO Valid Parentheses<br>
-//TODO Remove Nth Node From End of List<br>
-//TODO Letter Combinations of a Phone Number<br>
-//TODO 4Sum<br>
-//TODO 3Sum Closest<br>
-//TODO 3Sum<br>
-//TODO Longest Common Prefix<br>
+Valid Parentheses<br>
+Remove Nth Node From End of List<br>
+Letter Combinations of a Phone Number<br>
+*4Sum<br>
+3Sum Closest<br>
+3Sum<br>
+Longest Common Prefix<br>
 //TODO Roman to Integer<br>
 //TODO Integer to Roman<br>
-//TODO Container With Most Water<br>
+*Container With Most Water<br>
 //TODO Regular Expression Matching<br>
 //TODO Palindrome Number<br>
 //TODO String to Integer (atoi)<br>
