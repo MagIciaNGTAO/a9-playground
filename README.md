@@ -17,7 +17,7 @@ Title
 *Search in Rotated Sorted Array II<br>
 *Remove Duplicates from Sorted Array II<br>
 *Minimum Window Substring<br>
-//TODO Simplify Path<br>
+*Simplify Path<br>
 *Sqrt(x)<br>
 *Valid Number<br>
 *Permutation Sequence<br>
@@ -52,10 +52,10 @@ Longest Common Prefix<br>
 //TODO Roman to Integer<br>
 //TODO Integer to Roman<br>
 *Container With Most Water<br>
-//TODO Regular Expression Matching<br>
-//TODO Palindrome Number<br>
+*Regular Expression Matching<br>
+Palindrome Number<br>
 //TODO String to Integer (atoi)<br>
-//TODO Reverse Integer<br>
-//TODO ZigZag Conversion<br>
-//TODO Add Two Numbers<br>
+Reverse Integer<br>
+ZigZag Conversion<br>
+Add Two Numbers<br>
 *Median of Two Sorted Arrays<br>
