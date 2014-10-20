@@ -42,14 +42,10 @@ public class StringToInteger {
 
     // TODO
     public String multiply(String num1, String num2) {
-        StringBuilder ret = new StringBuilder();
-        
-        char[] n1 = num1.toCharArray();
-        char[] n2 = num2.toCharArray();
-        
-        
-        
-        return ret.toString();
-        
+        BigInteger b1 = new BigInteger(num1);
+        BigInteger b2 = new BigInteger(num2);
+
+        return b1.multiply(b2) + "";
+
     }
 }
