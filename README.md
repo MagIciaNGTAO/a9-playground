@@ -11,7 +11,7 @@ Title
 *Balanced Binary Tree<br>
 *Interleaving String<br>
 *Reverse Linked List II<br>
-//TODO Gray Code<br>
+Gray Code<br>
 *Scramble String<br>
 *Largest Rectangle in Histogram<br>
 *Search in Rotated Sorted Array II<br>
@@ -23,7 +23,7 @@ Title
 *Permutation Sequence<br>
 *Maximum Subarray<br>
 *Pow(x, n)<br>
-//TODO Anagrams<br>
+Anagrams<br>
 *Permutations<br>
 *Jump Game II<br>
 *Wildcard Matching<br>
@@ -49,8 +49,8 @@ Letter Combinations of a Phone Number<br>
 3Sum Closest<br>
 3Sum<br>
 Longest Common Prefix<br>
-//TODO Roman to Integer<br>
-//TODO Integer to Roman<br>
+Roman to Integer<br>
+Integer to Roman<br>
 *Container With Most Water<br>
 *Regular Expression Matching<br>
 Palindrome Number<br>
