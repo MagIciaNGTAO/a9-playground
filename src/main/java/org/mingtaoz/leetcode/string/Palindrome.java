@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-import org.mingtaoz.leetcode.toolbox.graph.UndirectedGraph.UndirectedGraphNode;
+import org.mingtaoz.leetcode.graph.UndirectedGraph.UndirectedGraphNode;
 
 public class Palindrome {
 

@@ -1,7 +1,8 @@
 package org.mingtaoz.leetcode.list;
 
-import org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList.ListNode;
-import static org.mingtaoz.leetcode.toolbox.list.SinglyLinkedList.*;
+import org.mingtaoz.leetcode.list.SinglyLinkedList.ListNode;
+
+import static org.mingtaoz.leetcode.list.SinglyLinkedList.*;
 
 public class ReorderList {
 
