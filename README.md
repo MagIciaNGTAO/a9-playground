@@ -1,7 +1,7 @@
 Leetcode Difficulties
 ========
-Maximum Product Subarray(em this one is tricky)
-Push Zero Down
+Maximum Product Subarray<br>
+Push Zero Down<br>
 Binary Tree Postorder Traversal<br>
 Candy<br>
 Palindrome Partitioning II<br>
