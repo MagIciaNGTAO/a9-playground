@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.tree;
+package org.mingtaoz.other.tree;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;

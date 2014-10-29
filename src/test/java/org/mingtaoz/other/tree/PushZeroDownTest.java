@@ -1,7 +1,7 @@
-package org.mingtaoz.leetcode.tree;
+package org.mingtaoz.other.tree;
 
-import org.mingtaoz.leetcode.tree.PushZeroDown;
-import org.mingtaoz.leetcode.tree.PushZeroDown.TreeNode;
+import org.mingtaoz.other.tree.PushZeroDown;
+import org.mingtaoz.other.tree.PushZeroDown.TreeNode;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

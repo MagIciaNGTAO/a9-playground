@@ -1,75 +1,72 @@
 package org.mingtaoz.leetcode.string;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.SortedSet;
 
 public class MinimumWindowSubstring {
 
-	/**
-	 * Given a string S and a string T, find the minimum window in S which will
-	 * contain all the characters in T in complexity O(n).
-	 * 
-	 * For example, S = "ADOBECODEBANC" T = "ABC" Minimum window is "BANC".
-	 * 
-	 * Note: If there is no such window in S that covers all characters in T,
-	 * return the emtpy string "".
-	 * 
-	 * If there are multiple such windows, you are guaranteed that there will
-	 * always be only one unique minimum window in S.
-	 * 
-	 * @param S
-	 * @param T
-	 * @return
-	 */
-	public String minWindow(String S, String T) {
-		Map<String, List<Integer>> map = new HashMap<>();
-		Map<String, Integer> count = new HashMap<>();
-		for (int i = 0; i < T.length(); i++) {
-			String cur = T.charAt(i) + "";
-			if (count.containsKey(cur)) {
-				count.put(cur, count.get(cur) + 1);
-			} else {
-				count.put(cur, 1);
-			}
-		}
-		String result = "";
-		int match = 0;
-		for (int i = 0; i < S.length(); i++) {
-			String cur = S.charAt(i) + "";
-			if (count.containsKey(cur)) {
-				if (map.containsKey(cur)) {
-					List<Integer> list = map.get(cur);
-					if (count.get(cur) == list.size()) {
-						// shift to right :)
-						list.remove(0);
-						match--;
-					}
-					match++;
-					list.add(i);
-					map.put(cur, list);
-				} else {
-					match++;
-					List<Integer> list = new LinkedList<>();
-					list.add(i);
-					map.put(cur, list);
-				}
-				if (T.length() == match) {
-					// TODO time complexity
-					int min = Integer.MAX_VALUE, max = Integer.MIN_VALUE;
-					for (Entry<String, List<Integer>> entry : map.entrySet()) {
-						List<Integer> list = entry.getValue();
-						min = Math.min(min, list.get(0));
-						max = Math.max(max, list.get(list.size() - 1));
-					}
-					if ("".equals(result) || result.length() > (max - min + 1)) {
-						result = S.substring(min, max + 1);
-					}
-				}
-			}
-		}
-		return result;
-	}
+    /**
+     * Given a string S and a string T, find the minimum window in S which will
+     * contain all the characters in T in complexity O(n).
+     * 
+     * For example, S = "ADOBECODEBANC" T = "ABC" Minimum window is "BANC".
+     * 
+     * @param S
+     * @param T
+     * @return
+     */
+    public String minWindow(String S, String T) {
+        Map<Character, Integer> found = new HashMap<>();
+        Map<Character, Integer> need = new HashMap<>();
+        // TODO key here is push begin as far as possible
+        int begin = 0, match = 0;
+        String ret = "";
+        for (char cur : T.toCharArray()) {
+            if (need.containsKey(cur)) {
+                need.put(cur, need.get(cur) + 1);
+            } else {
+                need.put(cur, 1);
+            }
+        }
+        for (int i = 0; i < S.length(); i++) {
+            char cur = S.charAt(i);
+            if (need.containsKey(cur)) {
+                int needForCur = need.get(cur);
+                if (found.containsKey(cur)) {
+                    int foundForCur = found.get(cur) + 1;
+                    if (foundForCur <= needForCur) {
+                        match++;
+                    }
+                    found.put(cur, foundForCur);
+                } else {
+                    found.put(cur, 1);
+                    match++;
+                }
+            }
+            if (match == T.length()) {
+                while (begin < S.length()) {
+                    char temp = S.charAt(begin);
+                    if (need.containsKey(temp)) {
+                        if (need.get(temp) < found.get(temp)) {
+                            begin++;
+                            found.put(temp, found.get(temp) - 1);
+                        } else {
+                            break;
+                        }
+                    } else {
+                        begin++;
+                    }
+                }
+                if (ret.equals("") || ret.length() > (i - begin + 1)) {
+                    ret = S.substring(begin, i + 1);
+                }
+            }
+        }
+        return ret;
+    }
 }

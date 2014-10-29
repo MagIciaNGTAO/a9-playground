@@ -1,7 +1,6 @@
 Leetcode Difficulties
 ========
 Maximum Product Subarray<br>
-Push Zero Down<br>
 Binary Tree Postorder Traversal<br>
 Candy<br>
 Palindrome Partitioning II<br>
@@ -14,7 +13,6 @@ Scramble String<br>
 Largest Rectangle in Histogram<br>
 Search in Rotated Sorted Array II<br>
 Remove Duplicates from Sorted Array II<br>
-Minimum Window Substring<br>
 Simplify Path<br>
 Sqrt(x)<br>
 Valid Number<br>
@@ -38,3 +36,5 @@ Container With Most Water<br>
 Regular Expression Matching<br>
 Palindrome Number<br>
 Median of Two Sorted Arrays<br>
+// Minimum Window Substring<br>
+// Push Zero Down<br>

@@ -16,7 +16,7 @@ public class MinimumWindowSubstringTest {
 	}
 
 	@Test
-	public void testWordSearch1() {
+	public void testMinWindow1() {
 		ASSERT.that(sut.minWindow("ADOBECODEBANC", "ABC")).is("BANC");
 		ASSERT.that(sut.minWindow("a", "aa")).is("");
 	}
