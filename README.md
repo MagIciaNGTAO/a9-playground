@@ -1,11 +1,5 @@
 Leetcode Difficulties
 ========
-Find Minimum in Rotated Sorted Array II<br>
-Maximum Product Subarray<br>
-Binary Tree Postorder Traversal<br>
-Candy<br>
-Palindrome Partitioning II<br>
-Word Ladder II<br>
 Distinct Subsequences<br>
 Balanced Binary Tree<br>
 Interleaving String<br>
@@ -37,5 +31,13 @@ Container With Most Water<br>
 Regular Expression Matching<br>
 Palindrome Number<br>
 Median of Two Sorted Arrays<br>
-// Minimum Window Substring<br>
-// Push Zero Down<br>
+Find Minimum in Rotated Sorted Array II<br>
+Maximum Product Subarray<br>
+Word Ladder II<br>
+
+Minimum Window Substring<br>
+*Sink Zero In Binary Tree<br>
+Binary Tree Postorder Traversal<br>
+Candy<br>
+*Palindrome Partitioning II<br>
+Heap<br>

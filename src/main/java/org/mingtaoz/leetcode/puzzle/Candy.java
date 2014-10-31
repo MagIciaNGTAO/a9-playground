@@ -14,56 +14,37 @@ package org.mingtaoz.leetcode.puzzle;
  */
 public class Candy {
 
-	public int candy(int[] ratings) {
-		if (ratings == null || ratings.length == 0)
-			return 0;
-
-		int ret = 0, prev = Integer.MIN_VALUE, localMax = 0, deacreasingCount = 0;
-
-		for (int i = 0; i < ratings.length; i++) {
-			if (ratings[i] < prev) {
-				// decreasing
-				deacreasingCount++;
-			} else {
-				if (deacreasingCount > 0) {
-					int curCandy = 1;
-					while (deacreasingCount > 0) {
-						// put one candy more for all the stuff in stack
-						deacreasingCount--;
-						ret += curCandy++;
-					}
-					if (localMax < curCandy) {
-						ret += curCandy - localMax;
-					}
-					deacreasingCount = 0;
-					localMax = 1;
-				}
-				if (ratings[i] > prev) {
-					// increasing
-					localMax++;
-				} else {
-					// equal
-					localMax = 1;
-				}
-				ret += localMax;
-			}
-			prev = ratings[i];
-		}
-
-		// clear any potential buffer
-		if (deacreasingCount > 0) {
-			int curCandy = 1;
-
-			while (deacreasingCount > 0) {
-				// put one candy more for all the stuff in stack
-				deacreasingCount--;
-				ret += curCandy++;
-			}
-			if (localMax < curCandy) {
-				ret += curCandy - localMax;
-			}
-		}
-
-		return ret;
-	}
+    public int candy(int[] ratings) {
+        if (ratings == null || ratings.length == 0) {
+            return 0;
+        }
+        int ret = 1, prev = ratings[0], candy = 1;
+        for (int i = 1; i < ratings.length; i++) {
+            if (ratings[i] > prev) {
+                // case increase: give 1 more candy
+                ret += ++candy;
+            } else if (ratings[i] < prev) {
+                // case decrease: find local min -> give candy backwards
+                int j = i - 1;
+                while (i < ratings.length && ratings[i] < prev) {
+                    prev = ratings[i++];
+                }
+                int k = i - 1;
+                int tempCandy = 1;
+                while (k > j) {
+                    k--;
+                    ret += tempCandy++;
+                }
+                ret += (tempCandy - candy) > 0 ? (tempCandy - candy) : 0;
+                i--;
+                candy = 1;
+            } else {
+                // case equal: give 1 candy
+                candy = 0;
+                ret += ++candy;
+            }
+            prev = ratings[i];
+        }
+        return ret;
+    }
 }
