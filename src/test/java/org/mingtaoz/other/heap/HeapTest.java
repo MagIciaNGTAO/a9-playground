@@ -15,10 +15,17 @@ public class HeapTest {
     }
 
     @Test
+    public void testHeapify2() {
+        int[] i = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        sut.heapify(i);
+        ASSERT.that(i).is(new int[] { 7, 5, 6, 4, 2, 1, 3 });
+    }
+
+    @Test
     public void testHeapify1() {
         int[] i = new int[] { 1, 2, 3 };
         sut.heapify(i);
-        ASSERT.that(i).is(new int[] { 3, 1, 2 });
+        ASSERT.that(i).is(new int[] { 3, 2, 1 });
     }
 
 }
