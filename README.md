@@ -1,11 +1,5 @@
 Leetcode Difficulties
 ========
-Distinct Subsequences<br>
-Balanced Binary Tree<br>
-Interleaving String<br>
-Reverse Linked List II<br>
-Scramble String<br>
-Largest Rectangle in Histogram<br>
 Search in Rotated Sorted Array II<br>
 Remove Duplicates from Sorted Array II<br>
 Simplify Path<br>
@@ -41,3 +35,10 @@ Binary Tree Postorder Traversal<br>
 Candy<br>
 *Palindrome Partitioning II<br>
 Heap<br>
+Distinct Subsequences<br>
+Balanced Binary Tree<br>
+Interleaving String<br>
+Scramble String<br>
+Reverse Linked List II<br>
+Largest Rectangle in Histogram<br>
+BitMap<br>

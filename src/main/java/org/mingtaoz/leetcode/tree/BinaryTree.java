@@ -308,25 +308,36 @@ public class BinaryTree {
      * @return
      */
     public boolean isBalanced(TreeNode root) {
-        if (root == null)
+        if (root == null) {
             return true;
+        }
         return isBalancedHelper(root) != -1;
     }
 
+    /**
+     * 
+     * use -1 to denote any subtree is not balanced
+     * 
+     * @param root
+     * @return
+     */
     private int isBalancedHelper(TreeNode root) {
         if (root.left == null && root.right == null) {
             return 1;
         }
         int left = 0, right = 0;
         if (root.left != null) {
+            // TODO should I do this? for the double stack space?
             left = isBalancedHelper(root.left);
-            if (left == -1)
+            if (left == -1) {
                 return -1;
+            }
         }
         if (root.right != null) {
             right = isBalancedHelper(root.right);
-            if (right == -1)
+            if (right == -1) {
                 return -1;
+            }
         }
         int diff = Math.abs(right - left);
         int depth = Math.max(left, right) + 1;

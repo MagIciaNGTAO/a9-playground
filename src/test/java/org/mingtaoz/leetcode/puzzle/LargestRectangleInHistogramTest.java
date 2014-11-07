@@ -5,13 +5,13 @@ import org.junit.Test;
 
 import static org.truth0.Truth.ASSERT;
 
-public class RectangleTest {
+public class LargestRectangleInHistogramTest {
 
-	private Rectangle sut;
+	private LargestRectangleInHistogram sut;
 
 	@Before
 	public void setup() {
-		sut = new Rectangle();
+		sut = new LargestRectangleInHistogram();
 	}
 
 	@Test
