@@ -1,8 +1,5 @@
 Leetcode Difficulties
 ========
-Search in Rotated Sorted Array II<br>
-Remove Duplicates from Sorted Array II<br>
-Simplify Path<br>
 Sqrt(x)<br>
 Valid Number<br>
 Permutation Sequence<br>
@@ -28,6 +25,7 @@ Median of Two Sorted Arrays<br>
 Find Minimum in Rotated Sorted Array II<br>
 Maximum Product Subarray<br>
 Word Ladder II<br>
+Search in Rotated Sorted Array II<br>
 
 Minimum Window Substring<br>
 *Sink Zero In Binary Tree<br>
@@ -42,3 +40,4 @@ Scramble String<br>
 Reverse Linked List II<br>
 Largest Rectangle in Histogram<br>
 BitMap<br>
+Simplify Path<br>
