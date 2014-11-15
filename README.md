@@ -2,15 +2,11 @@ Leetcode Difficulties
 ========
 Sqrt(x)<br>
 Valid Number<br>
-Permutation Sequence<br>
 Maximum Subarray<br>
 Pow(x, n)<br>
 Permutations<br>
-Jump Game II<br>
 Wildcard Matching<br>
 Multiply Strings<br>
-Combination Sum II<br>
-Combination Sum<br>
 Sudoku Solver<br>
 Longest Valid Parentheses<br>
 Next Permutation<br>
@@ -41,3 +37,7 @@ Reverse Linked List II<br>
 Largest Rectangle in Histogram<br>
 BitMap<br>
 Simplify Path<br>
+Permutation Sequence: this one is a bit tricky<br>
+Jump Game II<br>
+Combination Sum<br>
+Combination Sum II<br>
