@@ -21,7 +21,6 @@ Median of Two Sorted Arrays<br>
 Find Minimum in Rotated Sorted Array II<br>
 Maximum Product Subarray<br>
 Word Ladder II<br>
-Search in Rotated Sorted Array II<br>
 
 Minimum Window Substring<br>
 *Sink Zero In Binary Tree<br>
@@ -39,5 +38,5 @@ BitMap<br>
 Simplify Path<br>
 Permutation Sequence: this one is a bit tricky<br>
 Jump Game II<br>
-Combination Sum<br>
-Combination Sum II<br>
+Combination Sum: not very confident writing it fast<br>
+Search in Rotated Sorted Array II<br>

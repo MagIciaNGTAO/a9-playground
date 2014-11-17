@@ -30,12 +30,11 @@ public class CombinationSum {
      * @return
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        return combinationSumHelper(candidates, target, 0,
-                new LinkedList<Integer>(), 0);
+        return combinationSumHelper(candidates, target, 0, new LinkedList<Integer>(), 0);
     }
 
-    public List<List<Integer>> combinationSumHelper(int[] candidates,
-            int target, int sum, List<Integer> current, int start) {
+    public List<List<Integer>> combinationSumHelper(int[] candidates, int target, int sum, List<Integer> current,
+            int start) {
         List<List<Integer>> ret = new LinkedList<>();
         if (sum > target) {
             return ret;
@@ -46,7 +45,7 @@ public class CombinationSum {
             ret.add(temp);
             return ret;
         }
-        int prev = Integer.MAX_VALUE; // dup
+        int prev = candidates[start] - 1;
         for (int i = start; i < candidates.length; i++) {
             if (prev != candidates[i]) {
                 current.add(candidates[i]);
@@ -59,8 +58,6 @@ public class CombinationSum {
         }
         return ret;
     }
-
-    private Set<String> rep = new HashSet<>();
 
     /**
      * 
@@ -86,9 +83,9 @@ public class CombinationSum {
      * @return
      */
     public List<List<Integer>> combinationSum2(int[] num, int target) {
+        Set<String> rep = new HashSet<>();
         List<List<Integer>> ret = new LinkedList<>();
-        List<List<Integer>> all = combinationSumHelper2(num, target, 0,
-                new LinkedList<Integer>(), -1);
+        List<List<Integer>> all = combinationSumHelper2(num, target, 0, new LinkedList<Integer>(), -1);
         for (List<Integer> one : all) {
             String s = one.toString();
             if (!rep.contains(s)) {
@@ -96,7 +93,6 @@ public class CombinationSum {
                 rep.add(s);
             }
         }
-
         return ret;
     }
 
@@ -112,7 +108,10 @@ public class CombinationSum {
             ret.add(temp);
             return ret;
         }
-        int prev = Integer.MAX_VALUE;
+        int prev = 0;
+        if (start + 1 < candidates.length) {
+            prev = candidates[start + 1] - 1;
+        }
         for (int i = start + 1; i < candidates.length; i++) {
             if (prev != candidates[i]) {
                 current.add(candidates[i]);
