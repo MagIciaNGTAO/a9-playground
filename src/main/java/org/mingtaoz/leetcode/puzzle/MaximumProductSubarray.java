@@ -6,7 +6,8 @@ public class MaximumProductSubarray {
      * Lemma 1: With no 0, the largest product will include left most or right
      * most or both
      * Prove:
-     * case 1: left < 0, right < 0, Pi(all) > Pi(mid)
+     * case 1: left < 0, right < 0, if Pi(mid) < 0, include larger one, if
+     * P(mid) > 0, include both
      * case 2: left > 0, right < 0, Pi(mid) < max(Pi(mid, left), Pi(mid, right))
      * case 3/4 similar to 1/2
      * 
@@ -19,7 +20,7 @@ public class MaximumProductSubarray {
      */
     public int maxProduct(int[] A) {
         if (A.length == 0) {
-            return 0; // ?
+            return 0;
         }
         int ori = getMax(A);
         reverse(A);
@@ -37,32 +38,34 @@ public class MaximumProductSubarray {
     }
 
     private int getMax(int[] A) {
-        int ret = A[0], positive = A[0], negtive = A[0];
+        int ret = A[0], pos = A[0], neg = A[0];
         for (int i = 1; i < A.length; i++) {
             if (A[i] > 0) {
-                if (positive > 0) {
-                    positive *= A[i];
-                    negtive *= A[i];
+                if (pos > 0) {
+                    pos *= A[i];
+                    neg *= A[i];
                 } else {
-                    positive = A[i];
-                    if (negtive == 0) {
-                        negtive = A[i];
+                    // pos == 0
+                    pos = A[i];
+                    if (neg == 0) {
+                        neg = A[i];
                     } else {
-                        negtive *= A[i];
+                        neg *= A[i];
                     }
                 }
             } else if (A[i] < 0) {
-                if (negtive == 0) {
-                    negtive = A[i];
+                if (neg == 0) {
+                    neg = A[i];
                 } else {
-                    negtive *= A[i];
-                    positive = negtive;
+                    // neg could grow, and update pos doesn't hurt
+                    neg *= A[i];
+                    pos = neg;
                 }
             } else {
-                positive = 0;
-                negtive = 0;
+                pos = 0;
+                neg = 0;
             }
-            ret = Math.max(ret, positive);
+            ret = Math.max(ret, pos);
         }
         return ret;
     }

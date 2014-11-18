@@ -2,30 +2,26 @@ package org.mingtaoz.leetcode.array;
 
 public class Arrays {
 
-    // TODO need to see this ...
-    public int search1(int A[], int target) {
+    public int search(int A[], int target) {
         int left = 0, right = A.length - 1;
         while (left <= right) {
-            // need to dig into why this work too
             int mid = (left + right) / 2;
             if (A[mid] == target) {
                 return mid;
-            }
-            if (A[left] < A[mid]) {
+            } else if (A[left] < A[mid]) {
                 if (target >= A[left] && target < A[mid]) {
                     right = mid - 1;
                 } else {
                     left = mid + 1;
                 }
-            }
-            else if (A[left] > A[mid]) {
+            } else if (A[left] > A[mid]) {
                 if (target > A[mid] && target <= A[right]) {
                     left = mid + 1;
                 } else {
                     right = mid - 1;
                 }
             } else {
-                // skip duplicate one, A[start] == A[mid]
+                // skip duplicate one, A[left] == A[mid]
                 left++;
             }
         }
@@ -49,7 +45,7 @@ public class Arrays {
      * @param target
      * @return
      */
-    public int search(int[] A, int target) {
+    public int searchMine(int[] A, int target) {
         int minIndex = findMinIndex(A);
         int left = minIndex, right = (left == 0 ? A.length : left) - 1;
         return searchHelper(A, target, left, right);
@@ -63,7 +59,7 @@ public class Arrays {
      * @return
      */
     public boolean search2(int[] A, int target) {
-        return search(A, target) != -1;
+        return searchMine(A, target) != -1;
     }
 
     public int findMinIndex(int[] A) {
