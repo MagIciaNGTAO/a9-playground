@@ -16,6 +16,12 @@ public class MaximumSubarrayTest {
 	}
 
 	@Test
+	public void testMaximumSubarray3() {
+		int[] input = { -2, -3, -3 };
+		ASSERT.that(sut.maxSubArray(input)).is(-2);
+	}
+
+	@Test
 	public void testMaximumSubarray2() {
 		int[] input = { -2, 1, -3, 4, 6, -1, 2, 1, -5, 4 };
 		ASSERT.that(sut.maxSubArray(input)).is(12);

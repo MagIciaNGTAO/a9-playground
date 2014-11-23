@@ -1,27 +1,42 @@
 package org.mingtaoz.leetcode.recursion;
 
-// TODO it's terriable, but it's 120% by myself ...
 public class Sqrt {
+
+	/**
+	 * 
+	 * Newton-Raphson
+	 * 
+	 * time complexity
+	 * 
+	 * @param x
+	 * @return
+	 */
 	public int sqrt(int x) {
 		if (x == 0) {
 			return 0;
 		}
-		if (x <= 3) {
-			return 1;
+		long trial = x / 2 + 1, sq = trial * trial;
+		while (sq > x) {
+			trial = (trial + x / trial) / 2;
+			sq = trial * trial;
 		}
-		long ret = x / 2, sq = ret * ret;
-		while (true) {
-			ret = ret + (int) Math.round((double) (x - sq) / (2 * ret));
-			if (sq == ret * ret) {
-				ret = ret - 1;
-			}
-			sq = ret * ret;
-			long sqp = (ret + 1) * (ret + 1);
-			if (sq <= x && sqp > x) {
-				// leetcode require a 'less than or equal' solution strictly
-				break;
+		return (int) trial;
+	}
+
+	public int sqrtBinarySearch(int x) {
+		// x/2 + 1 easy to prove
+		long l = 0, r = x / 2 + 1;
+		while (l <= r) {
+			long mid = (l + r) / 2;
+			long sq = mid * mid;
+			if (sq == x) {
+				return (int) mid;
+			} else if (sq < x) {
+				l = mid + 1;
+			} else {
+				r = mid - 1;
 			}
 		}
-		return (int) ret;
+		return (int) r;
 	}
 }

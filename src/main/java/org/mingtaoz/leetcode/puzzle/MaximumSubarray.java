@@ -15,14 +15,13 @@ public class MaximumSubarray {
 		int max = A[0], sum = A[0];
 
 		for (int i = 1; i < A.length; i++) {
-			if (A[i] >= sum && sum <= 0) {
+			if (sum <= 0 && A[i] >= sum) {
+				// this case is tricky
 				sum = A[i];
 			} else {
 				sum += A[i];
 			}
-			if (sum > max) {
-				max = sum;
-			}
+			max = Math.max(max, sum);
 		}
 
 		return max;

@@ -4,30 +4,27 @@ public class PowXN {
 
 	// TODO tricky
 	public double pow(double x, int n) {
-		double ret = 1, stable = 0;
-		boolean sign = false; // plus
 		if (x == 0) {
 			return 0;
 		}
+		double cur = 1, pre = 0;
+		boolean minus = false;
 		if (x < 0) {
 			x = -x;
-			if (n % 2 != 0) {
-				sign = true;
-			}
+			minus = n % 2 != 0;
 		}
 		if (n > 0) {
-			while (n-- > 0 && stable != ret) {
-				stable = ret;
-				ret *= x;
-
+			while (n-- > 0 && pre != cur) {
+				pre = cur;
+				cur *= x;
 			}
 		} else {
 			x = 1 / x;
-			while (n++ < 0 && stable != ret) {
-				stable = ret;
-				ret *= x;
+			while (n++ < 0 && pre != cur) {
+				pre = cur;
+				cur *= x;
 			}
 		}
-		return (sign ? -1 : 1) * ret;
+		return (minus ? -1 : 1) * cur;
 	}
 }

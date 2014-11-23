@@ -1,10 +1,5 @@
 Leetcode Difficulties
 ========
-Sqrt(x)<br>
-Valid Number<br>
-Maximum Subarray<br>
-Pow(x, n)<br>
-Permutations<br>
 Wildcard Matching<br>
 Multiply Strings<br>
 Sudoku Solver<br>
@@ -40,3 +35,8 @@ Word Ladder II<br>
 Maximum Product Subarray<br>
 Find Minimum in Rotated Sorted Array II<br>
 Median of Two Sorted Arrays<br>
+Sqrt(x)<br>
+Valid Number<br>
+Maximum Subarray<br>
+Pow(x, n)<br>
+Permutations<br>

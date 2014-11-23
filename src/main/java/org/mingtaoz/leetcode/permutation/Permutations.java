@@ -80,6 +80,19 @@ public class Permutations {
 		}
 	}
 
+	/**
+	 * 
+	 * Permutations II
+	 *
+	 * Given a collection of numbers that might contain duplicates, return all
+	 * possible unique permutations.
+	 * 
+	 * For example, [1,1,2] have the following unique permutations: [1,1,2],
+	 * [1,2,1], and [2,1,1].
+	 * 
+	 * @param num
+	 * @return
+	 */
 	public List<List<Integer>> permuteUnique(int[] num) {
 		List<Integer> candidates = new ArrayList<>();
 		for (int n : num) {
@@ -97,7 +110,7 @@ public class Permutations {
 			result.add(temp);
 			return result;
 		}
-		int prev = Integer.MAX_VALUE;
+		int prev = candidates.get(0) - 1;
 		for (int i = 0; i < candidates.size(); i++) {
 			int current = candidates.get(i);
 			if (current != prev) {
@@ -114,6 +127,17 @@ public class Permutations {
 		return result;
 	}
 
+	/**
+	 * Permutation
+	 * 
+	 * Given a collection of numbers, return all possible permutations.
+	 * 
+	 * For example, [1,2,3] have the following permutations: [1,2,3], [1,3,2],
+	 * [2,1,3], [2,3,1], [3,1,2], and [3,2,1].
+	 * 
+	 * @param num
+	 * @return
+	 */
 	public List<List<Integer>> permute(int[] num) {
 		List<Integer> candidates = new ArrayList<>();
 		for (int n : num) {
@@ -122,6 +146,7 @@ public class Permutations {
 		return permuteHelper(candidates);
 	}
 
+	// this is a basic recursion
 	public List<List<Integer>> permuteHelper(List<Integer> candidates) {
 		List<List<Integer>> result = new LinkedList<>();
 		if (candidates.size() == 1) {

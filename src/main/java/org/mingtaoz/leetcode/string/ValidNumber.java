@@ -2,22 +2,21 @@ package org.mingtaoz.leetcode.string;
 
 public class ValidNumber {
 
+	// TODO this is odd to have in a real interview
 	public boolean isNumber(String s) {
 		char[] characters = s.trim().toCharArray();
 		boolean eFlag = false, dotFlag = false, numberFlag = false;
-		if (characters.length == 0) {
+		if (characters.length == 0
+				|| (characters.length == 1 && characters[0] == '.')
+				|| characters[0] == 'e') {
 			return false;
 		}
-		if (characters.length == 1) {
-			if (characters[0] == '.') {
-				return false;
-			}
-		}
 		for (int i = characters.length - 1; i >= 0; i--) {
+			// reverse go through
 			if (characters[i] >= '0' && characters[i] <= '9') {
 				numberFlag = true;
 			} else if (characters[i] == 'e') {
-				if (eFlag || i == 0 || !numberFlag || dotFlag) {
+				if (eFlag || !numberFlag || dotFlag) {
 					return false;
 				}
 				numberFlag = false;
@@ -34,7 +33,7 @@ public class ValidNumber {
 					return false;
 				}
 			} else {
-				// eveything else
+				// everything else
 				return false;
 			}
 		}
