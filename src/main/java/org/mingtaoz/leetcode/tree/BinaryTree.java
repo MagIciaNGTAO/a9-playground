@@ -27,6 +27,18 @@ public class BinaryTree {
         }
     }
 
+    // TODO
+    public TreeNode upsideDownBinaryTree(TreeNode node, TreeNode parent) {
+        if (node == null) {
+            return parent;
+        } else {
+            TreeNode root = upsideDownBinaryTree(node.left, node);
+            node.right = parent;
+            node.left = parent != null ? parent.right : null;
+            return root;
+        }
+    }
+
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ret = new LinkedList<Integer>();
         if (root == null)

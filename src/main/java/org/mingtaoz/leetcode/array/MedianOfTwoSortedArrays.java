@@ -12,44 +12,25 @@ public class MedianOfTwoSortedArrays {
      * @return
      */
     public double findMedianSortedArrays(int A[], int B[]) {
-        if (A.length == 0) {
-            if ((A.length + B.length) % 2 == 0) {
-                int mr = (A.length + B.length) / 2, ml = mr - 1;
-                return ((double) B[ml] + B[mr]) / 2;
-            } else {
-                int mr = (A.length + B.length) / 2;
-                return B[mr];
-            }
-        }
-        if (B.length == 0) {
-            if ((A.length + B.length) % 2 == 0) {
-                int mr = (A.length + B.length) / 2, ml = mr - 1;
-                return ((double) A[ml] + A[mr]) / 2;
-            } else {
-                int mr = (A.length + B.length) / 2;
-                return A[mr];
-            }
-        }
         if ((A.length + B.length) % 2 == 0) {
-            // even
             int ml = (A.length + B.length) / 2, mr = ml + 1;
             return ((double) kthSelection(A, B, ml) + kthSelection(A, B, mr)) / 2;
         } else {
-            // odd
             int mr = (A.length + B.length + 1) / 2;
             return kthSelection(A, B, mr);
         }
     }
 
-    // k is the kth element not the index, starting from 1
+    // k starts from 1
+    // i + j = k - 2
     public int kthSelection(int[] A, int[] B, int k) {
-        // guard the j + 1, i + 1 in later while loop
-        if (A.length + B.length == k) {
-            return A[A.length - 1] > B[B.length - 1] ? A[A.length - 1]
-                    : B[B.length - 1];
-        }
-        // guard k == 1 case
-        if (k == 1) {
+        if (A.length == 0 && B.length == 0) {
+            // exception
+        } else if (A.length == 0) {
+            return B[k - 1];
+        } else if (B.length == 0) {
+            return A[k - 1];
+        } else if (k == 1) {
             return A[0] < B[0] ? A[0] : B[0];
         }
         int la = 0, ra = A.length - 1, lb = 0, rb = B.length - 1;
@@ -70,7 +51,7 @@ public class MedianOfTwoSortedArrays {
                 } else {
                     // B1-> B2 <-A1 A2
                     ra = i - 1;
-                    i = (ra + la + 1) / 2;
+                    i = (la + i) / 2;
                     lb = j + 1;
                     j = k - i - 2;
                 }
@@ -81,16 +62,12 @@ public class MedianOfTwoSortedArrays {
                 } else {
                     // A1-> A2 <-B1 B2
                     rb = j - 1;
-                    j = (rb + lb + 1) / 2;
+                    j = (lb + j) / 2;
                     la = i + 1;
                     i = k - j - 2;
                 }
             }
         }
-        if (la <= ra) {
-            return A[la];
-        } else {
-            return B[lb];
-        }
+        return la <= ra ? A[la] : B[lb];
     }
 }

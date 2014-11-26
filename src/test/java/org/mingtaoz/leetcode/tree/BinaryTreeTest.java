@@ -11,7 +11,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public class BinaryTreeTest extends TestCase {
-    
+
     private BinaryTree sut;
 
     public BinaryTreeTest(String testName) {
@@ -37,6 +37,78 @@ public class BinaryTreeTest extends TestCase {
 
         assertEquals(list.toString(), sut
                 .postorderTraversalIterative(root).toString());
+    }
+
+    public void testUpsideDownBinaryTree3() {
+        TreeNode n1 = new TreeNode(1);
+        TreeNode n2 = new TreeNode(2);
+        TreeNode n3 = new TreeNode(3);
+        TreeNode n4 = new TreeNode(4);
+        TreeNode n5 = new TreeNode(5);
+        TreeNode n6 = new TreeNode(6);
+        TreeNode n7 = new TreeNode(7);
+        n1.left = n2;
+        n1.right = n3;
+        n2.left = n4;
+        n2.right = n5;
+        n4.left = n6;
+        n4.right = n7;
+
+        List<Integer> list = new LinkedList<Integer>();
+        list.add(6);
+        list.add(7);
+        list.add(4);
+        list.add(5);
+        list.add(2);
+        list.add(3);
+        list.add(1);
+
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
+    }
+
+    public void testUpsideDownBinaryTree2() {
+        TreeNode n1 = new TreeNode(1);
+        TreeNode n2 = new TreeNode(2);
+        TreeNode n3 = new TreeNode(3);
+        TreeNode n4 = new TreeNode(4);
+        TreeNode n5 = new TreeNode(5);
+        TreeNode n6 = new TreeNode(6);
+        n1.left = n2;
+        n1.right = n3;
+        n2.left = n4;
+        n2.right = n5;
+        n4.left = n6;
+
+        List<Integer> list = new LinkedList<Integer>();
+        list.add(6);
+        list.add(4);
+        list.add(5);
+        list.add(2);
+        list.add(3);
+        list.add(1);
+
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
+    }
+
+    public void testUpsideDownBinaryTree1() {
+        TreeNode n1 = new TreeNode(1);
+        TreeNode n2 = new TreeNode(2);
+        TreeNode n3 = new TreeNode(3);
+        TreeNode n4 = new TreeNode(4);
+        TreeNode n5 = new TreeNode(5);
+        n1.left = n2;
+        n1.right = n3;
+        n2.left = n4;
+        n2.right = n5;
+
+        List<Integer> list = new LinkedList<Integer>();
+        list.add(4);
+        list.add(5);
+        list.add(2);
+        list.add(3);
+        list.add(1);
+
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
     }
 
     public void testPostorderTraversal2() {

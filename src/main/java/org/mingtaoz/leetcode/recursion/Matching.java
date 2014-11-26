@@ -17,13 +17,9 @@ public class Matching {
      * @param p
      * @return
      */
-    public boolean isMatchWildCard(String s, String p) {
-        return isMatchHelper(s.toCharArray(), p.toCharArray(), 0, 0);
-    }
-
-    // TODO the last start idea is from others need review
-    public boolean isMatchHelper(char[] s, char[] p, int match, int i) {
-        int lastStarIndex = -1, lastMatch = -1;
+    public boolean isMatchWildCard(String string, String pattern) {
+        char[] s = string.toCharArray(), p = pattern.toCharArray();
+        int lastStarIndex = -1, lastMatch = -1, match = 0, i = 0;
         while (match < s.length && (i < p.length || lastStarIndex != -1)) {
             if (i == p.length) {
                 i = lastStarIndex + 1;
@@ -32,27 +28,18 @@ public class Matching {
                 if (p[i] == '*') {
                     lastStarIndex = i++;
                     lastMatch = match;
-                } else if (p[i] == '?') {
+                } else if (p[i] == '?' || s[match] == p[i]) {
                     match++;
                     i++;
+                } else if (lastStarIndex != -1) {
+                    i = lastStarIndex + 1;
+                    match = ++lastMatch;
                 } else {
-                    if (s[match] == p[i]) {
-                        match++;
-                        i++;
-                    } else {
-                        if (lastStarIndex != -1) {
-                            i = lastStarIndex + 1;
-                            match = ++lastMatch;
-                        } else {
-                            return false;
-                        }
-                    }
+                    return false;
                 }
             }
         }
-        if (match == s.length && i == p.length) {
-            return true;
-        } else if (match == s.length) {
+        if (match == s.length) {
             while (i < p.length) {
                 if (p[i] != '*') {
                     return false;
@@ -60,10 +47,8 @@ public class Matching {
                 i++;
             }
             return true;
-        } else {
-            // TODO
-            return false;
         }
+        return false;
     }
 
     /**
@@ -103,16 +88,14 @@ public class Matching {
             // pattern left
             boolean character = false;
             while (j < p.length) {
-                if (p[j] == '*') {
+                if (p[j++] == '*') {
                     character = false;
                 } else {
                     if (character) {
                         return false;
-                    } else {
-                        character = true;
                     }
+                    character = true;
                 }
-                j++;
             }
             return !character;
         }
@@ -120,10 +103,12 @@ public class Matching {
             return false;
         }
         if (j < p.length - 1 && p[j + 1] == '*') {
-            // next star
+            // next is star
+            // don't use star
             if (isMatch2Helper(s, p, i, j + 2)) {
                 return true;
             }
+            // all ways of using a star
             while (i < s.length && (s[i] == p[j] || p[j] == '.')) {
                 if (isMatch2Helper(s, p, ++i, j + 2)) {
                     return true;
@@ -137,57 +122,4 @@ public class Matching {
         }
         return false;
     }
-
-    // TODO DP? match as far as possible?
-    // TODO learn more about FSA
-    // // shield out the easy case cuz it's hard to add to automata ...
-    // if (p.length() == 0) {
-    // return s.length() == 0;
-    // }
-    // if (p.length() == 1) {
-    // return s.length() == 1 && (s.charAt(0) == p.charAt(0) || p.charAt(0) ==
-    // '.');
-    // }
-    // // building automata
-    // int i = 1, state = 0, finalState = -1;
-    // List<Map<Character, Integer>> fsa = new ArrayList<>();
-    // while (i < p.length()) {
-    // if (p.charAt(i) == '*') {
-    // if (p.charAt(i - 1) == '.') {
-    //
-    // } else {
-    //
-    // }
-    // } else {
-    // // a simple character
-    // Map<Character, Integer> map = new HashMap<>();
-    // if (p.charAt(i - 1) == '.') {
-    // state++;
-    // for (char c = 'a'; c <= 'z'; c++) {
-    // map.put(c, state);
-    // }
-    // } else {
-    // map.put(p.charAt(i - 1), ++state);
-    // }
-    // fsa.add(map);
-    // }
-    // i++;
-    // }
-    // // use the automata
-    // i = 0;
-    // state = 0;
-    // while (i < s.length()) {
-    // Map<Character, Integer> transition = fsa.get(state);
-    // if (transition.containsKey(s.charAt(i))) {
-    // state = transition.get(fsa.get(0));
-    // } else {
-    // return false;
-    // }
-    // i++;
-    // }
-    // if (state == finalState) {
-    // return true;
-    // } else {
-    // return false;
-    // }
 }

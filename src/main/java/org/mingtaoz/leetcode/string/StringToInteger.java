@@ -1,6 +1,4 @@
-package org.mingtaoz.leetcode.puzzle;
-
-import java.math.BigInteger;
+package org.mingtaoz.leetcode.string;
 
 public class StringToInteger {
 
@@ -38,14 +36,5 @@ public class StringToInteger {
             i++;
         }
         return (int) (neg ? -1 * ret : ret);
-    }
-
-    // TODO
-    public String multiply(String num1, String num2) {
-        BigInteger b1 = new BigInteger(num1);
-        BigInteger b2 = new BigInteger(num2);
-
-        return b1.multiply(b2) + "";
-
     }
 }

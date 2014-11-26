@@ -1,17 +1,14 @@
 Leetcode Difficulties
 ========
-Wildcard Matching<br>
-Multiply Strings<br>
-Sudoku Solver<br>
 Longest Valid Parentheses<br>
-Next Permutation<br>
+Multiply Strings<br>
 Substring with Concatenation of All Words<br>
 Reverse Nodes in k-Group<br>
 Generate Parentheses<br>
 4Sum<br>
 Container With Most Water<br>
-Regular Expression Matching<br>
 Palindrome Number<br>
+Upside Down Binary Tree<br>
 
 Minimum Window Substring<br>
 *Sink Zero In Binary Tree<br>
@@ -34,9 +31,12 @@ Search in Rotated Sorted Array II<br>
 Word Ladder II<br>
 Maximum Product Subarray<br>
 Find Minimum in Rotated Sorted Array II<br>
-Median of Two Sorted Arrays<br>
 Sqrt(x)<br>
 Valid Number<br>
 Maximum Subarray<br>
 Pow(x, n)<br>
 Permutations<br>
+Median of Two Sorted Arrays<br>
+Wildcard Matching<br>
+Regular Expression Matching<br>
+Next Permutation<br>
