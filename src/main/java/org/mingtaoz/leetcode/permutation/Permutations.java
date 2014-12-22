@@ -17,34 +17,31 @@ public class Permutations {
      * 1,2,3 1,1,5 → 1,5,1
      * 
      * no disorder until the end, switch last two: 1234->1243 some disorder but
-     * one in order? 2134->2143 3214->3241 => find last piece of in order and
-     * switch failed: 4321 => 'switching sort': keep switching left++ and
+     * one in order 2134->2143 3214->3241 => find last piece of in order and
+     * switch
+     * failed to find ??: 4321 => 'switching sort': keep switching left++ and
      * right-- 14315 -> 14351 1237654 -> 1247653 'switching sort' -> 1243567
      * 1257643 -> 1263457 -> ; 16375 -> 16537
      * 
      * @param num
      */
-    // TODO simplify?
     public void nextPermutation(int[] num) {
-        int prev = num[0], cur;
-        if (num.length == 1) {
+        int n = num.length;
+        if (n == 1) {
             return;
         }
-        int recentDown = num[0] > num[1] ? 0 : -1, recentUp = num[1] > num[0] ? 0
-                : -1, n = num.length;
-        for (int i = 1; i < n; i++) {
-            cur = num[i];
-            if (cur > prev) {
-                recentUp = i - 1;
-            } else if (cur < prev) {
-                recentDown = i - 1;
+        int rightMostDecrease = -1, rightMostIncrease = -1;
+        for (int i = 0; i < n - 1; i++) {
+            if (num[i] < num[i + 1]) {
+                rightMostIncrease = i;
+            } else if (num[i] > num[i + 1]) {
+                rightMostDecrease = i;
             } else {
-                // TODO em ...
+                // no-op
             }
-            prev = cur;
         }
-        if (recentUp > recentDown) {
-            // switch last two not equal
+        if (rightMostIncrease > rightMostDecrease) {
+            // switch right most two not equal
             int last = n - 1;
             while (num[last] == num[last - 1]) {
                 last--;
@@ -53,24 +50,24 @@ public class Permutations {
             num[last - 1] = num[last];
             num[last] = temp;
         } else {
-            if (recentUp != -1) {
-                // find closest to recentUp and switch siwth recentUp
-                int temp = num[recentUp];
+            if (rightMostIncrease != -1) {
+                // search back find first element larger than rightMostIncrease
+                // and switch
+                int temp = num[rightMostIncrease];
                 int search = n - 1;
                 // TODO could be a binary search as it's sorted desc
-                while (num[search] <= temp && search > recentUp) {
+                while (num[search] <= temp && search > rightMostIncrease) {
                     search--;
                 }
-                num[recentUp] = num[search];
+                num[rightMostIncrease] = num[search];
                 num[search] = temp;
-                // switch sort
             }
             n--;
-            recentUp++;
-            while (n > recentUp) {
+            rightMostIncrease++;
+            while (n > rightMostIncrease) {
                 int temp = num[n];
-                num[n--] = num[recentUp];
-                num[recentUp++] = temp;
+                num[n--] = num[rightMostIncrease];
+                num[rightMostIncrease++] = temp;
             }
         }
     }

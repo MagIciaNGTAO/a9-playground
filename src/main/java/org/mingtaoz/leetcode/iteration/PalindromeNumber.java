@@ -2,13 +2,11 @@ package org.mingtaoz.leetcode.iteration;
 
 public class PalindromeNumber {
 
-    // TODO em ... still mess up details
     public boolean isPalindrome(int x) {
         if (x < 0) {
             return false;
         }
-        long a = (long) x;
-        long leftBase = 1;
+        long a = (long) x, leftBase = 1;
         while (leftBase <= a) {
             leftBase *= 10;
         }

@@ -1,15 +1,5 @@
 Leetcode Difficulties
 ========
-Longest Valid Parentheses<br>
-Multiply Strings<br>
-Substring with Concatenation of All Words<br>
-Reverse Nodes in k-Group<br>
-Generate Parentheses<br>
-4Sum<br>
-Container With Most Water<br>
-Palindrome Number<br>
-Upside Down Binary Tree<br>
-
 Minimum Window Substring<br>
 *Sink Zero In Binary Tree<br>
 Binary Tree Postorder Traversal<br>
@@ -36,7 +26,14 @@ Valid Number<br>
 Maximum Subarray<br>
 Pow(x, n)<br>
 Permutations<br>
-Median of Two Sorted Arrays<br>
 Wildcard Matching<br>
 Regular Expression Matching<br>
 Next Permutation<br>
+Longest Valid Parentheses<br>
+Container With Most Water<br>
+Median of Two Sorted Arrays<br>
+4Sum<br>
+Reverse Nodes in k-Group<br>
+Upside Down Binary Tree<br>
+Multiply Strings<br>
+//TODO tail? recursion
