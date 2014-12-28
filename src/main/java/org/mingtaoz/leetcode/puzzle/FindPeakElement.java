@@ -13,6 +13,7 @@ package org.mingtaoz.leetcode.puzzle;
  */
 public class FindPeakElement {
 
+    // TODO runtime?
     public int findPeakElement(int[] num) {
         if (num.length == 1) {
             return 0;
