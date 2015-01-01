@@ -16,7 +16,6 @@ You may assume all elements in the array are non-negative integers and fit in th
  */
 public class MaximumGap {
 
-    // TODO assume no duplicate
     public int maximumGap(int[] num) {
         int n = num.length;
         if (n < 2) {
