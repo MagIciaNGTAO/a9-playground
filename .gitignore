@@ -5,3 +5,4 @@
 
 *.prefs
 /target
+/test-output
