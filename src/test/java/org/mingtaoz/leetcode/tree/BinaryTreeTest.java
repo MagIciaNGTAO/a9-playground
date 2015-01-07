@@ -3,12 +3,11 @@ package org.mingtaoz.leetcode.tree;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.mingtaoz.leetcode.tree.BinaryTree;
-import org.mingtaoz.leetcode.tree.BinaryTree.TreeNode;
-
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.mingtaoz.leetcode.tree.BinaryTree.TreeNode;
 
 public class BinaryTreeTest extends TestCase {
 
@@ -35,8 +34,8 @@ public class BinaryTreeTest extends TestCase {
         list.add(1);
         list.add(3);
 
-        assertEquals(list.toString(), sut
-                .postorderTraversalIterative(root).toString());
+        assertEquals(list.toString(), sut.postorderTraversalIterative(root)
+                .toString());
     }
 
     public void testUpsideDownBinaryTree3() {
@@ -63,7 +62,8 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
+        assertEquals(list.toString(),
+                sut.preorderTraversal(sut.helper(n1, null)).toString());
     }
 
     public void testUpsideDownBinaryTree2() {
@@ -87,7 +87,8 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
+        assertEquals(list.toString(),
+                sut.preorderTraversal(sut.helper(n1, null)).toString());
     }
 
     public void testUpsideDownBinaryTree1() {
@@ -108,7 +109,8 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTree(n1, null)).toString());
+        assertEquals(list.toString(),
+                sut.preorderTraversal(sut.helper(n1, null)).toString());
     }
 
     public void testPostorderTraversal2() {
@@ -120,8 +122,8 @@ public class BinaryTreeTest extends TestCase {
         list.add(2);
         list.add(1);
 
-        assertEquals(list.toString(), sut
-                .postorderTraversalIterative(root).toString());
+        assertEquals(list.toString(), sut.postorderTraversalIterative(root)
+                .toString());
     }
 
     public void testSumNumbers1() {

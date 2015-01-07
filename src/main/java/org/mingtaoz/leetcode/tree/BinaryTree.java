@@ -28,50 +28,40 @@ public class BinaryTree {
     }
 
     /**
-     * 
-     * Given a binary tree where all the right nodes are either leaf nodes with
-     * a sibling (a left node that shares the same parent node) or empty, flip
-     * it upside down and turn it into a tree where the original right nodes
-     * turned into left leaf nodes. Return the new root.
-     * For example:
-     * Given a binary tree {1,2,3,4,5},
-     *   1
-     *  / \
-     *  2 3
-     * / \
-     * 4 5
-     * return the root of the binary tree [4,5,2,#,#,3,1].
-     *  4
-     * / \
-     * 5 2
-     *  / \
-     *  3 1
-     *
-     * if (node == null) {
-            return parent;
-        } else {
-            TreeNode root = upsideDownBinaryTree(node.left, node);
-            node.right = parent;
-            node.left = parent != null ? parent.right : null;
-            return root;
-        }
-     * 
-     * @param node
-     * @param parent
-     * @return
-     */
+     * Given a binary tree where all the right nodes are either leaf nodes with a sibling 
+     * (a left node that shares the same parent node) or empty, flip it upside down and 
+     * turn it into a tree where the original right nodes turned into left leaf nodes. 
+     * Return the new root.
 
-    public TreeNode upsideDownBinaryTree(TreeNode node, TreeNode parent) {
+    For example:
+    Given a binary tree {1,2,3,4,5},
+    1
+    / \
+    2   3
+    / \
+    4   5
+    return the root of the binary tree [4,5,2,#,#,3,1].
+    4
+    / \
+    5   2
+    / \
+    3   1  
+     */
+    public TreeNode UpsideDownBinaryTree(TreeNode root) {
+        return helper(root, null);
+    }
+
+    public TreeNode helper(TreeNode node, TreeNode parent) {
         if (node == null) {
             return parent;
         } else {
-            TreeNode root = upsideDownBinaryTree(node.left, node);
+            TreeNode root = helper(node.left, node);
             node.right = parent;
             node.left = parent == null ? null : parent.right;
             return root;
         }
     }
-    
+
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> ret = new LinkedList<Integer>();
         if (root == null)
