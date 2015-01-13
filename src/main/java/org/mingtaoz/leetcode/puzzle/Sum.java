@@ -1,5 +1,6 @@
 package org.mingtaoz.leetcode.puzzle;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,6 +11,16 @@ import java.util.Set;
 
 public class Sum {
 
+    /**
+     * 
+     * Two Sum I - Input array is sorted
+     * &
+     * Two Sum II - Input array is sorte 
+     * 
+     * @param numbers
+     * @param target
+     * @return
+     */
     public int[] twoSum(int[] numbers, int target) {
         Map<Integer, Integer> complement = new HashMap<>();
         int[] ret = new int[2];
@@ -18,11 +29,53 @@ public class Sum {
             if (complement.containsKey(numbers[i])) {
                 ret[0] = complement.get(numbers[i]) + 1;
                 ret[1] = i + 1;
+                return ret;
             } else {
                 complement.put(target - numbers[i], i);
             }
         }
         return ret;
+    }
+
+    /**
+     * 
+     * Two Sum III - Data structure design
+     * 
+     * Design and implement a TwoSum class. It should support the following operations: add and find.
+
+    add - Add the number to an internal data structure.
+    find - Find if there exists any pair of numbers which sum is equal to the value.
+
+    For example,
+    add(1); add(3); add(5);
+    find(4) -> true
+    find(7) -> false
+     *
+     */
+    class TwoSum {
+
+        List<Integer> numbers = new ArrayList<>();
+        Set<Integer> cache = new HashSet<>();
+
+        public void add(int number) {
+            numbers.add(number);
+        }
+
+        public boolean find(int value) {
+            if (cache.contains(value)) {
+                return true;
+            }
+            Map<Integer, Integer> complement = new HashMap<>();
+            for (int i = 0; i < numbers.size(); i++) {
+                if (complement.containsKey(numbers.get(i))) {
+                    cache.add(value);
+                    return true;
+                } else {
+                    complement.put(value - numbers.get(i), i);
+                }
+            }
+            return false;
+        }
     }
 
     public List<List<Integer>> threeSum(int[] num) {
@@ -41,8 +94,7 @@ public class Sum {
             for (int j = right; j > left + 1; j--) {
                 for (int i = j - 1; i > left & num[left] + num[i] + num[j] >= 0; i--) {
                     if ((num[left] + num[i] + num[j]) == 0) {
-                        List<Integer> list = Arrays.asList(num[left], num[i],
-                                num[j]);
+                        List<Integer> list = Arrays.asList(num[left], num[i], num[j]);
                         String s = list.toString();
                         if (!dup.contains(s)) {
                             dup.add(s);

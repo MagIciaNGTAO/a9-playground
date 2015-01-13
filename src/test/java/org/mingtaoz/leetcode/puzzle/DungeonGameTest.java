@@ -16,6 +16,24 @@ public class DungeonGameTest {
     }
 
     @Test
+    public void testDungeonGame11() {
+        int[][] i = { { 0, -40, 100 }, { -30, -30, 1 }, { 30, 30, 0 } };
+        ASSERT.that(sut.calculateMinimumHP(i)).is(31);
+    }
+
+    @Test
+    public void testDungeonGame10() {
+        int[][] i = { { 0, 5 }, { -2, -3 } };
+        ASSERT.that(sut.calculateMinimumHP(i)).is(1);
+    }
+
+    @Test
+    public void testDungeonGame9() {
+        int[][] i = { { -2, -3, 3 }, { -5, -10, 1 }, { 10, 30, -5 } };
+        ASSERT.that(sut.calculateMinimumHP(i)).is(7);
+    }
+
+    @Test
     public void testDungeonGame8() {
         int[][] i = { { 0, 2 }, { -7, 0 } };
         ASSERT.that(sut.calculateMinimumHP(i)).is(1);
