@@ -12,10 +12,39 @@ public class LongestSubstring {
      * 2 distinct characters. 
      * For example, Given s = “eceba”, T is "ece" which its length is 3.
      * 
-     * 
      */
     public int lengthOfLongestSubstringTwoDistinct(String s) {
-        return 0;
+        int n = s.length();
+        if (n == 0) {
+            return 0;
+        }
+        int firstStart = 0, i = 1;
+        char temp = s.charAt(firstStart);
+        // init secondStart
+        while (i < n && temp == s.charAt(i)) {
+            i++;
+        }
+        if (i == n) {
+            return n;
+        }
+        int secondStart = i, ret = 0;
+        ret = Math.max(ret, i - firstStart + 1);
+        i++;
+        while (i < n) {
+            if (s.charAt(secondStart) == s.charAt(i) || s.charAt(firstStart) == s.charAt(i)) {
+                ret = Math.max(ret, (i - firstStart) + 1);
+                i++;
+            } else {
+                // there is some repeat calculation
+                firstStart = secondStart;
+                secondStart++;
+                while (secondStart < n && s.charAt(firstStart) == s.charAt(secondStart)) {
+                    secondStart++;
+                }
+            }
+        }
+        ret = Math.max(ret, i - firstStart);
+        return ret;
     }
 
     /**
