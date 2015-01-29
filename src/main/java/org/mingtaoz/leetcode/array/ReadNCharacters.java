@@ -3,7 +3,8 @@ package org.mingtaoz.leetcode.array;
 public class ReadNCharacters {
 
     private char[] buffer = new char[4];
-    private int index = 0;
+    private int index = -1;
+    private int previous = -1;
 
     /**
      * Read N Characters Given Read4 II - Call multiple times
@@ -15,16 +16,22 @@ public class ReadNCharacters {
      * 
      */
     public int read(char[] destination, int n) {
-        int ret = 0, temp = 0;
-        while (n > 0 && (temp = read4Wrapper(buffer)) == 4) {
+        int ret = 0;
+        // 1. consume buffer
+        while (index < previous) {
+            destination[ret++] = buffer[index++];
+            n--;
+        }
+        // 2. read4 as usual
+        while (n > 0 && (previous = read4(buffer)) == 4) {
             copy(buffer, destination, ret);
-            ret += temp;
-            n -= temp;
+            ret += previous;
+            n -= previous;
         }
         if (n > 0) {
             copy(buffer, destination, ret);
-            n -= temp;
-            ret += temp;
+            n -= previous;
+            ret += previous;
         }
         while (n < 0) {
             destination[ret--] = 0;
@@ -35,17 +42,8 @@ public class ReadNCharacters {
     }
 
     private void copy(char[] buffer, char[] destination, int ret) {
-        for (; index < 4; index++) {
+        for (index = 0; index < previous; index++) {
             destination[ret++] = buffer[index];
-        }
-    }
-
-    // TODO resolve stuff here
-    private int read4Wrapper(char[] buffer) {
-        if (index < 4) {
-            return 4 - index;
-        } else {
-            return read4(buffer);
         }
     }
 
