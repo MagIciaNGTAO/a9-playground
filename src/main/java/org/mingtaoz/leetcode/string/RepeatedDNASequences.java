@@ -1,25 +1,42 @@
-
 package org.mingtaoz.leetcode.string;
 
-public class StrStr {
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
-    // brute force, the condition is tricky
-    public int strStrPrime(String haystackString, String needleString) {
-        for (int i = 0;; i++) {
-            for (int j = 0;; j++) {
-                if (j == needleString.length()) {
-                    return i;
-                } else if (i + j == haystackString.length()) {
-                    return -1;
-                } else if (haystackString.charAt(i + j) != needleString.charAt(j)) {
-                    break;
+/**
+ * 
+ * All DNA is composed of a series of nucleotides abbreviated as A, C, G, and T, for example: "ACGAATTCCG". 
+ * When studying DNA, it is sometimes useful to identify repeated sequences within the DNA.
+ * Write a function to find all the 10-letter-long sequences (substrings) that occur more than once in a DNA molecule.
+ * For example,
+ * Given s = "AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT",
+ * Return: ["AAAAACCCCC", "CCCCCAAAAA"].
+ * 
+ *
+ */
+public class RepeatedDNASequences {
+
+    public List<String> findRepeatedDnaSequences(String s) {
+        Set<String> helper = new HashSet<>();
+        List<String> ret = new LinkedList<>();
+        int n = s.length(), S = 10;
+
+        for (int i = 0; i <= n - S; i++) {
+            String needle = s.substring(i, i + S);
+            String haystack = s.substring(i + 1);
+            if (!helper.contains(needle)) {
+                if (strStr(haystack, needle) > 0) {
+                    helper.add(needle);
                 }
             }
         }
+
+        ret.addAll(helper);
+        return ret;
     }
 
-    // it's KMP related
-    // TODO review suffix array/tree
     public int strStr(String haystackString, String needleString) {
         if (needleString.length() == 0) {
             return 0;

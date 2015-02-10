@@ -1,37 +1,46 @@
 package org.mingtaoz.leetcode.string;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import static org.truth0.Truth.ASSERT;
 
-public class ReverseWordsInStringTest extends TestCase {
+import org.junit.Before;
+import org.junit.Test;
 
-	private ReverseWordsInString sut;
+public class ReverseWordsInStringTest {
 
-	public ReverseWordsInStringTest(String testName) {
-		super(testName);
-		sut = new ReverseWordsInString();
-	}
+    private ReverseWordsInString sut;
 
-	public static Test suite() {
-		return new TestSuite(ReverseWordsInStringTest.class);
-	}
+    @Before
+    public void setup() {
+        sut = new ReverseWordsInString();
+    }
 
-	public void testReverseWordsInString1() {
-		String input = "the sky is blue";
-		String expected = "blue is sky the";
-		assertEquals(expected, sut.reverseWordsInString(input));
-	}
-	
-	public void testReverseWordsInString2() {
-		String input = " the sky is";
-		String expected = "is sky the ";
-		assertEquals(expected, sut.reverseWordsInString(input));
-	}
-	
-	public void testReverseWordsInString3() {
-		String input = "the";
-		String expected = "the";
-		assertEquals(expected, sut.reverseWordsInString(input));
-	}
+    @Test
+    public void testReverseWordsInString1() {
+        String input = "the sky is blue"; // eulb si yks eht
+        String expected = "blue is sky the";
+        ASSERT.that(sut.reverseWordsInString(input)).is(expected);
+        char[] inout = input.toCharArray();
+        sut.reverseWordsInPlace(inout);
+        ASSERT.that(inout).is(expected.toCharArray());
+    }
+
+    @Test
+    public void testReverseWordsInString2() {
+        String input = "the sky is";
+        String expected = "is sky the";
+        ASSERT.that(sut.reverseWordsInString(input)).is(expected);
+        char[] inout = input.toCharArray();
+        sut.reverseWordsInPlace(inout);
+        ASSERT.that(inout).is(expected.toCharArray());
+    }
+
+    @Test
+    public void testReverseWordsInString3() {
+        String input = "the";
+        String expected = "the";
+        ASSERT.that(sut.reverseWordsInString(input)).is(expected);
+        char[] inout = input.toCharArray();
+        sut.reverseWordsInPlace(inout);
+        ASSERT.that(inout).is(expected.toCharArray());
+    }
 }
