@@ -19,58 +19,25 @@ import java.util.Set;
 public class RepeatedDNASequences {
 
     public List<String> findRepeatedDnaSequences(String s) {
-        Set<String> helper = new HashSet<>();
-        List<String> ret = new LinkedList<>();
-        int n = s.length(), S = 10;
+        Set<Integer> words = new HashSet<>();
+        Set<Integer> doubleWords = new HashSet<>();
+        List<String> rv = new LinkedList<>();
+        char[] map = new char[26];
+        //map['A' - 'A'] = 0;
+        map['C' - 'A'] = 1;
+        map['G' - 'A'] = 2;
+        map['T' - 'A'] = 3;
 
-        for (int i = 0; i <= n - S; i++) {
-            String needle = s.substring(i, i + S);
-            String haystack = s.substring(i + 1);
-            if (!helper.contains(needle)) {
-                if (strStr(haystack, needle) > 0) {
-                    helper.add(needle);
-                }
+        for (int i = 0; i < s.length() - 9; i++) {
+            int v = 0;
+            for (int j = i; j < i + 10; j++) {
+                v <<= 2; // represent 4 state using 2 bits
+                v |= map[s.charAt(j) - 'A'];
+            }
+            if (!words.add(v) && doubleWords.add(v)) {
+                rv.add(s.substring(i, i + 10));
             }
         }
-
-        ret.addAll(helper);
-        return ret;
-    }
-
-    public int strStr(String haystackString, String needleString) {
-        if (needleString.length() == 0) {
-            return 0;
-        }
-        if (haystackString.length() == 0) {
-            return -1;
-        }
-        char[] haystack = haystackString.toCharArray();
-        char[] needle = needleString.toCharArray();
-        // 1. build the jump table based on needle
-        // ABABC
-        // -10012
-        int[] table = new int[needle.length];
-        int acc = 0;
-        table[0] = -1;
-        for (int i = 1; i < needle.length; i++) {
-            if (needle[acc] == needle[i]) {
-                table[i] = acc++;
-            } else {
-                table[i] = acc;
-                acc = 0;
-            }
-        }
-        // 2. go through haystack
-        int match = 0, i = 0;
-        for (; i < haystack.length && match < needle.length; i++) {
-            while (match != -1 && haystack[i] != needle[match]) {
-                match = table[match];
-            }
-            match++;
-        }
-        if (match == needle.length) {
-            return i - needle.length;
-        }
-        return -1;
+        return rv;
     }
 }
