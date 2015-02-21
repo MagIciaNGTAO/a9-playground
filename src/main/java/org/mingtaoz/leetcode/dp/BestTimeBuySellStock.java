@@ -126,8 +126,9 @@ public class BestTimeBuySellStock {
     Note:
     You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
      
-    -- maybe transform to a maxflow? 
-    -- dijkstra?
+    -- take negative for all positive profit and walk k steps with dijkstra? not working ...
+    -- find local min to buy local max to sell? not working ...
+    -- a variation from maxProfit3: just recalculate the benefit array after selling m times
     
      * 
      * @param k
@@ -135,6 +136,31 @@ public class BestTimeBuySellStock {
      * @return
      */
     public int maxProfit4(int k, int[] prices) {
-        return 0;
+        int n = prices.length;
+
+        if (k > n / 2) {
+            int profit = 0;
+            for (int i = 1; i < n; i++) {
+                if (prices[i] > prices[i - 1]) {
+                    profit += prices[i] - prices[i - 1];
+                }
+            }
+            return profit;
+        }
+
+        int[] previous = new int[n];
+        for (int i = 1; i <= k; i++) {
+            int[] current = new int[n];
+
+            // acc denotes the maximum profit of just doing at most i-1 transactions, 
+            // using first j-1 prices minus cost from purchasing the stock at price[j]
+            int acc = previous[0] - prices[0];
+            for (int j = 1; j < n; j++) {
+                current[j] = Math.max(current[j - 1], prices[j] + acc);
+                acc = Math.max(acc, previous[j - 1] - prices[j]);
+            }
+            previous = current;
+        }
+        return previous[n - 1];
     }
 }
