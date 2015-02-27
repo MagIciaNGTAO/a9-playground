@@ -8,16 +8,25 @@ import org.junit.Before;
 
 public class MinimumWindowSubstringTest {
 
-	private MinimumWindowSubstring sut;
+    private MinimumWindowSubstring sut;
 
-	@Before
-	public void setup() {
-		sut = new MinimumWindowSubstring();
-	}
+    @Before
+    public void setup() {
+        sut = new MinimumWindowSubstring();
+    }
 
-	@Test
-	public void testMinWindow1() {
-		ASSERT.that(sut.minWindow("ADOBECODEBANC", "ABC")).is("BANC");
-		ASSERT.that(sut.minWindow("a", "aa")).is("");
-	}
+    @Test
+    public void testMinWindow3() {
+        ASSERT.that(sut.minWindow("a", "aa")).is("");
+    }
+
+    @Test
+    public void testMinWindow2() {
+        ASSERT.that(sut.minWindow("ADOBECODEBANC", "ABC")).is("BANC");
+    }
+
+    @Test
+    public void testMinWindow1() {
+        ASSERT.that(sut.minWindow("a", "a")).is("a");
+    }
 }

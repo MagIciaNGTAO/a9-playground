@@ -333,6 +333,8 @@ public class BinaryTree {
 
     /**
      * 
+     * Balanced Binary Tree
+     * 
      * Given a binary tree, determine if it is height-balanced.
      * 
      * For this problem, a height-balanced binary tree is defined as a binary
@@ -353,30 +355,23 @@ public class BinaryTree {
      * 
      * use -1 to denote any subtree is not balanced
      * 
-     * @param root
+     * @param node
      * @return
      */
-    private int isBalancedHelper(TreeNode root) {
-        if (root.left == null && root.right == null) {
+    private int isBalancedHelper(TreeNode node) {
+        if (node == null) {
             return 1;
         }
         int left = 0, right = 0;
-        if (root.left != null) {
-            // TODO should I do this? for the double stack space?
-            left = isBalancedHelper(root.left);
-            if (left == -1) {
-                return -1;
-            }
+        left = isBalancedHelper(node.left);
+        if (left == -1) {
+            return -1;
         }
-        if (root.right != null) {
-            right = isBalancedHelper(root.right);
-            if (right == -1) {
-                return -1;
-            }
+        right = isBalancedHelper(node.right);
+        if (right == -1) {
+            return -1;
         }
-        int diff = Math.abs(right - left);
-        int depth = Math.max(left, right) + 1;
-        return diff <= 1 ? depth : -1;
+        return Math.abs(right - left) <= 1 ? Math.max(left, right) + 1 : -1;
     }
 
     /**

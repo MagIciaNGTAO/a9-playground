@@ -16,11 +16,9 @@ public class MinimumWindowSubstring {
      * @return
      */
     public String minWindow(String S, String T) {
-        Map<Character, Integer> found = new HashMap<>();
-        Map<Character, Integer> need = new HashMap<>();
+        Map<Character, Integer> found = new HashMap<>(), need = new HashMap<>();
         // TODO key here is push begin as far as possible
-        int begin = 0, match = 0;
-        String ret = "";
+        int begin = 0, match = 0, retStart = -1, retEnd = -1;
         for (char cur : T.toCharArray()) {
             if (need.containsKey(cur)) {
                 need.put(cur, need.get(cur) + 1);
@@ -57,11 +55,12 @@ public class MinimumWindowSubstring {
                         begin++;
                     }
                 }
-                if (ret.equals("") || ret.length() > (i - begin + 1)) {
-                    ret = S.substring(begin, i + 1);
+                if (retStart == -1 || retEnd - retStart > (i - begin + 1)) {
+                    retStart = begin;
+                    retEnd = i + 1;
                 }
             }
         }
-        return ret;
+        return retStart == -1 ? "" : S.substring(retStart, retEnd);
     }
 }

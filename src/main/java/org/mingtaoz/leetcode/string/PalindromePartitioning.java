@@ -27,26 +27,26 @@ public class PalindromePartitioning {
      * @return
      */
     public List<List<String>> partition(String s) {
-        List<List<String>> ret = new LinkedList<>();
-        StringBuilder subString = new StringBuilder();
+        List<List<String>> ret = new LinkedList<List<String>>();
+        StringBuilder left = new StringBuilder();
         for (char c : s.toCharArray()) {
-            subString.append(c);
-            if (isPalindrome(subString.toString())) {
-                if (s.length() == subString.length()) {
-                    List<String> curRet = new LinkedList<>();
-                    curRet.add(s);
-                    ret.add(curRet);
+            left.append(c);
+            String temp = left.toString();
+            if (isPalindrome(temp)) {
+                if (left.length() == s.length()) {
+                    List<String> last = new LinkedList<>();
+                    last.add(temp);
+                    ret.add(last);
+                    return ret;
                 } else {
-                    List<List<String>> subPartitions = partition(s
-                            .substring(subString.length()));
-                    for (List<String> subPartition : subPartitions) {
-                        subPartition.add(0, subString.toString());
+                    List<List<String>> rights = partition(s.substring(left.length()));
+                    for (List<String> right : rights) {
+                        right.add(0, temp);
+                        ret.add(right);
                     }
-                    ret.addAll(subPartitions);
                 }
             }
         }
-
         return ret;
     }
 
@@ -81,13 +81,13 @@ public class PalindromePartitioning {
      * @param s
      * @return
      */
-    class UndirectedGraphNode {
+    class Node {
         public int label;
-        public List<UndirectedGraphNode> neighbors;
+        public List<Node> neighbors;
 
-        public UndirectedGraphNode(int x) {
+        public Node(int x) {
             label = x;
-            neighbors = new ArrayList<UndirectedGraphNode>();
+            neighbors = new ArrayList<Node>();
         }
     }
 
@@ -98,23 +98,22 @@ public class PalindromePartitioning {
         int layer = 0, n = s.length();
         // build the graph
         boolean[] makred = new boolean[n + 1];
-        UndirectedGraphNode[] palinGraph = buildPalinGraph(s);
+        Node[] palinGraph = buildPalinGraph(s);
         // BFS
-        Queue<UndirectedGraphNode> curLayer = new LinkedList<>(), newLayer = new LinkedList<>();
+        Queue<Node> curLayer = new LinkedList<>(), newLayer = new LinkedList<>();
         newLayer.add(palinGraph[0]);
         makred[0] = true;
         while (!newLayer.isEmpty()) {
             curLayer = newLayer;
             newLayer = new LinkedList<>();
             while (!curLayer.isEmpty()) {
-                UndirectedGraphNode cur = curLayer.poll();
+                Node cur = curLayer.poll();
                 if (cur.label == n) {
-                    // find minCut
                     return layer - 1;
                 }
-                for (UndirectedGraphNode neighbour : cur.neighbors) {
-                    if (!makred[neighbour.label] && cur.label < neighbour.label) {
-                        // only make progress
+                for (Node neighbour : cur.neighbors) {
+                    if (!makred[neighbour.label]) {
+                        // ensure making progress
                         makred[neighbour.label] = true;
                         newLayer.add(palinGraph[neighbour.label]);
                     }
@@ -125,26 +124,27 @@ public class PalindromePartitioning {
         return layer - 1;
     }
 
-    public UndirectedGraphNode[] buildPalinGraph(String s) {
+    // TODO 
+    // why bother build the graph 
+    public Node[] buildPalinGraph(String s) {
         int n = s.length();
         // the last one is dummy target
-        UndirectedGraphNode[] p = new UndirectedGraphNode[n + 1];
+        Node[] p = new Node[n + 1];
         char[] chars = s.toCharArray();
         boolean[][] help = new boolean[n][n];
         // initial each node is connected with the next node
         for (int i = 0; i < n; i++) {
             help[i][i] = true;
-            p[i] = new UndirectedGraphNode(i);
-            p[i + 1] = new UndirectedGraphNode(i + 1);
+            p[i] = new Node(i);
+            p[i + 1] = new Node(i + 1);
             p[i].neighbors.add(p[i + 1]);
-            p[i + 1].neighbors.add(p[i]);
         }
         // dp to build the graph
         for (int k = 1; k < n; k++) {
             for (int i = 0; i < n - k; i++) {
                 int j = i + k;
                 if (help[i + 1][j - 1] || (i + 1) >= (j - 1)) {
-                    // sub is palin
+                    // sub is palin or empty
                     if (chars[i] == chars[j]) {
                         help[i][j] = true;
                         // from i could reach j + 1

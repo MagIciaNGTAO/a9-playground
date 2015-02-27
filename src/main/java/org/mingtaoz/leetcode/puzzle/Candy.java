@@ -18,11 +18,11 @@ public class Candy {
         if (ratings == null || ratings.length == 0) {
             return 0;
         }
-        int ret = 1, prev = ratings[0], candy = 1;
+        int ret = 1, prev = ratings[0], forwardCandy = 1;
         for (int i = 1; i < ratings.length; i++) {
             if (ratings[i] > prev) {
                 // case increase: give 1 more candy
-                ret += ++candy;
+                ret += ++forwardCandy;
             } else if (ratings[i] < prev) {
                 // case decrease: find local min -> give candy backwards
                 int j = i - 1;
@@ -30,18 +30,18 @@ public class Candy {
                     prev = ratings[i++];
                 }
                 int k = i - 1;
-                int tempCandy = 1;
+                int backwardCandy = 1;
                 while (k > j) {
                     k--;
-                    ret += tempCandy++;
+                    ret += backwardCandy++;
                 }
-                ret += (tempCandy - candy) > 0 ? (tempCandy - candy) : 0;
+                ret += (backwardCandy - forwardCandy) > 0 ? (backwardCandy - forwardCandy) : 0;
                 i--;
-                candy = 1;
+                forwardCandy = 1;
             } else {
                 // case equal: give 1 candy
-                candy = 0;
-                ret += ++candy;
+                forwardCandy = 0;
+                ret += ++forwardCandy;
             }
             prev = ratings[i];
         }

@@ -1,13 +1,5 @@
 Leetcode Difficulties
 ========
-Minimum Window Substring<br>
-*Sink Zero In Binary Tree<br>
-Binary Tree Postorder Traversal<br>
-Candy<br>
-*Palindrome Partitioning II<br>
-Heap<br>
-Distinct Subsequences<br>
-Balanced Binary Tree<br>
 Interleaving String<br>
 Scramble String<br>
 Reverse Linked List II<br>
@@ -36,4 +28,4 @@ Median of Two Sorted Arrays<br>
 Reverse Nodes in k-Group<br>
 Upside Down Binary Tree<br>
 Multiply Strings<br>
-Best Time to Buy and Sell Stock IV <br>
+// TODO casting

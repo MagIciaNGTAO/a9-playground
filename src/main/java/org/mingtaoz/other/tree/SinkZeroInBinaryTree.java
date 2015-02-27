@@ -2,8 +2,6 @@ package org.mingtaoz.other.tree;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.concurrent.DelayQueue;
 
 public class SinkZeroInBinaryTree {
     /**
@@ -39,6 +37,7 @@ public class SinkZeroInBinaryTree {
         clearQueue(node.right, deque);
     }
 
+    // this recursive definition is the key
     private void clearQueue(TreeNode node, Deque<TreeNode> deque) {
         if (!deque.isEmpty() && deque.peekLast() == node) {
             deque.pollLast();
