@@ -23,7 +23,7 @@ public class InterleavingString {
      * @param s3
      * @return
      */
-    // This is a top down approach with a Map
+    // a top down approach with a Map
     public boolean isInterleave(String s1, String s2, String s3) {
         if (map.containsKey(s1 + "-" + s2 + "-" + s3)) {
             return map.get(s1 + "-" + s2 + "-" + s3);
