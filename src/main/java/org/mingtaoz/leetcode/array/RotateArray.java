@@ -6,11 +6,6 @@ package org.mingtaoz.leetcode.array;
  * Note:
  * Try to come up as many solutions as you can, there are at least 3 different ways to solve this problem.
  * 
- * 5,6,7 - 4 - 1,2,3 -> 5,6,7,1,2,3,4
- * k = 1
- * 7 234561 -> 7123456
- * k = 6
- * 234567
  */
 public class RotateArray {
 
@@ -37,15 +32,33 @@ public class RotateArray {
         }
     }
 
+    /*
+     * 
+     * k = 1
+     * 7 234561 -> 7123456
+     * k = 2
+     * 67 34512 -> 67 12345
+     * k = 3
+     * 567 4123 -> 567 1234
+     * k = 4
+     * 4567 231 -> 4567 123
+     * k = 5
+     * 34567 21 -> 34567 12
+     * k = 6
+     * 234567 1 and that's it
+     * k = 7 -> same
+     * 
+     * could see a 'recursion' solution, but time complexity will be up
+     */
     // make it O(1) space
     public void rotate2(int[] nums, int k) {
         int n = nums.length;
         if (k > n) {
-            k = k - n;
+            k = k % n;
         }
         if (k == 0) {
             return;
         }
-        
+
     }
 }
