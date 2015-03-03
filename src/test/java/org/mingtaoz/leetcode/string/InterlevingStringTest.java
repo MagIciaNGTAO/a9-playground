@@ -81,7 +81,7 @@ public class InterlevingStringTest extends TestCase {
     }
 
     public void testIsInterleave10() {
-        assertFalse(sut.isInterleave("aa", "ab", "aaba"));
+        assertTrue(sut.isInterleave("aa", "ab", "aaba"));
     }
 
 }

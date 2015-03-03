@@ -5,6 +5,37 @@ import java.util.Map;
 
 public class InterleavingString {
 
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int n1 = s1.length(), n2 = s2.length(), n3 = s3.length();
+        if (n1 + n2 != n3) {
+            return false;
+        }
+        boolean[] previous = new boolean[n2 + 1];
+        // denotes whether s1(0, j) interleaves s2(0, j) yields s3(0, i + j) on
+        // ith iteration
+        previous[0] = true; // nothing = nothing + nothing <=> 0 = 0 + 0
+        for (int j = 1; j < n2 + 1; j++) {
+            previous[j] = previous[j - 1] && s3.charAt(j - 1) == s2.charAt(j - 1);
+        }
+        boolean anyMatch = false;
+        for (int i = 1; i < n1 + 1; i++) {
+            boolean[] current = new boolean[n2 + 1];
+            char temp = s1.charAt(i - 1);
+            current[0] = s3.charAt(i - 1) == temp && previous[0];
+            anyMatch |= current[0];
+            for (int j = 1; j < n2 + 1; j++) {
+                current[j] = (previous[j] && s3.charAt(i + j - 1) == temp)
+                        || (current[j - 1] && s3.charAt(i + j - 1) == s2.charAt(j - 1));
+                anyMatch |= current[j];
+            }
+            if (!anyMatch) {
+                return false;
+            }
+            previous = current;
+        }
+        return previous[n2];
+    }
+
     // TODO is there a bottom-up way? ... 3 dimension DP is a little crazy :(
     Map<String, Boolean> map = new HashMap<>();
 
@@ -63,46 +94,5 @@ public class InterleavingString {
             map.put(s1 + "-" + s2 + "-" + s3, false);
             return false;
         }
-    }
-
-    // still tough ... and it may not be called DP ...
-    public boolean isInterleave(String s1, String s2, String s3) {
-        char[] c1 = s1.toCharArray(), c2 = s2.toCharArray(), c3 = s3.toCharArray();
-        int common = 0, i1 = 0, i2 = 0, i3 = 0, n1 = c1.length, n2 = c2.length, n3 = c3.length;
-        if (n1 + n2 != n3) {
-            return false;
-        }
-        if (n1 == 0 && n2 == 0) {
-            return n3 == 0;
-        }
-        if (n1 == 0) {
-            return s2.equals(s3);
-        }
-        if (n2 == 0) {
-            return s1.equals(s3);
-        }
-        if (n3 == 0) {
-            return false;
-        }
-        while (i1 + common < n1 && i2 + common < n2 && i3 + common < n3) {
-            if (c1[i1 + common] == c3[i3 + common] && c2[i2 + common] == c3[i3 + common]) {
-                common++;
-            } else {
-                if (c1[i1 + common] == c3[i3 + common]) {
-                    i1 += common + 1;
-                    i3 += common + 1;
-                    common = 0;
-                } else if (c2[i2 + common] == c3[i3 + common]) {
-                    i2 += common + 1;
-                    i3 += common + 1;
-                    common = 0;
-                } else {
-                    // TODO maybe keep recursing?
-                }
-            }
-        }
-        return isInterleave(s1.substring(i1), s2.substring(i2 + common), s3.substring(i3 + common))
-                || isInterleave(s1.substring(i1 + common), s2.substring(i2), s3.substring(i3 + common));
-
     }
 }
