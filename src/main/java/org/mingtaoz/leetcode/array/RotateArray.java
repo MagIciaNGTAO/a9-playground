@@ -59,6 +59,22 @@ public class RotateArray {
         if (k == 0) {
             return;
         }
+        int start = 0;
+        while (n - k > start) {
+            if (k == 0) {
+                break;
+            }
+            rotate2Helper(nums, start, k, n);
+            start = start + k;
+            k = k % (n - start);
+        }
+    }
 
+    public void rotate2Helper(int[] nums, int start, int k, int n) {
+        for (int i = n - k; i < n; i++) {
+            int temp = nums[i];
+            nums[i] = nums[start];
+            nums[start++] = temp;
+        }
     }
 }
