@@ -27,6 +27,7 @@ public class SinglyLinkedList {
     }
 
     /**
+     * Reverse Linked List II
      * 
      * Reverse a linked list from position m to n. Do it in-place and in
      * one-pass.
@@ -45,7 +46,6 @@ public class SinglyLinkedList {
      * @param n
      * @return
      */
-    // TODO practise it for 3 times
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if (m == n) {
             return head;
