@@ -1,7 +1,5 @@
 Leetcode Difficulties
 ========
-Jump Game II<br>
-Combination Sum: not very confident writing it fast<br>
 Search in Rotated Sorted Array II<br>
 Word Ladder II<br>
 Maximum Product Subarray<br>

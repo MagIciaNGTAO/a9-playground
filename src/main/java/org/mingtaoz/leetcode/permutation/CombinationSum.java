@@ -1,5 +1,6 @@
 package org.mingtaoz.leetcode.permutation;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -25,36 +26,43 @@ public class CombinationSum {
      * [7]
      * [2, 2, 3]
      * 
-     * @param candidates
-     * @param target
-     * @return
      */
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        return combinationSumHelper(candidates, target, 0, new LinkedList<Integer>(), 0);
+        return combinationSumHelper(removeDuplicates(candidates), target, 0, new LinkedList<Integer>(), 0);
+    }
+
+    public int[] removeDuplicates(int[] A) {
+        int n = A.length, j = 0;
+        Arrays.sort(A);
+        for (int i = 0, prev = -1; i < n; i++) {
+            if (prev != A[i]) {
+                prev = A[i];
+                A[j++] = prev;
+            }
+        }
+        return Arrays.copyOf(A, j);
     }
 
     public List<List<Integer>> combinationSumHelper(int[] candidates, int target, int sum, List<Integer> current,
             int start) {
         List<List<Integer>> ret = new LinkedList<>();
-        if (sum > target) {
-            return ret;
-        }
         if (sum == target) {
             List<Integer> temp = new LinkedList<Integer>(current);
-            Collections.sort(temp);
             ret.add(temp);
             return ret;
         }
-        int prev = candidates[start] - 1;
         for (int i = start; i < candidates.length; i++) {
-            if (prev != candidates[i]) {
+            if (sum + candidates[i] <= target) {
                 current.add(candidates[i]);
                 List<List<Integer>> temp = combinationSumHelper(candidates,
                         target, sum + candidates[i], current, i);
-                current.remove(current.size() - 1);
                 ret.addAll(temp);
-                prev = candidates[i];
+                current.remove(current.size() - 1);
+            } else {
+                // this pruning is important
+                break;
             }
+
         }
         return ret;
     }
@@ -108,12 +116,8 @@ public class CombinationSum {
             ret.add(temp);
             return ret;
         }
-        int prev = 0;
-        if (start + 1 < candidates.length) {
-            prev = candidates[start + 1] - 1;
-        }
-        for (int i = start + 1; i < candidates.length; i++) {
-            if (prev != candidates[i]) {
+        for (int i = start + 1, prev = -1; i < candidates.length; i++) {
+            if (prev != candidates[i] || prev == -1) {
                 current.add(candidates[i]);
                 List<List<Integer>> temp = combinationSumHelper2(candidates,
                         target, sum + candidates[i], current, i);

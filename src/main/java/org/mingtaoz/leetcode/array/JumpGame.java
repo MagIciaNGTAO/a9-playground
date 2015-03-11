@@ -2,7 +2,6 @@ package org.mingtaoz.leetcode.array;
 
 public class JumpGame {
 
-    // TODO stuck for a while!
     /**
      * 
      * Given an array of non-negative integers, you are initially positioned at
@@ -23,22 +22,23 @@ public class JumpGame {
      * @return
      */
     public int jump(int[] A) {
-        int ret = 0, currentFurthestReach = 0, previousFurthestReach = 0;
-        if (A.length == 1) {
+        int ret = 0, explorer = 0, follower = 0, n = A.length;
+        if (n == 1) {
             return 0;
         }
-        for (int i = 0; i < A.length; i++) {
-            if (previousFurthestReach < i) {
+        for (int i = 0; i < n; i++) {
+            if (follower < i) {
                 ret++;
-                previousFurthestReach = currentFurthestReach;
+                follower = explorer;
             }
-            currentFurthestReach = Math.max(currentFurthestReach, i + A[i]);
-            if (currentFurthestReach >= A.length - 1) {
-                if (previousFurthestReach < currentFurthestReach) {
-                    ret++;
-                }
-                return ret;
+            // i is reachable by follower with 1 jump
+            explorer = Math.max(explorer, i + A[i]);
+            if (explorer >= n - 1) {
+                break;
             }
+        }
+        if (follower < explorer) {
+            ret++;
         }
         return ret;
     }
