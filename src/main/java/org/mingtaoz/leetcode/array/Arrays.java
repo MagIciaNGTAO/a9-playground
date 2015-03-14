@@ -62,19 +62,14 @@ public class Arrays {
         return searchMine(A, target) != -1;
     }
 
+    // A is sorted bu rotated once
     public int findMinIndex(int[] A) {
         int left = 0, right = A.length - 1;
-        // TODO uh ... it's difficult to get this right
-        while (left < right) {
-            if (A[left] == A[left + 1]) {
-                left++;
-            } else {
-                if (A[right] == A[right - 1]) {
-                    right--;
-                } else {
-                    break;
-                }
-            }
+        while (left < right && A[left] == A[left + 1]) {
+            left++;
+        }
+        while (left < right && A[right] == A[right - 1]) {
+            right--;
         }
         while (left != right) {
             int mid = (left + right) / 2;

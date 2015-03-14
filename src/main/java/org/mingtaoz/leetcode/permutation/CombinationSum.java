@@ -93,6 +93,7 @@ public class CombinationSum {
     public List<List<Integer>> combinationSum2(int[] num, int target) {
         Set<String> rep = new HashSet<>();
         List<List<Integer>> ret = new LinkedList<>();
+        Arrays.sort(num);
         List<List<Integer>> all = combinationSumHelper2(num, target, 0, new LinkedList<Integer>(), -1);
         for (List<Integer> one : all) {
             String s = one.toString();
@@ -107,22 +108,22 @@ public class CombinationSum {
     public List<List<Integer>> combinationSumHelper2(int[] candidates,
             int target, int sum, List<Integer> current, int start) {
         List<List<Integer>> ret = new LinkedList<>();
-        if (sum > target) {
-            return ret;
-        }
         if (sum == target) {
             List<Integer> temp = new LinkedList<Integer>(current);
-            Collections.sort(temp);
             ret.add(temp);
             return ret;
         }
         for (int i = start + 1, prev = -1; i < candidates.length; i++) {
             if (prev != candidates[i] || prev == -1) {
-                current.add(candidates[i]);
-                List<List<Integer>> temp = combinationSumHelper2(candidates,
-                        target, sum + candidates[i], current, i);
-                current.remove(current.size() - 1);
-                ret.addAll(temp);
+                if (sum + candidates[i] <= target) {
+                    current.add(candidates[i]);
+                    List<List<Integer>> temp = combinationSumHelper2(candidates,
+                            target, sum + candidates[i], current, i);
+                    current.remove(current.size() - 1);
+                    ret.addAll(temp);
+                } else {
+                    break;
+                }
                 prev = candidates[i];
             }
         }
