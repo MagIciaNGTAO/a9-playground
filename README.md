@@ -1,6 +1,5 @@
 Leetcode Difficulties
 ========
-Word Ladder II<br>
 Maximum Product Subarray<br>
 Find Minimum in Rotated Sorted Array II<br>
 Sqrt(x)<br>
