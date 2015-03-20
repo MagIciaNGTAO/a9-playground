@@ -36,36 +36,7 @@ public class WordLadder {
      * @param dict
      * @return
      */
-    // TODO two way BFS could improve that exponentially
-//    public int ladderLength(String start, String end, Set<String> dict) {
-//        dict.add(end); // for searching purpose
-//        int layer = 0;
-//        Set<String> marked = new HashSet<>();
-//        Queue<String> curLayer = new LinkedList<>(), nextLayer;
-//        marked.add(start);
-//        curLayer.add(start);
-//        while (!curLayer.isEmpty()) {
-//            nextLayer = new LinkedList<>();
-//            while (!curLayer.isEmpty()) {
-//                String current = curLayer.poll();
-//                if (end.equals(current)) {
-//                    dict.remove(end);
-//                    return layer + 1;
-//                }
-//                for (String neighbour : neighbours(current, dict)) {
-//                    if (!marked.contains(neighbour)) {
-//                        marked.add(neighbour);
-//                        nextLayer.add(neighbour);
-//                    }
-//                }
-//            }
-//            layer++;
-//            curLayer = nextLayer;
-//        }
-//        dict.remove(end);
-//        return 0;
-//    }
-
+    // two way BFS
     public int ladderLength(String start, String end, Set<String> dict) {
         dict.add(end); // for searching purpose
 
@@ -86,27 +57,33 @@ public class WordLadder {
         while (!forwardCurLayer.isEmpty() && !backwardCurLayer.isEmpty()) {
             forwardNextLayer = new LinkedList<>();
             backwardNextLayer = new LinkedList<>();
-            while (!forwardCurLayer.isEmpty() || !backwardCurLayer.isEmpty()) {
-                String forWardCurrent = forwardCurLayer.poll();
-                if (backwardCurLayer.contains(forWardCurrent)) {
-                    dict.remove(end);
-                    return forwardLayer + backwardLayer + 1; // TODO?
-                }
-                String backWardCurrent = backwardCurLayer.poll();
-                if (forwardCurLayer.contains(backWardCurrent)) {
-                    dict.remove(end);
-                    return forwardLayer + backwardLayer + 1; // TODO?
-                }
-                for (String neighbour : neighbours(forWardCurrent, dict)) {
-                    if (!forwardMarked.contains(neighbour)) {
-                        forwardMarked.add(neighbour);
-                        forwardNextLayer.add(neighbour);
+            for (String forword : forwardCurLayer) {
+                for (String neighbour : neighbours(forword, dict)) {
+                    if (backwardCurLayer.contains(neighbour)) {
+                        dict.remove(end);
+                        return forwardLayer + backwardLayer + 2;
+                    } else {
+                        if (!forwardMarked.contains(neighbour)) {
+                            forwardMarked.add(neighbour);
+                            forwardNextLayer.add(neighbour);
+                        }
                     }
                 }
-                for (String neighbour : neighbours(backWardCurrent, dict)) {
-                    if (!backwardMarked.contains(neighbour)) {
-                        backwardMarked.add(neighbour);
-                        backwardNextLayer.add(neighbour);
+            }
+            for (String backword : backwardCurLayer) {
+                for (String neighbour : neighbours(backword, dict)) {
+                    if (forwardCurLayer.contains(neighbour)) {
+                        dict.remove(end);
+                        return forwardLayer + backwardLayer + 2;
+                    } else {
+                        if (!backwardMarked.contains(neighbour)) {
+                            backwardMarked.add(neighbour);
+                            backwardNextLayer.add(neighbour);
+                            if (forwardNextLayer.contains(neighbour)) {
+                                dict.remove(end);
+                                return forwardLayer + backwardLayer + 3;
+                            }
+                        }
                     }
                 }
             }
@@ -119,6 +96,8 @@ public class WordLadder {
         return 0;
     }
 
+    Map<String, List<String>> cache = new HashMap<>();
+
     /**
      * PRE: s is not null not empty
      * 
@@ -126,6 +105,9 @@ public class WordLadder {
      * @return
      */
     public List<String> neighbours(String s, Set<String> dict) {
+        if (cache.containsKey(s)) {
+            return cache.get(s);
+        }
         if (s == null || s.length() == 0)
             return new LinkedList<>();
         char[] chars = s.toCharArray();
@@ -136,13 +118,13 @@ public class WordLadder {
                 if (chars[i] == c) {
                     continue;
                 }
-                String potentialNeighbour = sb.replace(i, i + 1, c + "")
-                        .toString();
+                String potentialNeighbour = sb.replace(i, i + 1, c + "").toString();
                 if (dict.contains(potentialNeighbour)) {
                     ret.add(potentialNeighbour);
                 }
             }
         }
+        cache.put(s, ret);
         return ret;
     }
 
@@ -166,8 +148,7 @@ public class WordLadder {
      * @param dict
      * @return
      */
-    public List<List<String>> findLadders(String start, String end,
-            Set<String> dict) {
+    public List<List<String>> findLadders(String start, String end, Set<String> dict) {
         // reversed reference
         Map<String, List<String>> subGraph = new HashMap<>(), tempSubGraph = new HashMap<>();
         Queue<String> curLayer = new LinkedList<String>(), nextLayer = new LinkedList<String>();
@@ -210,8 +191,7 @@ public class WordLadder {
     }
 
     // DFS
-    private List<List<String>> generateResult(
-            Map<String, List<String>> reversedGraph, String start, String end) {
+    private List<List<String>> generateResult(Map<String, List<String>> reversedGraph, String start, String end) {
         List<List<String>> ret = new LinkedList<>();
         // null - never seen for current DFS stack
         // 0 - to be visited
