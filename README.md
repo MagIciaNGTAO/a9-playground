@@ -1,12 +1,5 @@
 Leetcode Difficulties
 ========
-Maximum Product Subarray<br>
-Find Minimum in Rotated Sorted Array II<br>
-Sqrt(x)<br>
-Valid Number<br>
-Maximum Subarray<br>
-Pow(x, n)<br>
-Permutations<br>
 Wildcard Matching<br>
 Regular Expression Matching<br>
 Next Permutation<br>

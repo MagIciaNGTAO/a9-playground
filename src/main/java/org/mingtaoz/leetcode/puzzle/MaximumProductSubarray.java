@@ -38,34 +38,15 @@ public class MaximumProductSubarray {
     }
 
     private int getMax(int[] A) {
-        int ret = A[0], pos = A[0], neg = A[0];
+        int ret = A[0], pos = A[0], any = A[0];
         for (int i = 1; i < A.length; i++) {
+            any = any == 0 ? A[i] : any * A[i];
             if (A[i] > 0) {
-                if (pos > 0) {
-                    pos *= A[i];
-                    neg *= A[i];
-                } else {
-                    // pos == 0
-                    pos = A[i];
-                    if (neg == 0) {
-                        neg = A[i];
-                    } else {
-                        neg *= A[i];
-                    }
-                }
-            } else if (A[i] < 0) {
-                if (neg == 0) {
-                    neg = A[i];
-                } else {
-                    // neg could grow, and update pos doesn't hurt
-                    neg *= A[i];
-                    pos = neg;
-                }
-            } else {
+                pos = pos == 0 ? A[i] : pos * A[i];
+            } else if (A[i] <= 0) {
                 pos = 0;
-                neg = 0;
             }
-            ret = Math.max(ret, pos);
+            ret = Math.max(any, Math.max(ret, pos));
         }
         return ret;
     }
