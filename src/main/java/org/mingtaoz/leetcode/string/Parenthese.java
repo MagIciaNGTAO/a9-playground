@@ -34,7 +34,7 @@ public class Parenthese {
             } else {
                 if (!stack.isEmpty()) {
                     int left = stack.pop();
-                    if (left >= 1) {
+                    if (left != 0) {
                         largests[i] = i - left + 1 + largests[left - 1];
                     } else {
                         largests[i] = i - left + 1;

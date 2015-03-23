@@ -20,10 +20,9 @@ public class ScrambleString {
         }
 
         for (int i = 1; i < n1; i++) {
-            if ((isScramble(s1.substring(0, i), s2.substring(0, i)) && isScramble(s1.
-                    substring(i), s2.substring(i)))
-                    || (isScramble(s1.substring(0, i), s2.substring(n1 - i)) && isScramble(
-                            s1.substring(i), s2.substring(0, n1 - i)))) {
+            if ((isScramble(s1.substring(0, i), s2.substring(0, i)) && isScramble(s1.substring(i), s2.substring(i)))
+                    || (isScramble(s1.substring(0, i), s2.substring(n1 - i)) && isScramble(s1.substring(i),
+                            s2.substring(0, n1 - i)))) {
                 return true;
             }
         }

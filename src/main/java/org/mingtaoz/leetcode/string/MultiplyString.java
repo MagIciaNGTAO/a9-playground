@@ -18,19 +18,17 @@ public class MultiplyString {
      * @return
      */
     public String multiply(String num1, String num2) {
-        // TODO the ret length is still limited ...
         if (num1.equals("0") || num2.equals("0")) {
             return "0";
         }
         StringBuilder resultBuilder = new StringBuilder();
-        boolean minus = false;
         // sign
         if (num1.contains("-") && !num2.contains("-")) {
-            minus = true;
+            resultBuilder.append("-");
             num1 = num1.substring(1);
         }
         if (!num1.contains("-") && num2.contains("-")) {
-            minus = true;
+            resultBuilder.append("-");
             num2 = num2.substring(1);
         }
         if (num1.contains("-") && num2.contains("-")) {
@@ -68,10 +66,6 @@ public class MultiplyString {
                     start = true;
                 }
             }
-        }
-
-        if (minus && resultBuilder.length() != 0) {
-            resultBuilder.insert(0, "-");
         }
         return resultBuilder.toString();
     }

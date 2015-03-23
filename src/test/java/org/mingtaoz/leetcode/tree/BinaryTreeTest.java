@@ -34,8 +34,7 @@ public class BinaryTreeTest extends TestCase {
         list.add(1);
         list.add(3);
 
-        assertEquals(list.toString(), sut.postorderTraversalIterative(root)
-                .toString());
+        assertEquals(list.toString(), sut.postorderTraversalIterative(root).toString());
     }
 
     public void testUpsideDownBinaryTree3() {
@@ -62,8 +61,7 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(),
-                sut.preorderTraversal(sut.helper(n1, null)).toString());
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
     }
 
     public void testUpsideDownBinaryTree2() {
@@ -87,8 +85,7 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(),
-                sut.preorderTraversal(sut.helper(n1, null)).toString());
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
     }
 
     public void testUpsideDownBinaryTree1() {
@@ -109,8 +106,7 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(),
-                sut.preorderTraversal(sut.helper(n1, null)).toString());
+        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
     }
 
     public void testPostorderTraversal2() {
@@ -122,8 +118,7 @@ public class BinaryTreeTest extends TestCase {
         list.add(2);
         list.add(1);
 
-        assertEquals(list.toString(), sut.postorderTraversalIterative(root)
-                .toString());
+        assertEquals(list.toString(), sut.postorderTraversalIterative(root).toString());
     }
 
     public void testSumNumbers1() {
@@ -283,8 +278,7 @@ public class BinaryTreeTest extends TestCase {
     }
 
     public void testBuildTree2() {
-        TreeNode root = sut.buildTree(new int[] { 1, 2, 3 }, new int[] { 1, 3,
-                2 });
+        TreeNode root = sut.buildTree(new int[] { 1, 2, 3 }, new int[] { 1, 3, 2 });
         assertEquals(1, root.val);
         assertEquals(2, root.right.val);
         assertEquals(3, root.right.left.val);
@@ -297,8 +291,7 @@ public class BinaryTreeTest extends TestCase {
     }
 
     public void testBuildTree22() {
-        TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2,
-                1 });
+        TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2, 1 });
         assertEquals(1, root.val);
         assertEquals(2, root.right.val);
         assertEquals(3, root.right.left.val);

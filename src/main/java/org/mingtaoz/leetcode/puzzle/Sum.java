@@ -204,11 +204,11 @@ public class Sum {
         Arrays.sort(num);
         // 2. remove duplicate
         int right = removeQuaduplets(num), left = 0;
-        // 3. search & prunning
+        // 3. search & pruning
         int quarter = target / 4 - 1, half = target / 2 - 1, threeQuarter = half + quarter;
         for (; right > left + 2; right--) {
             if (num[right] < quarter) {
-                // rightmost is the largest, should be larger than 1/4 target
+                // right most is the largest, should be larger than 1/4 target
                 break;
             }
             for (int i = right - 1; i > left + 1; i--) {
@@ -220,7 +220,7 @@ public class Sum {
                 for (int j = i - 1; j > left; j--) {
                     int partial = partialOut + num[j];
                     if (partial < threeQuarter) {
-                        // right tree should be larger than 3 quarters
+                        // right three should be larger than 3 quarters
                         break;
                     }
                     for (int k = left; k < j; k++) {

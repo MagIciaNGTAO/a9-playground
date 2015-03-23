@@ -48,14 +48,14 @@ public class BinaryTree {
     3   1  
      */
     public TreeNode UpsideDownBinaryTree(TreeNode root) {
-        return helper(root, null);
+        return upsideDownBinaryTreeHelper(root, null);
     }
 
-    public TreeNode helper(TreeNode node, TreeNode parent) {
+    public TreeNode upsideDownBinaryTreeHelper(TreeNode node, TreeNode parent) {
         if (node == null) {
             return parent;
         } else {
-            TreeNode root = helper(node.left, node);
+            TreeNode root = upsideDownBinaryTreeHelper(node.left, node);
             node.right = parent;
             node.left = parent == null ? null : parent.right;
             return root;
@@ -162,11 +162,11 @@ public class BinaryTree {
         // after knowing the left and right return
         // calculate maxCanGrow with either branch
         // calculate maxCantGrow with both branch
-        int maxCanGrow = Math.max(left.maxCanGrow > 0 ? left.maxCanGrow : 0,
-                right.maxCanGrow > 0 ? right.maxCanGrow : 0) + node.val;
-        int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0)
-                + node.val + (right.maxCanGrow > 0 ? right.maxCanGrow : 0),
-                Math.max(left.maxCantGrow, right.maxCantGrow));
+        int maxCanGrow = Math.max(left.maxCanGrow > 0 ? left.maxCanGrow : 0, right.maxCanGrow > 0 ? right.maxCanGrow
+                : 0)
+                + node.val;
+        int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0) + node.val
+                + (right.maxCanGrow > 0 ? right.maxCanGrow : 0), Math.max(left.maxCantGrow, right.maxCantGrow));
 
         return new Data(maxCantGrow, maxCanGrow);
     }
@@ -291,8 +291,7 @@ public class BinaryTree {
         if (root.right == null) {
             return hasPathSum(root.left, sum - root.val);
         }
-        return hasPathSum(root.left, sum - root.val)
-                || hasPathSum(root.right, sum - root.val);
+        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
     }
 
     public List<List<Integer>> pathSum(TreeNode root, int sum) {
@@ -301,8 +300,7 @@ public class BinaryTree {
         return ret;
     }
 
-    private void pathSumHelper(TreeNode root, int sum, List<List<Integer>> ret,
-            List<Integer> cur) {
+    private void pathSumHelper(TreeNode root, int sum, List<List<Integer>> ret, List<Integer> cur) {
         if (root == null)
             return;
         if (root.left == null && root.right == null) {
@@ -499,12 +497,10 @@ public class BinaryTree {
         if (preorder.length != inorder.length) {
             return null; // exception?
         }
-        return buildTreeHelper(preorder, inorder, 0, preorder.length - 1, 0,
-                preorder.length - 1);
+        return buildTreeHelper(preorder, inorder, 0, preorder.length - 1, 0, preorder.length - 1);
     }
 
-    private TreeNode buildTreeHelper(int[] preorder, int[] inorder,
-            int preStart, int preEnd, int inStart, int inEnd) {
+    private TreeNode buildTreeHelper(int[] preorder, int[] inorder, int preStart, int preEnd, int inStart, int inEnd) {
         if (preStart > preEnd) {
             return null;
         }
@@ -521,10 +517,8 @@ public class BinaryTree {
             }
         }
         // recursively find right and right, tricky part is figure out the index
-        currentNode.left = buildTreeHelper(preorder, inorder, preStart + 1,
-                preStart + i - inStart, inStart, i - 1);
-        currentNode.right = buildTreeHelper(preorder, inorder, preStart + i
-                - inStart + 1, preEnd, i + 1, inEnd);
+        currentNode.left = buildTreeHelper(preorder, inorder, preStart + 1, preStart + i - inStart, inStart, i - 1);
+        currentNode.right = buildTreeHelper(preorder, inorder, preStart + i - inStart + 1, preEnd, i + 1, inEnd);
         return currentNode;
     }
 
@@ -549,12 +543,10 @@ public class BinaryTree {
         if (postorder.length != inorder.length) {
             return null; // exception?
         }
-        return buildTreeHelper2(inorder, postorder, 0, postorder.length - 1, 0,
-                postorder.length - 1);
+        return buildTreeHelper2(inorder, postorder, 0, postorder.length - 1, 0, postorder.length - 1);
     }
 
-    public TreeNode buildTreeHelper2(int[] inorder, int[] postorder,
-            int inStart, int inEnd, int postStart, int postEnd) {
+    public TreeNode buildTreeHelper2(int[] inorder, int[] postorder, int inStart, int inEnd, int postStart, int postEnd) {
         if (inStart > inEnd) {
             return null;
         }
@@ -569,10 +561,8 @@ public class BinaryTree {
                 break;
             }
         }
-        currentNode.left = buildTreeHelper2(inorder, postorder, inStart, i - 1,
-                postStart, postStart + i - 1 - inStart);
-        currentNode.right = buildTreeHelper2(inorder, postorder, i + 1, inEnd,
-                postEnd - (inEnd - i), postEnd - 1);
+        currentNode.left = buildTreeHelper2(inorder, postorder, inStart, i - 1, postStart, postStart + i - 1 - inStart);
+        currentNode.right = buildTreeHelper2(inorder, postorder, i + 1, inEnd, postEnd - (inEnd - i), postEnd - 1);
         return currentNode;
     }
 
@@ -722,8 +712,7 @@ public class BinaryTree {
         if (left.val != right.val) {
             return false;
         }
-        return symmetricHelper(left.left, right.right)
-                && symmetricHelper(left.right, right.left);
+        return symmetricHelper(left.left, right.right) && symmetricHelper(left.right, right.left);
     }
 
     /**
@@ -752,8 +741,7 @@ public class BinaryTree {
         if (left.val != right.val) {
             return false;
         }
-        return isSameTree(left.right, right.right)
-                && isSameTree(left.left, right.left);
+        return isSameTree(left.right, right.right) && isSameTree(left.left, right.left);
     }
 
     // TODO this is tricky when the first element is one of those

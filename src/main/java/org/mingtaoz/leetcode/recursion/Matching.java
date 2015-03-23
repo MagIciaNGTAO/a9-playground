@@ -1,6 +1,7 @@
 package org.mingtaoz.leetcode.recursion;
 
 public class Matching {
+
     /**
      * Implement wildcard pattern matching with support for '?' and '*'.
      * 
@@ -32,6 +33,7 @@ public class Matching {
                     match++;
                     i++;
                 } else if (lastStarIndex != -1) {
+                    // use * hard
                     i = lastStarIndex + 1;
                     match = ++lastMatch;
                 } else {
@@ -41,10 +43,9 @@ public class Matching {
         }
         if (match == s.length) {
             while (i < p.length) {
-                if (p[i] != '*') {
+                if (p[i++] != '*') {
                     return false;
                 }
-                i++;
             }
             return true;
         }
@@ -75,7 +76,6 @@ public class Matching {
      * @param p
      * @return
      */
-    // can be done by simple recursion
     public boolean isMatch(String s, String p) {
         return isMatch2Helper(s.toCharArray(), p.toCharArray(), 0, 0);
     }
