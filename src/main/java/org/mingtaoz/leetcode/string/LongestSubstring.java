@@ -1,8 +1,5 @@
 package org.mingtaoz.leetcode.string;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class LongestSubstring {
 
     /**
@@ -13,38 +10,40 @@ public class LongestSubstring {
      * For example, Given s = “eceba”, T is "ece" which its length is 3.
      * 
      */
-    public int lengthOfLongestSubstringTwoDistinct(String s) {
-        int n = s.length();
-        if (n == 0) {
-            return 0;
-        }
-        int firstStart = 0, i = 1;
-        char temp = s.charAt(firstStart);
-        // init secondStart
-        while (i < n && temp == s.charAt(i)) {
-            i++;
-        }
-        if (i == n) {
-            return n;
-        }
-        int secondStart = i, ret = 0;
-        ret = Math.max(ret, i - firstStart + 1);
-        i++;
-        while (i < n) {
-            if (s.charAt(secondStart) == s.charAt(i) || s.charAt(firstStart) == s.charAt(i)) {
-                ret = Math.max(ret, (i - firstStart) + 1);
-                i++;
-            } else {
-                // there is some repeat calculation
-                firstStart = secondStart;
-                secondStart++;
-                while (secondStart < n && s.charAt(firstStart) == s.charAt(secondStart)) {
-                    secondStart++;
+    // invariant ...
+    public int lengthOfLongestSubstringTwoDistinct1(String s) {
+        int ret = 0, rear = 0, mid = -1;
+
+        for (int front = 1; front < s.length(); front++) {
+            if (s.charAt(front) != s.charAt(front - 1)) {
+                if (mid >= 0 && s.charAt(mid) != s.charAt(front)) {
+                    ret = Math.max(ret, front - rear);
+                    rear = mid + 1;
                 }
+                mid = front - 1;
             }
         }
-        ret = Math.max(ret, i - firstStart);
-        return ret;
+        return Math.max(s.length() - rear, ret);
+    }
+
+    public int lengthOfLongestSubstringTwoDistinct(String s) {
+        int[] count = new int[256];
+        int i = 0, numDistinct = 0, maxLen = 0, N = 2;
+        for (int j = 0; j < s.length(); j++) {
+            if (count[s.charAt(j)] == 0) {
+                numDistinct++;
+            }
+            count[s.charAt(j)]++;
+            while (numDistinct > N) {
+                count[s.charAt(i)]--;
+                if (count[s.charAt(i)] == 0) {
+                    numDistinct--;
+                }
+                i++;
+            }
+            maxLen = Math.max(j - i + 1, maxLen);
+        }
+        return maxLen;
     }
 
     /**
@@ -57,14 +56,12 @@ public class LongestSubstring {
     public int lengthOfLongestSubstring(String s) {
         int ret = 0, left = -1;
         char[] cs = s.toCharArray();
-        Map<Character, Integer> conflict = new HashMap<>();
+        int[] charMap = new int[256];
         for (int i = 0; i < cs.length; i++) {
-            if (!conflict.containsKey(cs[i])) {
-                conflict.put(cs[i], i);
-            } else {
-                left = Math.max(left, conflict.get(cs[i]));
-                conflict.put(cs[i], i);
+            if (charMap[cs[i]] > 0) {
+                left = Math.max(left, charMap[cs[i]]);
             }
+            charMap[cs[i]] = i;
             ret = Math.max(ret, i - left);
         }
         return ret;

@@ -32,23 +32,15 @@ public class RotateArray {
         }
     }
 
-    /*
+    /**
      * 
-     * k = 1
-     * 7 234561 -> 7123456
-     * k = 2
-     * 67 34512 -> 67 12345
-     * k = 3
-     * 567 4123 -> 567 1234
-     * k = 4
-     * 4567 231 -> 4567 123
-     * k = 5
-     * 34567 21 -> 34567 12
-     * k = 6
-     * 234567 1 and that's it
+     * k = 1 -- 7 234561 -> 7123456 
+     * k = 2 -- 67 34512 -> 67 12345 
+     * k = 3 -- 567 4123 -> 567 1234 
+     * k = 4 -- 4567 231 -> 4567 123 
+     * k = 5 -- 34567 21 -> 34567 12 
+     * k = 6 -- 234567 1 and that's it 
      * k = 7 -> same
-     * 
-     * could see a 'recursion' solution, but time complexity will be up
      */
     // make it O(1) space
     public void rotate2(int[] nums, int k) {
@@ -64,16 +56,16 @@ public class RotateArray {
             if (k == 0) {
                 break;
             }
-            rotate2Helper(nums, start, k, n);
+            exchange(nums, start, n - k, n);
             start = start + k;
             k = k % (n - start);
         }
     }
 
-    public void rotate2Helper(int[] nums, int start, int k, int n) {
-        for (int i = n - k; i < n; i++) {
+    public void exchange(int[] nums, int start, int i, int n) {
+        while (i < n) {
             int temp = nums[i];
-            nums[i] = nums[start];
+            nums[i++] = nums[start];
             nums[start++] = temp;
         }
     }

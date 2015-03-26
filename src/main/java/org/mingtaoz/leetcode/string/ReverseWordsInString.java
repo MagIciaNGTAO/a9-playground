@@ -48,39 +48,20 @@ public class ReverseWordsInString {
      * @param sequence
      */
     public void reverseWordsInPlace(char[] sequence) {
-        int i = 0, j = sequence.length - 1;
-
-        // reverse
-        while (i < j) {
-            char temp = sequence[i];
-            sequence[i] = sequence[j];
-            sequence[j] = temp;
-            i++;
-            j--;
-        }
-
-        // get good words
-        int prev = 0;
-        for (i = 0; i < sequence.length; i++) {
-            if (sequence[i] == ' ') {
-                j = i - 1;
-                while (prev < j) {
-                    char temp = sequence[prev];
-                    sequence[prev] = sequence[j];
-                    sequence[j] = temp;
-                    prev++;
-                    j--;
-                }
-                prev = i + 1;
+        reverse(sequence, 0, sequence.length - 1);
+        for (int i = 0, j = 0; i <= sequence.length; i++) {
+            if (i == sequence.length || sequence[i] == ' ') {
+                reverse(sequence, j, i - 1);
+                j = i + 1;
             }
         }
-        j = i - 1;
-        while (prev < j) {
-            char temp = sequence[prev];
-            sequence[prev] = sequence[j];
-            sequence[j] = temp;
-            prev++;
-            j--;
+    }
+
+    public void reverse(char[] sequence, int start, int end) {
+        while (start < end) {
+            char temp = sequence[start];
+            sequence[start++] = sequence[end];
+            sequence[end--] = temp;
         }
     }
 }

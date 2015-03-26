@@ -28,7 +28,7 @@ public class LongestSubstringTest extends TestCase {
     }
 
     public void testNumDistinct5() {
-        String S = "aaabc";
+        String S = "ababc";
         assertEquals(4, sut.lengthOfLongestSubstringTwoDistinct(S));
     }
 
