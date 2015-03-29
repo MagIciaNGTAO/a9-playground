@@ -15,33 +15,28 @@ public class MissingRanges {
         List<String> ret = new LinkedList<>();
         int n = A.length;
         if (n == 0) {
-            rangeToString(lower, upper, ret);
+            ret.add(rangeToString(lower, upper));
             return ret;
         }
         // handle lower
         if (lower < A[0]) {
-            rangeToString(lower, A[0] - 1, ret);
+            ret.add(rangeToString(lower, A[0] - 1));
         }
         // lower == A[0]
         for (int i = 1; i < n; i++) {
-            rangeToString(A[i - 1] + 1, A[i] - 1, ret);
+            if (A[i - 1] + 1 <= A[i] - 1) {
+                // kinda duplicate judge here
+                ret.add(rangeToString(A[i - 1] + 1, A[i] - 1));
+            }
         }
         // handle upper
         if (upper > A[n - 1]) {
-            rangeToString(A[n - 1] + 1, upper, ret);
+            ret.add(rangeToString(A[n - 1] + 1, upper));
         }
         return ret;
     }
 
-    private void rangeToString(int lower, int upper, List<String> ret) {
-        if (lower < upper) {
-            StringBuilder temp = new StringBuilder();
-            temp.append(lower).append("->").append(upper);
-            ret.add(temp.toString());
-        } else if (lower == upper) {
-            StringBuilder temp = new StringBuilder();
-            temp.append(upper);
-            ret.add(temp.toString());
-        }
+    private String rangeToString(int lower, int upper) {
+        return lower < upper ? lower + "->" + upper : String.valueOf(upper);
     }
 }

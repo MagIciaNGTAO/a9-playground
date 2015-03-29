@@ -3,8 +3,7 @@ package org.mingtaoz.leetcode.array;
 public class ReadNCharacters {
 
     private char[] buffer = new char[4];
-    private int index = -1;
-    private int previous = -1;
+    private int offset, bufferSize;
 
     /**
      * Read N Characters Given Read4 II - Call multiple times
@@ -18,33 +17,32 @@ public class ReadNCharacters {
     public int read(char[] destination, int n) {
         int ret = 0;
         // 1. consume buffer
-        while (index < previous) {
-            destination[ret++] = buffer[index++];
+        while (offset < bufferSize && n > 0) {
+            destination[ret++] = buffer[offset++];
             n--;
         }
         // 2. read4 as usual
-        while (n > 0 && (previous = read4(buffer)) == 4) {
+        while (n > 0 && (bufferSize = read4(buffer)) == 4) {
             copy(buffer, destination, ret);
-            ret += previous;
-            n -= previous;
+            ret += bufferSize;
+            n -= bufferSize;
         }
         if (n > 0) {
             copy(buffer, destination, ret);
-            n -= previous;
-            ret += previous;
+            n -= bufferSize;
+            ret += bufferSize;
         }
         while (n < 0) {
             destination[ret--] = 0;
-            index--;
+            offset--;
             n++;
         }
         return ret;
     }
 
     private void copy(char[] buffer, char[] destination, int ret) {
-        for (index = 0; index < previous; index++) {
-            destination[ret++] = buffer[index];
-        }
+        System.arraycopy(buffer, offset, destination, ret, bufferSize - offset);
+        offset = bufferSize;
     }
 
     /**
@@ -52,5 +50,35 @@ public class ReadNCharacters {
      */
     int read4(char[] buf) {
         return 0;
+    }
+
+    /**
+     * TODO better solution
+     */
+    class dummy {
+        private char[] buffer = new char[4];
+        int offset = 0, bufsize = 0;
+
+        /**
+            * @param buf Destination buffer
+            * @param n   Maximum number of characters to read
+            * @return    The number of characters read
+            */
+        public int read(char[] buf, int n) {
+            int readBytes = 0;
+            boolean eof = false;
+            while (!eof && readBytes < n) {
+                if (bufsize == 0) {
+                    bufsize = read4(buffer);
+                    eof = bufsize < 4;
+                }
+                int bytes = Math.min(n - readBytes, bufsize);
+                System.arraycopy(buffer, offset, buf, readBytes, bytes);
+                offset = (offset + bytes) % 4;
+                bufsize -= bytes;
+                readBytes += bytes;
+            }
+            return readBytes;
+        }
     }
 }

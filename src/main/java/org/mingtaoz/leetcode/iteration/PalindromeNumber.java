@@ -6,21 +6,20 @@ public class PalindromeNumber {
         if (x < 0) {
             return false;
         }
-        long a = (long) x, leftBase = 1;
-        while (leftBase <= a) {
-            leftBase *= 10;
+        long a = (long) x, div = 1;
+        while (div <= a) {
+            div *= 10;
         }
-        leftBase /= 10;
-        int rightBase = 10;
-        while (leftBase >= rightBase) {
-            long leftDigit = a / leftBase;
-            long rightDigit = a % rightBase;
-            if (leftDigit != rightDigit) {
+        div /= 10;
+        int TEN = 10;
+        while (div >= TEN) {
+            long l = a / div;
+            long r = a % TEN;
+            if (l != r) {
                 return false;
             }
-            a -= leftDigit * leftBase;
-            a /= rightBase;
-            leftBase /= 100;
+            a = (a % div) / TEN;
+            div /= 100;
         }
         return true;
     }
