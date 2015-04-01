@@ -6,13 +6,7 @@ import java.util.Map;
 public class Roman {
 
     public enum RomanNumerical {
-        ONE("I"),
-        FIVE("V"),
-        TEN("X"),
-        FIFTY("L"),
-        HUNDRED("C"),
-        FIVEHUNDRED("D"),
-        THOUSAND("M");
+        ONE("I"), FIVE("V"), TEN("X"), FIFTY("L"), HUNDRED("C"), FIVEHUNDRED("D"), THOUSAND("M");
 
         private final String repr;
 
@@ -63,6 +57,7 @@ public class Roman {
         return ret;
     }
 
+    // DRY out
     public String intToRoman(int num) {
         StringBuilder s = new StringBuilder();
 

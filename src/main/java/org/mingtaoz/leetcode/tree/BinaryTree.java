@@ -130,45 +130,25 @@ public class BinaryTree {
         return ret;
     }
 
+    int maxSum;
+
     public int maxPathSum(TreeNode root) {
-        Data ret = maxPathSumHelper(root);
-        return Math.max(ret.maxCanGrow, ret.maxCantGrow);
+        maxSum = Integer.MIN_VALUE;
+        maxPathSumHelper(root);
+        return maxSum;
     }
 
-    public static class Data {
-        public int maxCantGrow;
-        public int maxCanGrow;
-
-        public Data() {
+    // 1. define the return
+    // 2. how to update maxSum
+    public int maxPathSumHelper(TreeNode node) {
+        if (node == null) {
+            return 0;
         }
-
-        public Data(int maxCantGrow, int maxCanGrow) {
-            this.maxCantGrow = maxCantGrow;
-            this.maxCanGrow = maxCanGrow;
-        }
-    }
-
-    public void test(Integer i) {
-        // ok it's immutable :)
-    }
-
-    // TODO refactor: could return a single integer, but keep the maxcantgrow as
-    // an object
-    public Data maxPathSumHelper(TreeNode node) {
-        if (node == null)
-            return new Data(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        Data left = maxPathSumHelper(node.left);
-        Data right = maxPathSumHelper(node.right);
-        // after knowing the left and right return
-        // calculate maxCanGrow with either branch
-        // calculate maxCantGrow with both branch
-        int maxCanGrow = Math.max(left.maxCanGrow > 0 ? left.maxCanGrow : 0, right.maxCanGrow > 0 ? right.maxCanGrow
-                : 0)
-                + node.val;
-        int maxCantGrow = Math.max((left.maxCanGrow > 0 ? left.maxCanGrow : 0) + node.val
-                + (right.maxCanGrow > 0 ? right.maxCanGrow : 0), Math.max(left.maxCantGrow, right.maxCantGrow));
-
-        return new Data(maxCantGrow, maxCanGrow);
+        int left = maxPathSumHelper(node.left);
+        int right = maxPathSumHelper(node.right);
+        maxSum = Math.max(left + right + node.val, maxSum);
+        int ret = node.val + Math.max(left, right);
+        return ret > 0 ? ret : 0;
     }
 
     public List<Integer> postorderTraversalIterative(TreeNode root) {
@@ -259,10 +239,11 @@ public class BinaryTree {
      * @return
      */
     public int minDepth(TreeNode root) {
-        if (root == null)
+        if (root == null) {
             return 0;
+        }
         if (root.left == null && root.right == null) {
-            // leaf
+            // definition of leaf ...
             return 1;
         }
         if (root.left == null) {
@@ -400,6 +381,36 @@ public class BinaryTree {
         cur.left = sortedArrayToBSTHelper(num, start, mid - 1);
         cur.right = sortedArrayToBSTHelper(num, mid + 1, end);
         return cur;
+    }
+
+    // opt
+    class SortedListToOBST {
+        ListNode list;
+
+        public TreeNode sortedListToBST(ListNode head) {
+            ListNode cur = head;
+            list = head;
+            int n = 0;
+            while (cur != null) {
+                cur = cur.next;
+                n++;
+            }
+            return sortedListToBSTHelper(0, n - 1);
+        }
+
+        // length is number of nodes
+        private TreeNode sortedListToBSTHelper(int start, int end) {
+            if (start > end) {
+                return null;
+            }
+            int mid = (start + end) / 2;
+            TreeNode left = sortedListToBSTHelper(start, mid - 1);
+            TreeNode parent = new TreeNode(list.val);
+            parent.left = left;
+            list = list.next;
+            parent.right = sortedListToBSTHelper(mid + 1, end);
+            return parent;
+        }
     }
 
     /**
@@ -592,10 +603,11 @@ public class BinaryTree {
     }
 
     public boolean isValidBST(TreeNode root) {
-        if (root == null)
+        if (root == null) {
             return true;
+        }
         Stack<TreeNode> stack = new Stack<TreeNode>();
-        int pre = Integer.MIN_VALUE;
+        TreeNode pre = null; // could use null to represent real min
         // inorder traversal
         TreeNode cur = root;
         while (!stack.isEmpty() || cur != null) {
@@ -604,10 +616,10 @@ public class BinaryTree {
                 cur = cur.left;
             } else {
                 TreeNode visiting = stack.pop();
-                if (pre >= visiting.val) {
+                if (pre != null && pre.val >= visiting.val) {
                     return false;
                 }
-                pre = visiting.val;
+                pre = visiting;
                 if (visiting.right != null) {
                     cur = visiting.right;
                 }
