@@ -1,10 +1,8 @@
 package org.mingtaoz.leetcode.graph;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -30,37 +28,52 @@ public class UndirectedGraph {
      * @return
      */
     public static UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
-        if (node == null)
+        if (node == null) {
             return node;
+        }
         // mapping label with new graph node
-        Map<Integer, UndirectedGraphNode> newNodes = new HashMap<>();
-        // marking visited label in old graph
-        Set<Integer> marked = new HashSet<>();
+        Map<UndirectedGraphNode, UndirectedGraphNode> newNodes = new HashMap<>();
         Queue<UndirectedGraphNode> toBeVisit = new LinkedList<>();
         toBeVisit.add(node);
         UndirectedGraphNode newSource = new UndirectedGraphNode(node.label);
-        newNodes.put(node.label, newSource);
-        marked.add(node.label);
+        newNodes.put(node, newSource);
         while (!toBeVisit.isEmpty()) {
             UndirectedGraphNode visiting = toBeVisit.poll();
-            UndirectedGraphNode copyTo = newNodes.get(visiting.label);
+            UndirectedGraphNode copyTo = newNodes.get(visiting);
             for (UndirectedGraphNode neighbour : visiting.neighbors) {
                 UndirectedGraphNode newNode;
-                if (!marked.contains(neighbour.label)) {
+                if (!newNodes.containsKey(neighbour)) {
                     // add to be visited
                     toBeVisit.add(neighbour);
                     // haven't created newNode
                     newNode = new UndirectedGraphNode(neighbour.label);
-                    newNodes.put(neighbour.label, newNode);
-                    // mark
-                    marked.add(neighbour.label);
+                    newNodes.put(neighbour, newNode);
                 } else {
-                    newNode = newNodes.get(neighbour.label);
+                    newNode = newNodes.get(neighbour);
                 }
                 copyTo.neighbors.add(newNode);
             }
         }
         return newSource;
+    }
+
+    static Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
+
+    // DFS
+    public static UndirectedGraphNode cloneGraphDFS(UndirectedGraphNode node) {
+        if (node == null) {
+            return null;
+        }
+        if (map.containsKey(node)) {
+            return map.get(node);
+        }
+        UndirectedGraphNode newGraph = new UndirectedGraphNode(node.label);
+        map.put(node, newGraph);
+        for (UndirectedGraphNode neighbour : node.neighbors) {
+            UndirectedGraphNode newNeighbour = cloneGraphDFS(neighbour);
+            newGraph.neighbors.add(newNeighbour);
+        }
+        return newGraph;
     }
 
     /**

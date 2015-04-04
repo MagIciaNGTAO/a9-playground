@@ -17,11 +17,19 @@ public class KnapsackTest extends TestCase {
         return new TestSuite(KnapsackTest.class);
     }
 
+    public void testKnapsack4() {
+        assertEquals(4, sut.maxStealUB(6, new int[] { 3 }, new int[] { 2 }));
+    }
+
+    public void testKnapsack3() {
+        assertEquals(2, sut.maxSteal01(6, new int[] { 3 }, new int[] { 2 }));
+    }
+
     public void testKnapsack2() {
-        assertEquals(49, sut.maxSteal(29, new int[] { 3, 6, 8, 20 }, new int[] { 5, 9, 12, 35 }));
+        assertEquals(49, sut.maxSteal01(29, new int[] { 3, 6, 8, 20 }, new int[] { 5, 9, 12, 35 }));
     }
 
     public void testKnapsack1() {
-        assertEquals(47, sut.maxSteal(28, new int[] { 3, 6, 8, 20 }, new int[] { 5, 9, 12, 35 }));
+        assertEquals(47, sut.maxSteal01(28, new int[] { 3, 6, 8, 20 }, new int[] { 5, 9, 12, 35 }));
     }
 }
