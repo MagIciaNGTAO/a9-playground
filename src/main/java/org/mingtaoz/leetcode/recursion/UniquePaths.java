@@ -1,51 +1,50 @@
 package org.mingtaoz.leetcode.recursion;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UniquePaths {
 
-	private Map<String, Integer> cache = new HashMap<>();
+    public int uniquePaths(int m, int n) {
+        if (m < n) {
+            int temp = m;
+            m = n;
+            n = temp;
+        }
+        int[] cur = new int[n];
+        for (int i = 0; i < n; i++) {
+            cur[i] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            int[] next = new int[n];
+            next[0] = 1;
+            for (int j = 1; j < n; j++) {
+                next[j] = next[j - 1] + cur[j];
+            }
+            cur = next;
+        }
+        return cur[n - 1];
+    }
 
-	// TODO why can't JVM cache this result?
-	public int uniquePaths(int m, int n) {
-		if ((m == 1 && n == 1) || (m == 2 && n == 1) || (m == 1 && n == 2)) {
-			return 1;
-		}
-		if (m == 0 || n == 0) {
-			return 0;
-		}
-		String key = m + "-" + n;
-		if (cache.containsKey(key)) {
-			return cache.get(key);
-		} else {
-			int value = uniquePaths(m - 1, n) + uniquePaths(m, n - 1);
-			cache.put(key, value);
-			return value;
-		}
-	}
-
-	public int uniquePaths2Helper(int m, int n, int[][] obstacleGrid) {
-		// TODO check?
-		int row = obstacleGrid.length, column = obstacleGrid[0].length;
-		if (m == row || n == column || obstacleGrid[m][n] == 1) {
-			return 0;
-		}
-		if (m == row - 1 && n == column - 1) {
-			return 1;
-		}
-		String key = m + "-" + n;
-		if (cache.containsKey(key)) {
-			return cache.get(key);
-		} else {
-			int value = uniquePaths2Helper(m + 1, n, obstacleGrid)
-					+ uniquePaths2Helper(m, n + 1, obstacleGrid);
-			cache.put(key, value);
-			return value;
-		}
-	}
-
-	public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-		return uniquePaths2Helper(0, 0, obstacleGrid);
-	}
+    // too many ifs?
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        int[] cur = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (obstacleGrid[0][i] == 1) {
+                break;
+            }
+            cur[i] = 1;
+        }
+        for (int i = 1; i < m; i++) {
+            int[] next = new int[n];
+            if (obstacleGrid[i][0] == 0 && cur[0] > 0) {
+                next[0] = 1;
+            }
+            for (int j = 1; j < n; j++) {
+                if (obstacleGrid[i][j] == 0) {
+                    next[j] = next[j - 1] + cur[j];
+                }
+            }
+            cur = next;
+        }
+        return cur[n - 1];
+    }
 }

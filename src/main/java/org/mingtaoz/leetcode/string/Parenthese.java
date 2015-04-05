@@ -1,8 +1,10 @@
 package org.mingtaoz.leetcode.string;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
 
@@ -59,42 +61,44 @@ public class Parenthese {
      * @return
      */
     public List<String> generateParenthesis(int n) {
-        return new LinkedList<String>(generateParenthesisHelper(0, 0, n,
-                new StringBuilder()));
+        return new LinkedList<String>(generateParenthesisHelper(0, 0, n, new StringBuilder()));
     }
 
-    public Set<String> generateParenthesisHelper(int leftBrace, int rightBrace,
-            int n, StringBuilder stringBuilder) {
+    public Set<String> generateParenthesisHelper(int leftBrace, int rightBrace, int n, StringBuilder stringBuilder) {
         Set<String> ret = new HashSet<>();
         if (leftBrace == rightBrace && leftBrace == n) {
             ret.add(stringBuilder.toString());
             return ret;
         }
         if (leftBrace > rightBrace) {
-            ret.addAll(generateParenthesisHelper(leftBrace, rightBrace + 1,
-                    n, stringBuilder.append(")")));
+            ret.addAll(generateParenthesisHelper(leftBrace, rightBrace + 1, n, stringBuilder.append(")")));
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
         if (leftBrace < n) {
-            ret.addAll(generateParenthesisHelper(leftBrace + 1, rightBrace,
-                    n, stringBuilder.append("(")));
+            ret.addAll(generateParenthesisHelper(leftBrace + 1, rightBrace, n, stringBuilder.append("(")));
             stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
         return ret;
     }
 
+    @SuppressWarnings("serial")
+    private static final Map<Character, Character> map = new HashMap<Character, Character>() {
+        {
+            put('(', ')');
+            put('[', ']');
+            put('{', '}');
+        }
+    };
+
     public boolean isValid(String s) {
         Stack<Character> stack = new Stack<>();
         for (char c : s.toCharArray()) {
-            if (c == ')' && (stack.isEmpty() || stack.pop() != '(')) {
-                return false;
-            } else if (c == ']' && (stack.isEmpty() || stack.pop() != '[')) {
-                return false;
-            } else if (c == '}' && (stack.isEmpty() || stack.pop() != '{')) {
-                return false;
-            }
-            if (c == '(' || c == '{' || c == '[') {
+            if (map.containsKey(c)) {
                 stack.push(c);
+            } else {
+                if (stack.isEmpty() || c != map.get(stack.pop())) {
+                    return false;
+                }
             }
         }
         return stack.isEmpty();
