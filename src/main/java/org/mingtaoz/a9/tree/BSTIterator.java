@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.tree;
+package org.mingtaoz.a9.tree;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.dp;
+package org.mingtaoz.a9.dp;
 
 public class Knapsack {
 

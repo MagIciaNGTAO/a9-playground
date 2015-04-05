@@ -1,4 +1,4 @@
-package org.mingtaoz.other.binary;
+package org.mingtaoz.a9.binary;
 
 /**
  * 

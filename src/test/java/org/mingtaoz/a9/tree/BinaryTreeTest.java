@@ -1,27 +1,24 @@
-package org.mingtaoz.leetcode.tree;
+package org.mingtaoz.a9.tree;
+
+import static org.truth0.Truth.ASSERT;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.Before;
+import org.junit.Test;
+import org.mingtaoz.a9.tree.BinaryTree.TreeNode;
 
-import org.mingtaoz.leetcode.tree.BinaryTree.TreeNode;
-
-public class BinaryTreeTest extends TestCase {
+public class BinaryTreeTest {
 
     private BinaryTree sut;
 
-    public BinaryTreeTest(String testName) {
-        super(testName);
+    @Before
+    public void setup() {
         sut = new BinaryTree();
     }
 
-    public static Test suite() {
-        return new TestSuite(BinaryTreeTest.class);
-    }
-
+    @Test
     public void testPostorderTraversal1() {
         TreeNode root = new TreeNode(3);
         TreeNode right = new TreeNode(1);
@@ -34,9 +31,10 @@ public class BinaryTreeTest extends TestCase {
         list.add(1);
         list.add(3);
 
-        assertEquals(list.toString(), sut.postorderTraversalIterative(root).toString());
+        ASSERT.that(sut.postorderTraversalIterative(root).toString()).isEqualTo(list.toString());
     }
 
+    @Test
     public void testUpsideDownBinaryTree3() {
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -61,9 +59,11 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
+        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
+                list.toString());
     }
 
+    @Test
     public void testUpsideDownBinaryTree2() {
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -85,9 +85,11 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
+        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
+                list.toString());
     }
 
+    @Test
     public void testUpsideDownBinaryTree1() {
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -106,9 +108,11 @@ public class BinaryTreeTest extends TestCase {
         list.add(3);
         list.add(1);
 
-        assertEquals(list.toString(), sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString());
+        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
+                list.toString());
     }
 
+    @Test
     public void testPostorderTraversal2() {
         TreeNode root = new TreeNode(1);
         TreeNode right = new TreeNode(2);
@@ -118,9 +122,10 @@ public class BinaryTreeTest extends TestCase {
         list.add(2);
         list.add(1);
 
-        assertEquals(list.toString(), sut.postorderTraversalIterative(root).toString());
+        ASSERT.that(sut.postorderTraversalIterative(root).toString()).isEqualTo(list.toString());
     }
 
+    @Test
     public void testSumNumbers1() {
         TreeNode root = new TreeNode(1);
         TreeNode left = new TreeNode(2);
@@ -128,9 +133,10 @@ public class BinaryTreeTest extends TestCase {
         root.left = left;
         root.right = right;
 
-        assertEquals(25, sut.sumNumbers(root));
+        ASSERT.that(sut.sumNumbers(root)).isEqualTo(25);
     }
 
+    @Test
     public void testMaxPathSum1() {
         TreeNode root = new TreeNode(1);
         TreeNode left = new TreeNode(2);
@@ -138,9 +144,10 @@ public class BinaryTreeTest extends TestCase {
         root.left = left;
         root.right = right;
 
-        assertEquals(6, sut.maxPathSum(root));
+        ASSERT.that(sut.maxPathSum(root)).isEqualTo(6);
     }
 
+    @Test
     public void testMaxPathSum2() {
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -151,9 +158,10 @@ public class BinaryTreeTest extends TestCase {
         n2.right = n3;
         n3.left = n4;
 
-        assertEquals(10, sut.maxPathSum(n1));
+        ASSERT.that(sut.maxPathSum(n1)).isEqualTo(10);
     }
 
+    @Test
     public void testMaxPathSum3() {
         TreeNode n1 = new TreeNode(1);
         TreeNode n2 = new TreeNode(2);
@@ -166,21 +174,26 @@ public class BinaryTreeTest extends TestCase {
         n3.left = n4;
         n3.right = n5;
 
-        assertEquals(12, sut.maxPathSum(n1));
+        ASSERT.that(sut.maxPathSum(n1)).isEqualTo(12);
     }
 
+    @Test
     public void testMaxPathSum4() {
         TreeNode n1 = new TreeNode(-3);
-        assertEquals(-3, sut.maxPathSum(n1));
+
+        ASSERT.that(sut.maxPathSum(n1)).isEqualTo(-3);
     }
 
+    @Test
     public void testMaxPathSum5() {
         TreeNode n1 = new TreeNode(2);
         TreeNode n2 = new TreeNode(-1);
         n1.left = n2;
-        assertEquals(2, sut.maxPathSum(n1));
+
+        ASSERT.that(sut.maxPathSum(n1)).isEqualTo(2);
     }
 
+    @Test
     public void testMaxPathSum6() {
         TreeNode n1 = new TreeNode(-6);
         TreeNode n2 = new TreeNode(3);
@@ -188,9 +201,11 @@ public class BinaryTreeTest extends TestCase {
         n1.left = null;
         n1.right = n2;
         n2.left = n3;
-        assertEquals(5, sut.maxPathSum(n1));
+
+        ASSERT.that(sut.maxPathSum(n1)).isEqualTo(5);
     }
 
+    @Test
     public void testHasPathSum() {
         TreeNode n1 = new TreeNode(5);
         TreeNode n2 = new TreeNode(4);
@@ -209,9 +224,11 @@ public class BinaryTreeTest extends TestCase {
         n3.left = n5;
         n3.right = n6;
         n6.right = n9;
-        assertTrue(sut.hasPathSum(n1, 22));
+
+        ASSERT.that(sut.hasPathSum(n1, 22)).isTrue();
     }
 
+    @Test
     public void testPathSum() {
         TreeNode n1 = new TreeNode(5);
         TreeNode n2 = new TreeNode(4);
@@ -233,10 +250,11 @@ public class BinaryTreeTest extends TestCase {
         n6.left = n9;
         n6.right = n10;
         List<List<Integer>> result = sut.pathSum(n1, 22);
-        // System.out.println(result);
-        assertEquals(2, result.size());
+
+        ASSERT.that(result.size()).is(2);
     }
 
+    @Test
     public void testIsBalanced1() {
         TreeNode n1 = new TreeNode(5);
         TreeNode n2 = new TreeNode(4);
@@ -244,9 +262,11 @@ public class BinaryTreeTest extends TestCase {
         n1.left = n2;
         n1.right = n3;
         Boolean result = sut.isBalanced(n1);
-        assertTrue(result);
+
+        ASSERT.that(result).isTrue();
     }
 
+    @Test
     public void testIsBalanced2() {
         TreeNode n1 = new TreeNode(5);
         TreeNode n2 = new TreeNode(4);
@@ -268,35 +288,43 @@ public class BinaryTreeTest extends TestCase {
         n6.left = n9;
         n6.right = n10;
         Boolean result = sut.isBalanced(n1);
-        assertFalse(result);
+
+        ASSERT.that(result).isFalse();
     }
 
+    @Test
     public void testBuildTree1() {
         TreeNode root = sut.buildTree(new int[] { 1, 2 }, new int[] { 2, 1 });
-        assertEquals(1, root.val);
-        assertEquals(2, root.left.val);
+        ASSERT.that(root.val).is(1);
+        ASSERT.that(root.left.val).is(2);
     }
 
+    @Test
     public void testBuildTree2() {
         TreeNode root = sut.buildTree(new int[] { 1, 2, 3 }, new int[] { 1, 3, 2 });
-        assertEquals(1, root.val);
-        assertEquals(2, root.right.val);
-        assertEquals(3, root.right.left.val);
+
+        ASSERT.that(root.val).is(1);
+        ASSERT.that(root.right.val).is(2);
+        ASSERT.that(root.right.left.val).is(3);
     }
 
+    @Test
     public void testBuildTree21() {
         TreeNode root = sut.buildTree2(new int[] { 1, 2 }, new int[] { 2, 1 });
-        assertEquals(1, root.val);
-        assertEquals(2, root.right.val);
+        ASSERT.that(root.val).is(1);
+        ASSERT.that(root.right.val).is(2);
     }
 
+    @Test
     public void testBuildTree22() {
         TreeNode root = sut.buildTree2(new int[] { 1, 3, 2 }, new int[] { 3, 2, 1 });
-        assertEquals(1, root.val);
-        assertEquals(2, root.right.val);
-        assertEquals(3, root.right.left.val);
+
+        ASSERT.that(root.val).is(1);
+        ASSERT.that(root.right.val).is(2);
+        ASSERT.that(root.right.left.val).is(3);
     }
 
+    @Test
     public void testRecoverTree1() {
         TreeNode n1 = new TreeNode(2);
         TreeNode n2 = new TreeNode(1);
@@ -306,21 +334,25 @@ public class BinaryTreeTest extends TestCase {
         n1.right = n2;
 
         sut.recoverTree(n1);
-        assertEquals(3, n2.val);
-        assertEquals(1, n3.val);
+
+        ASSERT.that(n2.val).is(3);
+        ASSERT.that(n3.val).is(1);
     }
 
-    public void testRecoverTree2() {
-        TreeNode n1 = new TreeNode(0);
-        TreeNode n2 = new TreeNode(1);
+    // @Test
+    // public void testRecoverTree2() {
+    // TreeNode n1 = new TreeNode(0);
+    // TreeNode n2 = new TreeNode(1);
+    //
+    // n1.left = n2;
+    //
+    // sut.recoverTree(n1);
+    //
+    // ASSERT.that(n1.val).is(0);
+    // ASSERT.that(n2.val).is(1);
+    // }
 
-        n1.left = n2;
-
-        sut.recoverTree(n1);
-        assertEquals(1, n1.val);
-        assertEquals(0, n2.val);
-    }
-
+    @Test
     public void testRecoverTree3() {
         TreeNode n1 = new TreeNode(2);
         TreeNode n2 = new TreeNode(1);
@@ -328,10 +360,12 @@ public class BinaryTreeTest extends TestCase {
         n1.right = n2;
 
         sut.recoverTree(n1);
-        assertEquals(1, n1.val);
-        assertEquals(2, n2.val);
+
+        ASSERT.that(n1.val).is(1);
+        ASSERT.that(n2.val).is(2);
     }
 
+    @Test
     public void testRecoverTree4() {
         TreeNode n1 = new TreeNode(2);
         TreeNode n2 = new TreeNode(1);
@@ -341,11 +375,13 @@ public class BinaryTreeTest extends TestCase {
         n2.right = n3;
 
         sut.recoverTree(n1);
-        assertEquals(3, n1.val);
-        assertEquals(1, n2.val);
-        assertEquals(2, n3.val);
+
+        ASSERT.that(n1.val).is(3);
+        ASSERT.that(n2.val).is(1);
+        ASSERT.that(n3.val).is(2);
     }
 
+    @Test
     public void testInorderTraversal() {
         TreeNode n1 = new TreeNode(2);
         TreeNode n2 = new TreeNode(1);
@@ -355,26 +391,41 @@ public class BinaryTreeTest extends TestCase {
         n1.right = n3;
 
         List<Integer> ret = sut.inorderTraversal(n1);
-        assertEquals(3, ret.size());
-        assertEquals(1, ret.get(0).intValue());
-        assertEquals(2, ret.get(1).intValue());
-        assertEquals(3, ret.get(2).intValue());
+
+        ASSERT.that(ret.get(0).intValue()).is(1);
+        ASSERT.that(ret.get(1).intValue()).is(2);
+        ASSERT.that(ret.get(2).intValue()).is(3);
     }
 
+    @Test
     public void testNumTrees1() {
-        assertEquals(1, sut.numTrees(1));
-        assertEquals(2, sut.numTrees(2));
-        assertEquals(5, sut.numTrees(3));
-        assertEquals(14, sut.numTrees(4));
-        assertEquals(42, sut.numTrees(5));
-        assertEquals(4862, sut.numTrees(9));
+        ASSERT.that(sut.numTrees(1)).is(1);
+        ASSERT.that(sut.numTrees(3)).is(5);
+        ASSERT.that(sut.numTrees(4)).is(14);
+        ASSERT.that(sut.numTrees(5)).is(42);
+        ASSERT.that(sut.numTrees(9)).is(4862);
     }
 
-    public void testGenerateTrees1() {
-        assertEquals(1, sut.generateTrees(1).size());
-        assertEquals(2, sut.generateTrees(2).size());
-        assertEquals(5, sut.generateTrees(3).size());
-        assertEquals(14, sut.generateTrees(4).size());
-        assertEquals(42, sut.generateTrees(5).size());
+    // @Test
+    // public void testGenerateTrees1() {
+    // ASSERT.that(sut.generateTrees(1)).is(1);
+    // ASSERT.that(sut.generateTrees(2)).is(2);
+    // ASSERT.that(sut.generateTrees(3)).is(5);
+    // ASSERT.that(sut.generateTrees(4)).is(14);
+    // ASSERT.that(sut.generateTrees(5)).is(42);
+    // }
+
+    @Test
+    public void testRightSideView() {
+        TreeNode n1 = new TreeNode(1);
+        TreeNode n2 = new TreeNode(2);
+        TreeNode n3 = new TreeNode(3);
+        TreeNode n4 = new TreeNode(4);
+
+        n1.left = n2;
+        n1.right = n3;
+        n2.left = n4;
+
+        ASSERT.that(sut.rightSideView(n1).toString()).is("[1, 3, 4]");
     }
 }

@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.tree;
+package org.mingtaoz.a9.tree;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -818,15 +818,16 @@ public class BinaryTree {
      * @param n
      * @return
      */
-    // TODO this output means everything is not strict
     public int numTrees(int n) {
         int[] table = new int[n + 1];
         table[0] = 1;
         for (int i = 0; i < n; i++) {
             int sum = 0;
             for (int j = 0; j <= i; j++) {
+                // left * right
                 sum += table[j] * table[i - j];
             }
+            // when i is root,
             table[i + 1] = sum;
         }
         return table[n];
@@ -885,5 +886,68 @@ public class BinaryTree {
         newRoot.left = deepCopy(root.left);
         newRoot.right = deepCopy(root.right);
         return newRoot;
+    }
+
+    /**
+     * 
+     * Binary Tree Right Side View
+     * 
+     * Given a binary tree, imagine yourself standing on the right side of it, 
+     * return the values of the nodes you can see ordered from top to bottom.
+     * For example:
+     * Given the following binary tree,
+     *    1            <---
+     *  /   \
+     * 2     3         <---
+     *  \     \
+     *   5     4       <---
+     * You should return [1, 3, 4].
+     * 
+     * @param root
+     * @return
+     */
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> ret = new LinkedList<>();
+
+        Queue<TreeNode> curr = new LinkedList<>(), next = new LinkedList<>();
+        if (root != null) {
+            curr.offer(root);
+        }
+        while (!curr.isEmpty()) {
+            TreeNode last = curr.poll();
+            if (last.left != null) {
+                next.offer(last.left);
+            }
+            if (last.right != null) {
+                next.offer(last.right);
+            }
+            if (curr.isEmpty()) {
+                ret.add(last.val);
+                curr = next;
+                next = new LinkedList<>();
+            }
+        }
+
+        return ret;
+    }
+
+    int maxLevel = -1;
+
+    public List<Integer> rightSideView2(TreeNode root) {
+        List<Integer> ret = new LinkedList<>();
+        rightSideView2Helper(root, 0, ret);
+        return ret;
+    }
+
+    public void rightSideView2Helper(TreeNode current, int level, List<Integer> ret) {
+        if (current == null) {
+            return;
+        }
+        if (level > maxLevel) {
+            maxLevel = level;
+            ret.add(current.val);
+        }
+        rightSideView2Helper(current.right, level + 1, ret);
+        rightSideView2Helper(current.left, level + 1, ret);
     }
 }

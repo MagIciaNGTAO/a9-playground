@@ -1,4 +1,4 @@
-package org.mingtaoz.other.java;
+package org.mingtaoz.a9.java;
 
 import java.util.HashMap;
 import java.util.Map;

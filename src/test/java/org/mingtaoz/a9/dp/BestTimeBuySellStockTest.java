@@ -1,4 +1,6 @@
-package org.mingtaoz.leetcode.dp;
+package org.mingtaoz.a9.dp;
+
+import org.mingtaoz.a9.dp.BestTimeBuySellStock;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

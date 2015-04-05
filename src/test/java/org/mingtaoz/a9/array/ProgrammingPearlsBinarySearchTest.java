@@ -1,17 +1,18 @@
-package org.mingtaoz.other.array;
+package org.mingtaoz.a9.array;
 
 import static org.truth0.Truth.ASSERT;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mingtaoz.a9.array.BinarySearch;
 
 public class ProgrammingPearlsBinarySearchTest {
 
-    private ProgrammingPearlsBinarySearch sut;
+    private BinarySearch sut;
 
     @Before
     public void setup() {
-        sut = new ProgrammingPearlsBinarySearch();
+        sut = new BinarySearch();
     }
 
     @Test

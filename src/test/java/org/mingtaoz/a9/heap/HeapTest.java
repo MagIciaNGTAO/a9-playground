@@ -1,8 +1,9 @@
-package org.mingtaoz.other.heap;
+package org.mingtaoz.a9.heap;
 
 import static org.truth0.Truth.ASSERT;
 
 import org.junit.Test;
+import org.mingtaoz.a9.heap.Heap;
 
 public class HeapTest {
 

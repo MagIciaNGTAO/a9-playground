@@ -1,4 +1,4 @@
-package org.mingtaoz.other.tree;
+package org.mingtaoz.a9.tree;
 
 import java.util.Deque;
 import java.util.LinkedList;
