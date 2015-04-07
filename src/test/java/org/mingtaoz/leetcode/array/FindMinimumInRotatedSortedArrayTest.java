@@ -16,6 +16,14 @@ public class FindMinimumInRotatedSortedArrayTest {
     }
 
     @Test
+    public void testFindMin2() {
+        // TODO the index is lean to right or accurate, if lean happens cut
+        // include right
+        int[] i = { 0, 1, 2, 4, 5, 6, 7 };
+        ASSERT.that(sut.findMin(i)).is(0);
+    }
+
+    @Test
     public void testFindMin1() {
         // TODO the index is lean to right or accurate, if lean happens cut
         // include right
@@ -24,10 +32,10 @@ public class FindMinimumInRotatedSortedArrayTest {
     }
 
     @Test
-    public void testFindMin2() {
+    public void testFindMinDuplicate() {
         // TODO the index is lean to right or accurate, if lean happens cut
         // include right
-        int[] i = { 0, 1, 2, 4, 5, 6, 7 };
-        ASSERT.that(sut.findMin(i)).is(0);
+        int[] i = { 3, 3, 4, 5, 6, 7 };
+        ASSERT.that(sut.findMin2(i)).is(3);
     }
 }

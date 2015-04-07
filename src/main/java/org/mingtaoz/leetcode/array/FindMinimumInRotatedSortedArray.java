@@ -18,18 +18,15 @@ public class FindMinimumInRotatedSortedArray {
      */
     public int findMin(int[] num) {
         int left = 0, right = num.length - 1;
-        if (num[left] < num[right]) {
-            return num[left];
-        }
-        while (left < right - 1) {
-            int mid = (left + right + 1) / 2;
-            if (num[left] < num[mid]) {
-                left = mid;
-            } else {
+        while (left < right && num[left] > num[right]) {
+            int mid = (left + right) / 2;
+            if (num[mid] > num[right]) {
+                left = mid + 1;
+            } else if (num[mid] < num[left]) {
                 right = mid;
             }
         }
-        return Math.min(num[left], num[right]);
+        return num[left];
     }
 
     /**
@@ -51,27 +48,22 @@ public class FindMinimumInRotatedSortedArray {
      */
     public int findMin2(int[] num) {
         int left = 0, right = num.length - 1;
-        while (left < right - 1) {
-            if (num[left] < num[right]) {
-                return num[left];
-            }
-            int mid = (left + right + 1) / 2;
-            if (num[left] < num[mid]) {
-                left = mid;
-            } else if (num[left] > num[mid]) {
+        while (left < right && num[left] >= num[right]) {
+            int mid = (left + right) / 2;
+            if (num[mid] > num[right]) {
+                left = mid + 1;
+            } else if (num[mid] < num[left]) {
                 right = mid;
             } else {
-                if (num[mid] == num[right]) {
-                    // slowing down
-                    left++;
-                    right--;
-                } else {
-                    // must be num[mid] > num[right]
-                    left = mid;
-                }
+                // num[left] >= num[right]
+                // num[mid] <= num[right]
+                // num[mid] >= num[left]
+                // could see num[left] = num[mid] = num[right]
+                left++;
+                right--;
             }
         }
-        return Math.min(num[left], num[right]);
+        return num[left];
     }
 
 }
