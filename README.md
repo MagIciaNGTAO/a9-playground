@@ -1,2 +1,1 @@
-// TODO casting, stream, 
-// TODO recursion
+Playing with different algorithm.
