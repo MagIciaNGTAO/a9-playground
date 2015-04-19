@@ -22,7 +22,7 @@ public class MedianOfTwoSortedArrays {
     }
 
     // k starts from 1
-    // i + j = k - 2
+    // invariant: i + j = k - 2
     public int kthSelection(int[] A, int[] B, int k) {
         if (A.length == 0 && B.length == 0) {
             // exception
@@ -34,7 +34,8 @@ public class MedianOfTwoSortedArrays {
             return A[0] < B[0] ? A[0] : B[0];
         }
         int la = 0, ra = A.length - 1, lb = 0, rb = B.length - 1;
-        int midA = (la + k / 2 - 1), midB = k - midA - 2;
+        int midA = (la + k / 2 - 1);
+        int midB = k - midA - 2;
         if (k > A.length) {
             midA = ra;
             midB = k - midA - 2;
@@ -45,7 +46,7 @@ public class MedianOfTwoSortedArrays {
         }
         while (la <= ra && lb <= rb) {
             if (A[midA] >= B[midB]) {
-                if (midB + 1 == B.length || A[midA] <= B[midB + 1]) {
+                if (midB == B.length - 1 || A[midA] <= B[midB + 1]) {
                     // B1 A1 B2
                     return A[midA];
                 } else {
@@ -56,7 +57,7 @@ public class MedianOfTwoSortedArrays {
                     midB = k - midA - 2;
                 }
             } else {
-                if (midA + 1 == A.length || B[midB] < A[midA + 1]) {
+                if (midA == A.length - 1 || B[midB] <= A[midA + 1]) {
                     // A1 B1 A2
                     return B[midB];
                 } else {

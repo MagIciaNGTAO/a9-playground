@@ -246,16 +246,16 @@ public class Arrays {
         }
         // the only tricky part might be this A[0] - 1.
         int prev = A[0] - 1, j = 0, n = A.length;
-        boolean third = false;
+        int count = 0, N = 2;
         for (int i = 0; i < n; i++) {
             if (prev != A[i]) {
                 prev = A[i];
                 A[j++] = prev;
-                third = false;
-            } else if (!third) {
+                count = 1;
+            } else if (count < N) {
                 prev = A[i];
                 A[j++] = prev;
-                third = true;
+                count++;
             }
         }
         return j;

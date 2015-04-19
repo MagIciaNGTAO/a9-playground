@@ -4,7 +4,7 @@ import static org.truth0.Truth.ASSERT;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mingtaoz.leetcode.array.FindMinimumInRotatedSortedArray;
+import org.mingtaoz.a9.array.FindMinimumInRotatedSortedArray;
 
 public class FindMinimumInRotatedSortedArrayTest {
 

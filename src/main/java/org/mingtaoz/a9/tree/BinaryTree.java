@@ -78,8 +78,9 @@ public class BinaryTree {
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
-            if (cur == null)
+            if (cur == null) {
                 continue;
+            }
             ret.add(cur.val);
             stack.push(cur.right);
             stack.push(cur.left);
@@ -89,8 +90,9 @@ public class BinaryTree {
 
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> ret = new LinkedList<Integer>();
-        if (root == null)
+        if (root == null) {
             return ret;
+        }
         ret.addAll(postorderTraversalIterative(root.left));
         ret.addAll(postorderTraversalIterative(root.right));
         ret.add(root.val);
@@ -130,7 +132,7 @@ public class BinaryTree {
         return ret;
     }
 
-    int maxSum;
+    int maxSum; // keeps something while recursing
 
     public int maxPathSum(TreeNode root) {
         maxSum = Integer.MIN_VALUE;
@@ -138,8 +140,8 @@ public class BinaryTree {
         return maxSum;
     }
 
-    // 1. define the return
-    // 2. how to update maxSum
+    // return the max half component
+    // updating the maxSum
     public int maxPathSumHelper(TreeNode node) {
         if (node == null) {
             return 0;
@@ -175,22 +177,18 @@ public class BinaryTree {
     // layered BFS
     // working for populating-next-right-pointers-in-each-node i/ii
     public void connect(TreeLinkNode root) {
-        if (root == null) {
-            return;
-        }
         Queue<TreeLinkNode> curLayer = new LinkedList<>(), nextLayer = new LinkedList<>();
         TreeLinkNode next = null;
         curLayer.add(root);
         while (!curLayer.isEmpty()) {
             TreeLinkNode cur = curLayer.poll();
+            if (cur == null) {
+                continue;
+            }
             cur.next = next;
             next = cur;
-            if (cur.right != null) {
-                nextLayer.add(cur.right);
-            }
-            if (cur.left != null) {
-                nextLayer.add(cur.left);
-            }
+            nextLayer.add(cur.right);
+            nextLayer.add(cur.left);
             if (curLayer.isEmpty()) {
                 // next layer
                 curLayer = nextLayer;
@@ -208,22 +206,19 @@ public class BinaryTree {
      * @param root
      */
     public void flatten(TreeNode root) {
-        if (root == null)
-            return;
         TreeNode dummyHead = new TreeNode(-1), dummyCur = dummyHead;
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();
+            if (cur == null) {
+                continue;
+            }
             dummyCur.right = cur;
             dummyCur.left = null;
             dummyCur = cur;
-            if (cur.right != null) {
-                stack.push(cur.right);
-            }
-            if (cur.left != null) {
-                stack.push(cur.left);
-            }
+            stack.push(cur.right);
+            stack.push(cur.left);
         }
         root = dummyHead.right;
     }

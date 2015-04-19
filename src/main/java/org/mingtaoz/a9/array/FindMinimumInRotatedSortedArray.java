@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.array;
+package org.mingtaoz.a9.array;
 
 public class FindMinimumInRotatedSortedArray {
 
