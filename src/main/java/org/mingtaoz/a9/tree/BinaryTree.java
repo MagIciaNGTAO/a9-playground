@@ -945,4 +945,23 @@ public class BinaryTree {
         rightSideView2Helper(current.right, level + 1, ret);
         rightSideView2Helper(current.left, level + 1, ret);
     }
+
+    /**
+     * 
+     * Google: 90% of our engineers use the software you wrote (Homebrew)
+     * but you can’t invert a binary tree on a whiteboard so fuck off.
+     * 
+     * @param root
+     * @return
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root != null) {
+            TreeNode temp = root.left;
+            root.left = root.right;
+            root.right = temp;
+            invertTree(root.left);
+            invertTree(root.right);
+        }
+        return root;
+    }
 }
