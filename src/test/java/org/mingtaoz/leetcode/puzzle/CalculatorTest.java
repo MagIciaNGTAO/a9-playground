@@ -15,6 +15,26 @@ public class CalculatorTest {
     }
 
     @Test
+    public void testCalculate24() {
+        ASSERT.that(sut.calculate2("3+5 / 2")).is(5);
+    }
+
+    @Test
+    public void testCalculate23() {
+        ASSERT.that(sut.calculate2("1 * 2 / 2")).is(1);
+    }
+
+    @Test
+    public void testCalculate22() {
+        ASSERT.that(sut.calculate2("1 * 2")).is(2);
+    }
+
+    @Test
+    public void testCalculate21() {
+        ASSERT.that(sut.calculate2("1 + 2")).is(3);
+    }
+
+    @Test
     public void testCalculate5() {
         ASSERT.that(sut.calculate("(1+(4+5+2)-3)+(6+8)")).is(23);
     }

@@ -6,10 +6,6 @@ import java.util.Stack;
 
 public class Calculator {
 
-    Stack<Integer> pos = new Stack<>();
-    Map<Integer, Wrapper> posLeftState = new HashMap<>();// merge map
-    boolean plus = true;
-
     class Wrapper {
         public Wrapper(int sum, boolean plus) {
             this.sum = sum;
@@ -21,6 +17,9 @@ public class Calculator {
     }
 
     public int calculate(String s) {
+        Stack<Integer> pos = new Stack<>();
+        Map<Integer, Wrapper> posLeftState = new HashMap<>();// merge map
+        boolean plus = true;
         int ret = 0;
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == ' ') {
@@ -43,24 +42,74 @@ public class Calculator {
                     ret = w.sum - ret;
                 }
             } else if (s.charAt(i) <= '9' && s.charAt(i) >= '0') {
-                int start = i;
-                while (i < s.length() && s.charAt(i) <= '9' && s.charAt(i) >= '0') {
-                    i++;
-                }
+                String next = nextNumberString(i, s);
                 if (plus) {
-                    ret += Integer.parseInt(s.substring(start, i));
+                    ret += Integer.parseInt(next);
                 } else {
-                    ret -= Integer.parseInt(s.substring(start, i));
+                    ret -= Integer.parseInt(next);
                 }
-                i--;
+                i += next.length() - 1;
             }
         }
         return ret;
     }
 
+    class N {
+        public boolean sign;
+        public long n;
+
+        public N(boolean sign, long n) {
+            this.sign = sign;
+            this.n = n;
+        }
+    }
+
     public int calculate2(String s) {
-        // TODO
-        
-        return -1;
+        Stack<N> numbers = new Stack<>();
+        boolean sign = true, multi = false, divide = false;
+        int ret = 0;
+        N n = null;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ') {
+                // skip
+            } else if (s.charAt(i) == '+' || s.charAt(i) == '-') {
+                sign = (s.charAt(i) == '+');
+                multi = false;
+                divide = false;
+            } else if (s.charAt(i) == '*' || s.charAt(i) == '/') {
+                multi = (s.charAt(i) == '*');
+                divide = (s.charAt(i) == '/');
+                n = numbers.pop();
+            } else if (s.charAt(i) <= '9' && s.charAt(i) >= '0') {
+                String next = nextNumberString(i, s);
+                if (multi || divide) {
+                    if (multi) {
+                        numbers.push(new N(n.sign, n.n * Long.parseLong(next)));
+                    } else {
+                        numbers.push(new N(n.sign, n.n / Long.parseLong(next)));
+                    }
+                } else {
+                    numbers.push(new N(sign, Long.parseLong(next)));
+                }
+                i += next.length() - 1;
+            }
+        }
+        while (!numbers.isEmpty()) {
+            n = numbers.pop();
+            if (n.sign) {
+                ret += n.n;
+            } else {
+                ret -= n.n;
+            }
+        }
+        return ret;
+    }
+
+    public String nextNumberString(int i, String s) {
+        int start = i;
+        while (i < s.length() && s.charAt(i) <= '9' && s.charAt(i) >= '0') {
+            i++;
+        }
+        return s.substring(start, i);
     }
 }
