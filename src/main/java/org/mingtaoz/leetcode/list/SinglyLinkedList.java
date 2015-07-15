@@ -26,6 +26,17 @@ public class SinglyLinkedList {
         return newHead;
     }
 
+    public ListNode reverseList(ListNode head) {
+        ListNode newHead = null, cur = head;
+        while (cur != null) {
+            ListNode temp = cur;
+            cur = cur.next;
+            temp.next = newHead;
+            newHead = temp;
+        }
+        return newHead;
+    }
+
     /**
      * Reverse Linked List II
      * 
