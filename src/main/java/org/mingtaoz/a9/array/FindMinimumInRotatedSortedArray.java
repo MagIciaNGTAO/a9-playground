@@ -22,11 +22,28 @@ public class FindMinimumInRotatedSortedArray {
             int mid = (left + right) / 2;
             if (num[mid] > num[right]) {
                 left = mid + 1;
-            } else if (num[mid] < num[left]) {
+            } else if (num[mid] < num[right]) {
                 right = mid;
+            } else {
+                // TODO huh ...
+                return num[mid];
             }
         }
         return num[left];
+    }
+
+    public int findMinRecursion(int[] num, int left, int right) {
+        if (left > right || num[left] <= num[right]) {
+            return num[left];
+        }
+        int mid = (left + right) / 2;
+        if (num[mid] > num[right]) {
+            return findMinRecursion(num, mid + 1, right);
+        } else if (num[mid] < num[right]) {
+            return findMinRecursion(num, left, mid);
+        } else {
+            return num[mid];
+        }
     }
 
     /**
@@ -46,6 +63,14 @@ public class FindMinimumInRotatedSortedArray {
      * @param num
      * @return
      */
+
+    /**
+     * For case where AL == AM == AR, the minimum could be on AM’s left or right side (eg, [1, 1, 1, 0, 1] or [1, 0, 1, 1, 1]). 
+     * In this case, we could not discard either subarrays and therefore such worst case degenerates to the order of O(n).
+     * 
+     * @param num
+     * @return
+     */
     public int findMin2(int[] num) {
         int left = 0, right = num.length - 1;
         while (left < right && num[left] >= num[right]) {
@@ -55,10 +80,6 @@ public class FindMinimumInRotatedSortedArray {
             } else if (num[mid] < num[left]) {
                 right = mid;
             } else {
-                // num[left] >= num[right]
-                // num[mid] <= num[right]
-                // num[mid] >= num[left]
-                // could see num[left] = num[mid] = num[right]
                 left++;
                 right--;
             }
