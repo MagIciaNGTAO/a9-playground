@@ -7,8 +7,8 @@ package org.mingtaoz.a9.binary;
  */
 public class BitMap {
 
-    private static final int DEFAULT_SIZE = 1 << 10;
-    private static final int WORD_SIZE = 1 << 3;
+    private static final int DEFAULT_SIZE = 1 << 10; // 128 bytes
+    private static final int WORD_SIZE = 1 << 3; // 1 byte
 
     private final int size;
     private final byte[] back;
@@ -23,7 +23,7 @@ public class BitMap {
         back = new byte[this.size];
     }
 
-    public void flip(int number) {
+    public void on(int number) {
         number--;
         int location = number / WORD_SIZE;
         int bit = number % WORD_SIZE;
@@ -49,9 +49,9 @@ public class BitMap {
 
     public static void main(String[] args) {
         BitMap sut = new BitMap(16);
-        sut.flip(9);
-        sut.flip(8);
-        sut.flip(1);
+        sut.on(9);
+        sut.on(8);
+        sut.on(1);
         System.out.println(sut.toString());
     }
 }

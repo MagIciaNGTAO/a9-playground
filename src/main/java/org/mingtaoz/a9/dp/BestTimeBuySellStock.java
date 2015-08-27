@@ -14,18 +14,15 @@ public class BestTimeBuySellStock {
      * @return
      */
     public int maxProfit1(int[] prices) {
-        if (prices == null || prices.length == 0 || prices.length == 1)
-            return 0;
-        int profit = 0, min = Integer.MAX_VALUE;
-        for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < min) {
-                // a fake buy
-                min = prices[i];
+        int ret = 0, low = Integer.MAX_VALUE;
+        for (int price : prices) {
+            if (price < low) {
+                low = price;
             } else {
-                profit = Math.max(profit, prices[i] - min);
+                ret = Math.max(ret, price - low);
             }
         }
-        return profit;
+        return ret;
     }
 
     /**
@@ -42,16 +39,14 @@ public class BestTimeBuySellStock {
      * @return
      */
     public int maxProfit2(int[] prices) {
-        if (prices == null || prices.length == 0 || prices.length == 1) {
-            return 0;
-        }
-        int profit = 0;
-        for (int i = 1; i < prices.length; i++) {
-            if (prices[i] > prices[i - 1]) {
-                profit += prices[i] - prices[i - 1];
+        int ret = 0, buy = Integer.MAX_VALUE;
+        for (int price : prices) {
+            if (price > buy) {
+                ret += price - buy;
             }
+            buy = price;
         }
-        return profit;
+        return ret;
     }
 
     /**
@@ -69,43 +64,33 @@ public class BestTimeBuySellStock {
      * @return
      */
     public int maxProfit3(int[] prices) {
-        if (prices == null || prices.length == 0 || prices.length == 1) {
+        int n = prices.length;
+        if (n == 0) {
             return 0;
         }
-        int n = prices.length;
-        int[] profitOneBuy = new int[n];
-        int min = Integer.MAX_VALUE;
-
-        // buy once until ith transaction
-        for (int i = 0; i < n; i++) {
-            if (prices[i] <= min) {
-                min = prices[i];
-                // profitOneBuy[i] = 0;
-            } else {
-                profitOneBuy[i] = prices[i] - min;
+        int low = prices[0], high = prices[n - 1], ret = 0;
+        int[] sellBeforeOrAtI = new int[n], buyAfterOrAtI = new int[n];
+        // build left side
+        for (int i = 1; i < n; i++) {
+            int price = prices[i];
+            if (price < low) {
+                low = price;
             }
+            sellBeforeOrAtI[i] = Math.max(sellBeforeOrAtI[i - 1], price - low);
         }
-
-        int profit = 0;
-        int beforeIth = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (beforeIth < profitOneBuy[i]) {
-                min = prices[i];
-                int tempProfit = 0;
-                for (int j = i; j < n; j++) {
-                    if (prices[j] <= min) {
-                        min = prices[j];
-                    } else {
-                        tempProfit = Math.max(tempProfit, prices[j] - min);
-                    }
-                }
-                profit = Math.max(profit, profitOneBuy[i] + tempProfit);
+        // build right side
+        for (int i = n - 2; i >= 0; i--) {
+            int price = prices[i];
+            if (price > high) {
+                high = price;
             }
-            beforeIth = Math.max(beforeIth, profitOneBuy[i]);
+            buyAfterOrAtI[i] = Math.max(buyAfterOrAtI[i + 1], high - price);
         }
-
-        return profit;
+        // build result
+        for (int i = 0; i < n; i++) {
+            ret = Math.max(ret, sellBeforeOrAtI[i] + buyAfterOrAtI[i]);
+        }
+        return ret;
     }
 
     /**
@@ -123,8 +108,8 @@ public class BestTimeBuySellStock {
      */
     public int maxProfit4(int k, int[] prices) {
         int n = prices.length;
-
         if (k > n / 2) {
+            // easy case, could do many transactions
             int profit = 0;
             for (int i = 1; i < n; i++) {
                 if (prices[i] > prices[i - 1]) {
@@ -133,17 +118,18 @@ public class BestTimeBuySellStock {
             }
             return profit;
         }
-
         int[] previous = new int[n];
         for (int i = 1; i <= k; i++) {
             int[] current = new int[n];
-            int acc = -prices[0];
-            // denotes the maximum profit of just doing at most i-1 transactions, 
-            // using first j-1 prices 
-            // minus cost from purchasing the stock at price[j]
+            // maximum accumulated profit of
+            // 1. At most i-1 transactions +
+            // 2. Pre-paying cost to allow sell at j
+            int accumulated = -prices[0];
             for (int j = 1; j < n; j++) {
-                current[j] = Math.max(current[j - 1], prices[j] + acc);
-                acc = Math.max(acc, previous[j - 1] - prices[j]);
+                // 'not sell at j' vs 'sell at j'
+                current[j] = Math.max(current[j - 1], prices[j] + accumulated);
+                // 'don't buy at j' vs 'buy at j'
+                accumulated = Math.max(accumulated, previous[j - 1] - prices[j]);
             }
             previous = current;
         }
