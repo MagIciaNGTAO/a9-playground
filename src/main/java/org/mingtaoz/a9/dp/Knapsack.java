@@ -7,41 +7,41 @@ public class Knapsack {
     public int maxSteal01(int bag, int weights[], int worths[]) {
         int n = weights.length;
         // the max steal under <= i items as selection pool & weight <= limit
-        int[] maxSteal = new int[bag + 1];
-        for (int i = 1; i <= n; i++) {
-            int[] nextMaxSteal = new int[bag + 1];
+        int[] prev = new int[bag + 1];
+        for (int i = 0; i < n; i++) {
+            int[] cur = new int[bag + 1];
             for (int j = 1; j <= bag; j++) {
-                if (weights[i - 1] <= j) {
-                    nextMaxSteal[j] = Math.max(maxSteal[j], maxSteal[j - weights[i - 1]] + worths[i - 1]);
+                if (weights[i] <= j) {
+                    cur[j] = Math.max(prev[j], prev[j - weights[i]] + worths[i]);
                 } else {
-                    nextMaxSteal[j] = maxSteal[j];
+                    cur[j] = prev[j];
                 }
             }
-            maxSteal = nextMaxSteal;
+            prev = cur;
         }
-        return maxSteal[bag];
+        return prev[bag];
     }
 
-    // TODO The unbounded knapsack problem (UKP) places no upper bound on the
+    // The unbounded knapsack problem (UKP) places no upper bound on the
     // number of copies of each kind of item and can be formulated as above
     // except for that the only restriction on x_i is that it is a non-negative
     // integer.
-    public int maxStealUB(int bag, int weights[], int singleWorths[]) {
+    public int maxStealUB(int bag, int weights[], int single[]) {
         int n = weights.length;
         // the max steal under <= i items with possible repeat & weight <= limit
-        int[] maxSteal = new int[bag + 1];
+        int[] max = new int[bag + 1];
 
         for (int j = 1; j <= bag; j++) {
             int best = 0;
-            for (int i = 1; i <= n; i++) {
-                if (weights[i - 1] <= j) {
-                    best = Math.max(best, maxSteal[j - weights[i - 1]] + singleWorths[i - 1]);
+            for (int i = 0; i < n; i++) {
+                if (weights[i] <= j) {
+                    best = Math.max(best, max[j - weights[i]] + single[i]);
                 }
             }
-            maxSteal[j] = best;
+            max[j] = best;
         }
 
-        return maxSteal[bag];
+        return max[bag];
     }
 
     // TODO The bounded knapsack problem (BKP) removes the restriction that

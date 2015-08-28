@@ -80,6 +80,8 @@ public class CoinsInALine {
     // bestPick(yours) = Sum(i to j)(values) - bestPick(opponent)
     public int bestPick(int[] values) {
         int n = values.length;
+
+        // best pick from i to j
         int[][] table = new int[n][n];
         int a, b, c;
         for (int step = 0; step < n; step++) {
@@ -87,6 +89,9 @@ public class CoinsInALine {
                 a = i + 2 < n ? table[i + 2][j] : 0;
                 b = i + 1 < n && j - 1 >= 0 ? table[i + 1][j - 1] : 0;
                 c = j - 2 >= 0 ? table[i][j - 2] : 0;
+                // when you took i, opponent will pick to minimize your profit
+                // when you took j, opponent will pick to minimize your profit
+                // and you want the best between the two
                 table[i][j] = Math.max(values[i] + Math.min(a, b), values[j] + Math.min(b, c));
             }
         }
