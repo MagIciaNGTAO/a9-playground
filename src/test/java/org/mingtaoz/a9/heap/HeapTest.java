@@ -3,11 +3,17 @@ package org.mingtaoz.a9.heap;
 import static org.truth0.Truth.ASSERT;
 
 import org.junit.Test;
-import org.mingtaoz.a9.heap.Heap;
 
 public class HeapTest {
 
     private Heap sut;
+
+    @Test
+    public void testHeapify3() {
+        int[] i = new int[] { 20, 5, 10, 12, 15, 8, 2, 6, 2, 9 };
+        sut = new Heap(i);
+        ASSERT.that(i).is(new int[] { 20, 15, 10, 12, 9, 8, 2, 6, 2, 5 });
+    }
 
     @Test
     public void testHeapify2() {

@@ -3,6 +3,8 @@ package org.mingtaoz.a9.tree;
 import java.util.Deque;
 import java.util.LinkedList;
 
+import org.mingtaoz.a9.tree.BinaryTree.TreeNode;
+
 public class SinkZeroInBinaryTree {
     /**
      * 
@@ -31,13 +33,14 @@ public class SinkZeroInBinaryTree {
                 deque.add(node);
             }
         }
+        // ask left piece to consume upper 0s
         swapZero(node.left, deque);
         clearQueue(node.left, deque);
+        // ask right piece to consume upper 0s
         swapZero(node.right, deque);
         clearQueue(node.right, deque);
     }
 
-    // this recursive definition is the key
     private void clearQueue(TreeNode node, Deque<TreeNode> deque) {
         if (!deque.isEmpty() && deque.peekLast() == node) {
             deque.pollLast();

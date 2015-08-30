@@ -59,8 +59,7 @@ public class BinaryTreeTest {
         list.add(3);
         list.add(1);
 
-        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
-                list.toString());
+        ASSERT.that(sut.preorderTraversal(sut.UpsideDownBinaryTree(n1)).toString()).isEqualTo(list.toString());
     }
 
     @Test
@@ -85,8 +84,7 @@ public class BinaryTreeTest {
         list.add(3);
         list.add(1);
 
-        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
-                list.toString());
+        ASSERT.that(sut.preorderTraversal(sut.UpsideDownBinaryTree(n1)).toString()).isEqualTo(list.toString());
     }
 
     @Test
@@ -108,8 +106,7 @@ public class BinaryTreeTest {
         list.add(3);
         list.add(1);
 
-        ASSERT.that(sut.preorderTraversal(sut.upsideDownBinaryTreeHelper(n1, null)).toString()).isEqualTo(
-                list.toString());
+        ASSERT.that(sut.preorderTraversal(sut.UpsideDownBinaryTree(n1)).toString()).isEqualTo(list.toString());
     }
 
     @Test

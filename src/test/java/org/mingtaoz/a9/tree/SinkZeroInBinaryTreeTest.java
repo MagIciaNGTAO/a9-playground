@@ -1,7 +1,7 @@
 package org.mingtaoz.a9.tree;
 
 import org.mingtaoz.a9.tree.SinkZeroInBinaryTree;
-import org.mingtaoz.a9.tree.TreeNode;
+import org.mingtaoz.a9.tree.BinaryTree.TreeNode;
 import org.mingtaoz.a9.tree.TreePrinter;
 
 import junit.framework.Test;

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.mingtaoz.a9.tree.BinaryTree.TreeNode;
+
+// TODO could do a post order traversal and build from bottom left
 public class TreePrinter {
     public static String serializeTree(TreeNode root) {
         StringBuilder stringBuilder = new StringBuilder();
