@@ -148,6 +148,7 @@ public class WordLadder {
      * @param dict
      * @return
      */
+    // BFS to collect all routes, DFS to generate result
     public List<List<String>> findLadders(String start, String end, Set<String> dict) {
         // reversed reference
         Map<String, List<String>> subGraph = new HashMap<>(), tempSubGraph = new HashMap<>();

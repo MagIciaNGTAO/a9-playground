@@ -8,7 +8,6 @@ public class MergeSortedLists {
 
     // TODO O(1) space
     // keep doing merge2 and push result back to the lists ... side effect?
-
     public ListNode mergeKLists(List<ListNode> lists) {
         ListNode ret = new ListNode(-1), cur = ret;
         if (lists.size() == 0) {
@@ -41,7 +40,6 @@ public class MergeSortedLists {
 
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode dummyHead = new ListNode(-1), current = dummyHead;
-
         while (l1 != null && l2 != null) {
             if (l1.val > l2.val) {
                 current.next = l2;
@@ -52,16 +50,12 @@ public class MergeSortedLists {
             }
             current = current.next;
         }
-
-        // used to complicate this piece
         if (l1 != null) {
             current.next = l1;
         }
-
         if (l2 != null) {
             current.next = l2;
         }
-
         return dummyHead.next;
     }
 }

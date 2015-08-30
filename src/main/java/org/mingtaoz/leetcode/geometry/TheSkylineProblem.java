@@ -58,7 +58,6 @@ public class TheSkylineProblem {
                 return h1.index != h2.index ? h1.index - h2.index : h1.height - h2.height;
             }
         });
-
         PriorityQueue<Integer> pq = new PriorityQueue<Integer>(heights.size(), Collections.reverseOrder());
         pq.offer(0);
         int prev = 0;

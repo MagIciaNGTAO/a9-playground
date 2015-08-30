@@ -1,11 +1,25 @@
 package org.mingtaoz.leetcode.graph;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+
+class UndirectedGraphNode {
+
+    public int label;
+    public List<UndirectedGraphNode> neighbors;
+
+    public UndirectedGraphNode(int x) {
+        label = x;
+        neighbors = new ArrayList<UndirectedGraphNode>();
+    }
+
+}
 
 public class UndirectedGraph {
 

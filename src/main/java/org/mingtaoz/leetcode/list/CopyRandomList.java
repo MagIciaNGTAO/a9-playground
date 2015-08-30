@@ -13,7 +13,7 @@ public class CopyRandomList {
 
     public RandomListNode copyRandomList(RandomListNode head) {
         RandomListNode p = head;
-        // mixed pointing - tricky approach
+        // hack with copy next so the two lists are connected
         while (p != null) {
             RandomListNode next = p.next;
             RandomListNode copy = new RandomListNode(p.label);
@@ -29,7 +29,7 @@ public class CopyRandomList {
         }
         p = head;
         RandomListNode ret = p != null ? p.next : null;
-        // copy next & restore
+        // restore next in both original list and copied list
         while (p != null) {
             RandomListNode originNext = p.next.next;
             p.next.next = originNext != null ? originNext.next : null;
