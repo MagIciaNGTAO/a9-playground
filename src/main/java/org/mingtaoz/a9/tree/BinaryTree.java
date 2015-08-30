@@ -864,6 +864,47 @@ public class BinaryTree {
         return ret;
     }
 
+    /**
+     * 
+     * List<TreeNode> list = new LinkedList<>();
+        if (n == 0) {
+            list.add(null);
+            return list;
+        }
+        if (n == 1) {
+            list.add(new TreeNode(1));
+            return list;
+        }
+        list = generateTrees(n - 1);
+        List<TreeNode> ret = new LinkedList<>();
+        // current value as root
+        for (TreeNode node : list) {
+            TreeNode root = new TreeNode(n);
+            root.left = node;
+            ret.add(deepCopy(root));
+        }
+        // current value as right most child and tweeks
+        for (TreeNode node : list) {
+            TreeNode cur = node;
+            while (cur.right != null) {
+                TreeNode newNode = new TreeNode(n);
+                TreeNode tempRight = cur.right;
+                cur.right = newNode;
+                newNode.left = tempRight;
+                ret.add(deepCopy(node));
+                // changing state back
+                cur.right = tempRight;
+                cur = cur.right;
+            }
+            cur.right = new TreeNode(n);
+            ret.add(node);
+        }
+        return ret;
+     * 
+     * @param root
+     * @return
+     */
+
     public TreeNode deepCopy(TreeNode root) {
         if (root == null) {
             return null;

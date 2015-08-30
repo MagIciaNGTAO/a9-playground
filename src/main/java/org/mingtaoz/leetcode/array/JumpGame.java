@@ -31,7 +31,7 @@ public class JumpGame {
                 ret++;
                 follower = explorer;
             }
-            // i is reachable by follower with 1 jump
+            // NOTE: i is reachable by follower with 1 more jump
             explorer = Math.max(explorer, i + A[i]);
             if (explorer >= n - 1) {
                 break;
@@ -43,18 +43,38 @@ public class JumpGame {
         return ret;
     }
 
+    /**
+     * 
+     * Jump Game
+     * 
+     * Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+    Each element in the array represents your maximum jump length at that position.
+
+    Determine if you are able to reach the last index.
+
+    For example:
+    A = [2,3,1,1,4], return true.
+
+    A = [3,2,1,0,4], return false.
+     * 
+     * @param A
+     * @return
+     */
     public boolean canJump(int[] A) {
-        if (A.length == 0 || A.length == 1) {
+        int n = A.length;
+        if (n <= 1) {
             return true;
         }
-        int cl = 1;
-        for (int i = A.length - 2; i > 0; i--) {
-            if (A[i] >= cl) {
-                cl = 1;
+        int jumpNeeded = 1;
+        // walk back
+        for (int i = n - 2; i > 0; i--) {
+            if (A[i] >= jumpNeeded) {
+                jumpNeeded = 1;
             } else {
-                cl++;
+                jumpNeeded++;
             }
         }
-        return A[0] >= cl;
+        return A[0] >= jumpNeeded;
     }
 }

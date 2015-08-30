@@ -2,6 +2,22 @@ package org.mingtaoz.leetcode.array;
 
 public class Arrays {
 
+    /**
+     * 
+     * Search in Rotated Sorted Array
+     * 
+     * Suppose a sorted array is rotated at some pivot unknown to you beforehand.
+
+    (i.e., 0 1 2 4 5 6 7 might become 4 5 6 7 0 1 2).
+
+    You are given a target value to search. If found in the array return its index, otherwise return -1.
+
+    You may assume no duplicate exists in the array.
+     * 
+     * @param A
+     * @param target
+     * @return
+     */
     public int search(int A[], int target) {
         int left = 0, right = A.length - 1;
         while (left <= right) {
@@ -22,6 +38,7 @@ public class Arrays {
                 }
             } else {
                 // skip duplicate one, A[left] == A[mid]
+                // note: two shapes here
                 left++;
             }
         }
@@ -162,6 +179,24 @@ public class Arrays {
         return digits;
     }
 
+    /**
+     * 
+     * Search for a Range
+     * 
+     * Given a sorted array of integers, find the starting and ending position of a given target value.
+
+    Your algorithm's runtime complexity must be in the order of O(log n).
+
+    If the target is not found in the array, return [-1, -1].
+
+    For example,
+    Given [5, 7, 7, 8, 8, 10] and target value 8,
+    return [3, 4].
+     * 
+     * @param A
+     * @param target
+     * @return
+     */
     public int[] searchRange(int[] A, int target) {
         int[] ret = new int[2];
         ret[0] = -1;
@@ -174,8 +209,8 @@ public class Arrays {
             } else if (A[mid] < target) {
                 left = mid + 1;
             } else {
-                // find larget index -> right
-                int rLeft = mid;
+                // extend range by two more binary searches to
+                int rLeft = mid, lRight = mid;
                 while (A[right] != A[mid]) {
                     int rMid = (right + rLeft + 1) / 2;
                     if (A[rMid] > A[mid]) {
@@ -184,8 +219,6 @@ public class Arrays {
                         rLeft = rMid;
                     }
                 }
-                // find smallest index <- left
-                int lRight = mid;
                 while (A[left] != A[mid]) {
                     int lMid = (left + lRight) / 2;
                     if (A[lMid] < A[mid]) {
@@ -204,23 +237,37 @@ public class Arrays {
         return ret;
     }
 
-    public int searchInsert(int[] A, int target) {
-        int left = 0, right = A.length - 1, mid;
+    /**
+     * 
+     * Search Insert Position
+     * 
+     * Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+    You may assume no duplicates in the array.
+
+    Here are few examples.
+    [1,3,5,6], 5 → 2
+    [1,3,5,6], 2 → 1
+    [1,3,5,6], 7 → 4
+    [1,3,5,6], 0 → 0
+     * 
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length - 1, mid;
         while (left <= right) {
-            mid = (left + right + 1) / 2;
-            if (A[mid] == target) {
-                return mid;
-            } else if (A[mid] < target) {
+            mid = (left + right) / 2;
+            if (nums[mid] < target) {
                 left = mid + 1;
-            } else {
+            } else if (nums[mid] > target) {
                 right = mid - 1;
+            } else {
+                return mid;
             }
         }
-        if (right < 0) {
-            return 0;
-        } else {
-            return left;
-        }
+        return left;
     }
 
     public int removeElement(int[] A, int elem) {
@@ -245,19 +292,19 @@ public class Arrays {
             return 0;
         }
         // the only tricky part might be this A[0] - 1.
-        int prev = A[0] - 1, j = 0, n = A.length;
+        int prev = A[0] - 1, index = 0, n = A.length;
         int count = 0, N = 2;
         for (int i = 0; i < n; i++) {
             if (prev != A[i]) {
                 prev = A[i];
-                A[j++] = prev;
+                A[index++] = prev;
                 count = 1;
             } else if (count < N) {
                 prev = A[i];
-                A[j++] = prev;
+                A[index++] = prev;
                 count++;
             }
         }
-        return j;
+        return index;
     }
 }

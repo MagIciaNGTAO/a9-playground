@@ -34,6 +34,10 @@ public class SlidingWindowMaximum {
             }
             slider.offerLast(i);
         }
+        // invaraint of the deque:
+        // largest element's index at first
+        // whenever see a new num[i], get rid of smaller elements' indexes
+        // ensure the deque doesn't extend beyond sliding windows
         for (int i = 0; i < N; i++) {
             int j = i + k - 1;
             while (!slider.isEmpty() && nums[slider.peekLast()] < nums[j]) {
