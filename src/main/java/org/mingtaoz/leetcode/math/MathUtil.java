@@ -10,16 +10,18 @@ package org.mingtaoz.leetcode.math;
  */
 public class MathUtil {
 
-	public static int getLargestDenominator(int x, int y) {
-		if (x < y) {
-			int t = x;
-			x = y;
-			y = t;
-		}
-		// x >= y now
-		if ((x % y) == 0)
-			return y;
-		else
-			return getLargestDenominator(x - y, y);
-	}
+    // denominator
+    public static int getLargestDenominator(int x, int y) {
+        if (x < y) {
+            int t = x;
+            x = y;
+            y = t;
+        }
+        // x >= y now
+        if ((x % y) == 0) {
+            return y;
+        } else {
+            return getLargestDenominator(x - y, y);
+        }
+    }
 }

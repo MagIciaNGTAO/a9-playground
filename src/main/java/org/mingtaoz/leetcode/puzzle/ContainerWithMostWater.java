@@ -22,12 +22,11 @@ public class ContainerWithMostWater {
             if (height[i] > prev) {
                 next = Integer.MIN_VALUE;
                 for (int j = n - 1; j > i; j--) {
-                    // cuz next is calculated with wider width, we got maximum
+                    // we don't care when height decreases
                     if (height[j] > next) {
                         if (height[j] > height[i]) {
                             ret = Math.max(ret, height[i] * (j - i));
-                            // cuz j is decreasing, we got the maxmum for this
-                            // iteration
+                            // cuz j is decreasing, we got the final maxmum
                             break;
                         } else {
                             ret = Math.max(ret, height[j] * (j - i));

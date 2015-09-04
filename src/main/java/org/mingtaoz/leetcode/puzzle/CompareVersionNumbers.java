@@ -34,7 +34,6 @@ public class CompareVersionNumbers {
 			}
 		}
 
-		// tricky here
 		while (i < v1.length) {
 			if (Integer.parseInt(v1[i]) > 0) {
 				return 1;
