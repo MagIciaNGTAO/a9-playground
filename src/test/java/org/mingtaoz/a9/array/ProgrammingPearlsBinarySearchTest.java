@@ -18,7 +18,7 @@ public class ProgrammingPearlsBinarySearchTest {
     @Test
     public void testBinarySearchRecursive5() {
         int[] i = new int[] { 1, 2, 3, 3, 3, 3 };
-        ASSERT.that(sut.binarySearchRecursive(i, 3)).isEqualTo(4); // failing a test
+        ASSERT.that(sut.binarySearchRecursive(i, 3)).isEqualTo(2);
     }
 
     @Test

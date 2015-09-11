@@ -21,20 +21,49 @@ public class Sum {
      * @param target
      * @return
      */
-    public int[] twoSum(int[] numbers, int target) {
-        Map<Integer, Integer> complement = new HashMap<>();
-        int[] ret = new int[2];
-
-        for (int i = 0; i < numbers.length; i++) {
-            if (complement.containsKey(numbers[i])) {
-                ret[0] = complement.get(numbers[i]) + 1;
-                ret[1] = i + 1;
-                return ret;
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> complements = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (complements.containsKey(nums[i])) {
+                return new int[] { complements.get(nums[i]) + 1, i + 1 };
             } else {
-                complement.put(target - numbers[i], i);
+                complements.put(target - nums[i], i);
             }
         }
-        return ret;
+        throw new RuntimeException();
+    }
+
+    public int[] twoSumBinarySearchSkipDup(int[] numbers, int target) {
+        int n = numbers.length, prev = numbers[0] - 1;
+        for (int i = 0; i < n; i++) {
+            if (prev != numbers[i]) {
+                prev = numbers[i];
+                if (numbers[i] > target / 2) {
+                    throw new RuntimeException();
+                }
+                int remain = target - numbers[i];
+                int left = i + 1, right = n - 1;
+                int j = binarySearch(remain, left, right, numbers);
+                if (j != -1) {
+                    return new int[] { i + 1, j + 1 };
+                }
+            }
+        }
+        throw new RuntimeException();
+    }
+
+    private int binarySearch(int target, int left, int right, int[] numbers) {
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (numbers[mid] < target) {
+                left = mid + 1;
+            } else if (numbers[mid] > target) {
+                right = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -65,17 +94,65 @@ public class Sum {
             if (cache.contains(value)) {
                 return true;
             }
-            Map<Integer, Integer> complement = new HashMap<>();
-            for (int i = 0; i < numbers.size(); i++) {
-                if (complement.containsKey(numbers.get(i))) {
+            Set<Integer> complement = new HashSet<>();
+            for (int i : numbers) {
+                if (complement.contains(i)) {
                     cache.add(value);
                     return true;
                 } else {
-                    complement.put(value - numbers.get(i), i);
+                    complement.add(value - i);
                 }
             }
             return false;
         }
+    }
+
+    public List<List<Integer>> threeSumBinarySearch(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<>();
+        Arrays.sort(nums);
+        if (nums.length == 0) {
+            return ret;
+        }
+        int n = nums.length, prev = nums[0] - 1;
+        for (int i = 0; i < n - 2; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (nums[i] != prev) {
+                prev = nums[i];
+                int prevj = nums[i + 1] - 1;
+                for (int j = i + 1; j < n - 1; j++) {
+                    if (nums[j] != prevj) {
+                        prevj = nums[j];
+                        int temp = nums[i] + nums[j];
+                        if (temp > 0) {
+                            break;
+                        }
+                        int found = binarySearch(nums, j + 1, n - 1, -temp);
+                        if (found + temp == 0) {
+                            List<Integer> entry = Arrays.asList(nums[i], nums[j], found);
+                            ret.add(entry);
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    private int binarySearch(int[] nums, int left, int right, int target) {
+        int result = -1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                right = mid - 1;
+            } else {
+                return nums[mid];
+            }
+        }
+        return result;
     }
 
     public List<List<Integer>> threeSum(int[] num) {
@@ -131,11 +208,13 @@ public class Sum {
         return total;
     }
 
+    // removeQuadra is important for pruning
     public int threeSumClosest(int[] num, int target) {
         int ret = 0, dist = Integer.MAX_VALUE;
         Arrays.sort(num);
-        int right = removeTrilicate(num);
+        int right = removeQuadra(num);
         int left = 0;
+        // the search direction doesn't matter that much ...
         for (; left < right - 1; left++) {
             for (int j = right; j > left + 1; j--) {
                 for (int i = j - 1; i > left; i--) {
@@ -153,7 +232,7 @@ public class Sum {
     }
 
     // 2222 333 -> 222 333
-    public int removeTrilicate(int[] num) {
+    public int removeQuadra(int[] num) {
         int total = 0, prev = num[total];
         int count = 0;
         for (int i = 1; i < num.length; i++) {
@@ -206,6 +285,8 @@ public class Sum {
         int right = removeQuaduplets(num), left = 0;
         // 3. search & pruning
         int quarter = target / 4 - 1, half = target / 2 - 1, threeQuarter = half + quarter;
+
+        // search from right, and keep pruning
         for (; right > left + 2; right--) {
             if (num[right] < quarter) {
                 // right most is the largest, should be larger than 1/4 target

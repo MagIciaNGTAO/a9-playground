@@ -84,12 +84,12 @@ public class SumTest {
 
 	@Test
 	public void testRemoveTriplicate2() {
-		ASSERT.that(sut.removeTrilicate(new int[] { 0, 0, 0, 0 })).is(2);
+		ASSERT.that(sut.removeQuadra(new int[] { 0, 0, 0, 0 })).is(2);
 	}
 
 	@Test
 	public void testRemoveTriplicate1() {
-		ASSERT.that(sut.removeTrilicate(new int[] { 0, 0, 0 })).is(2);
+		ASSERT.that(sut.removeQuadra(new int[] { 0, 0, 0 })).is(2);
 	}
 
 	@Test

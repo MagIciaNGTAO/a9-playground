@@ -1,48 +1,62 @@
 package org.mingtaoz.leetcode.recursion;
 
+/**
+ * Sudoku Solver Total Accepted: 35630 Total Submissions: 160930 My Submissions Question Solution 
+Write a program to solve a Sudoku puzzle by filling the empty cells.
+
+Empty cells are indicated by the character '.'.
+
+You may assume that there will be only one unique solution.
+
+
+A sudoku puzzle...
+
+
+...and its solution numbers marked in red.
+ * 
+ * @author mingtaozhang
+ *
+ */
 public class Sudoku {
 
     public void solveSudoku(char[][] board) {
-        int n = board.length, dots = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                if (board[i][j] == '.') {
-                    dots++;
-                }
-            }
-        }
-        solveSudokuHelper(board, dots, 0);
+        solveSudokuHelper(0, 0, board.length, board);
     }
 
-    public boolean solveSudokuHelper(char[][] board, int dots, int seq) {
-        if (dots == 0) {
+    private boolean solveSudokuHelper(int i, int j, int n, char[][] board) {
+        if (i == n - 1 && j == n) {
             return true;
         }
-        int i = seq / 9, j = seq % 9;
-        if (board[i][j] != '.') {
-            return solveSudokuHelper(board, dots, seq + 1);
-        } else {
-            for (int k = 1; k <= 9; k++) {
-                board[i][j] = (char) ('0' + k);
-                if (isValidSudoku(board) && solveSudokuHelper(board, dots - 1, seq + 1)) {
-                    return true;
+        if (j == n) {
+            i += 1;
+            j = 0;
+            return solveSudokuHelper(i, j, n, board);
+        }
+        if (board[i][j] == '.') {
+            for (int num = 0; num < n; num++) {
+                board[i][j] = getChar(num);
+                if (isValidSudoku(board)) {
+                    if (solveSudokuHelper(i, j + 1, n, board)) {
+                        return true;
+                    }
                 }
             }
             board[i][j] = '.';
+            return false;
+        } else {
+            return solveSudokuHelper(i, j + 1, n, board);
         }
-        return false;
     }
 
-    public boolean isValidSudoku(char[][] board) {
-        int n = board.length;
+    private boolean isValidSudoku(char[][] board) {
         // rule 1
+        int n = board.length, squares = 3;
         for (int i = 0; i < n; i++) {
-            boolean[] conflict = new boolean[n];
+            boolean[] appear = new boolean[n];
             for (int j = 0; j < n; j++) {
                 if (board[i][j] != '.') {
-                    int v = board[i][j] - '1';
-                    if (!conflict[v]) {
-                        conflict[v] = true;
+                    if (!appear[getIndex(board[i][j])]) {
+                        appear[getIndex(board[i][j])] = true;
                     } else {
                         return false;
                     }
@@ -51,12 +65,11 @@ public class Sudoku {
         }
         // rule 2
         for (int i = 0; i < n; i++) {
-            boolean[] conflict = new boolean[n];
+            boolean[] appear = new boolean[n];
             for (int j = 0; j < n; j++) {
                 if (board[j][i] != '.') {
-                    int v = board[j][i] - '1';
-                    if (!conflict[v]) {
-                        conflict[v] = true;
+                    if (!appear[getIndex(board[j][i])]) {
+                        appear[getIndex(board[j][i])] = true;
                     } else {
                         return false;
                     }
@@ -64,15 +77,14 @@ public class Sudoku {
             }
         }
         // rule 3
-        for (int bi = 0; bi < 3; bi++) {
-            for (int bj = 0; bj < 3; bj++) {
-                boolean[] conflict = new boolean[n];
-                for (int i = bi * 3; i < (bi + 1) * 3; i++) {
-                    for (int j = bj * 3; j < (bj + 1) * 3; j++) {
-                        if (board[i][j] != '.') {
-                            int v = board[i][j] - '1';
-                            if (!conflict[v]) {
-                                conflict[v] = true;
+        for (int k = 0; k < n; k += squares) {
+            for (int l = 0; l < n; l += squares) {
+                boolean[] appear = new boolean[n];
+                for (int i = k; i < k + squares; i++) {
+                    for (int j = l; j < l + squares; j++) {
+                        if (board[j][i] != '.') {
+                            if (!appear[getIndex(board[j][i])]) {
+                                appear[getIndex(board[j][i])] = true;
                             } else {
                                 return false;
                             }
@@ -82,5 +94,13 @@ public class Sudoku {
             }
         }
         return true;
+    }
+
+    private char getChar(int index) {
+        return (char) (index + '1');
+    }
+
+    private int getIndex(char c) {
+        return c - '1';
     }
 }
