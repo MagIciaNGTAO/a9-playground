@@ -304,17 +304,14 @@ public class Sum {
                         // right three should be larger than 3 quarters
                         break;
                     }
-                    for (int k = left; k < j; k++) {
-                        int temp = partial + num[k];
-                        if (temp == target) {
-                            List<Integer> list = Arrays.asList(num[k], num[j], num[i], num[right]);
-                            Wrapper w = new Wrapper(list);
-                            if (!dup.contains(w)) {
-                                dup.add(w);
-                                ret.add(list);
-                            }
-                        } else if (temp > target) {
-                            break;
+                    // binary search for last one
+                    int found = binarySearch(target - partial, left, j - 1, num);
+                    if (found + partial == target) {
+                        List<Integer> list = Arrays.asList(found, num[j], num[i], num[right]);
+                        Wrapper w = new Wrapper(list);
+                        if (!dup.contains(w)) {
+                            dup.add(w);
+                            ret.add(list);
                         }
                     }
                 }
