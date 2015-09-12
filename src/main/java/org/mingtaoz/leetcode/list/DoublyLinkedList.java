@@ -6,9 +6,10 @@ public class DoublyLinkedList {
     Node tail;
 
     public static class Node {
-        public Node prev;
         public int key;
         public int value;
+
+        public Node prev;
         public Node next;
 
         public Node(int key, int value) {
@@ -48,27 +49,10 @@ public class DoublyLinkedList {
             return ret;
         }
 
-        // normal case
+        // middle of no where :)
         node.prev.next = node.next;
         node.next.prev = node.prev;
         return ret;
-    }
-
-    // this addToFront routine need to clear the old node pointers
-    public void addToFront(Node node) {
-        node.prev = null;
-        if (head == null && tail == null) {
-            // empty case
-            node.next = null;
-            head = node;
-            tail = node;
-            return;
-        }
-
-        // single/multi case
-        node.next = head;
-        head.prev = node;
-        head = node;
     }
 
     // precondition: non empty

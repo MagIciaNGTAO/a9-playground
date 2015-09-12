@@ -3,9 +3,6 @@ package org.mingtaoz.leetcode.map;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.mingtaoz.leetcode.list.DoublyLinkedList;
-import org.mingtaoz.leetcode.list.DoublyLinkedList.Node;
-
 /**
  * Design and implement a data structure for Least Recently Used (LRU) cache. It
  * should support the following operations: get and set.
@@ -17,52 +14,148 @@ import org.mingtaoz.leetcode.list.DoublyLinkedList.Node;
  * When the cache reached its capacity, it should invalidate the least recently
  * used item before inserting a new item.
  */
-public class LRUCache {
+interface Cache {
+    int get(int key);
 
-	private int capacity;
-	private Map<Integer, Node> cache;
-	private DoublyLinkedList usageList;
-	
-	public LRUCache(int capacity) {
-		this.capacity = capacity;
-		usageList = new DoublyLinkedList();
-		cache = new HashMap<Integer, Node>();
-	}
+    void set(int key, int value);
+}
 
-	public int get(int key) {
-		if (cache.containsKey(key)) {
-			// move to head
-			usageList.remove(cache.get(key));
-			usageList.addToFront(cache.get(key));
-			return cache.get(key).value;
-		} else {
-			return -1;
-		}
-	}
+public class LRUCache implements Cache {
 
-	public void set(int key, int value) {
-		if (cache.containsKey(key)) {
-			// key existed
-			cache.get(key).value = value; // update value
-			usageList.remove(cache.get(key));
-			usageList.addToFront(cache.get(key));
-		} else {
-			// key not existed
-			if (cache.size() == capacity) {
-				// case 1 full
-				cache.remove(usageList.removeTail());
-			}
-			Node newNode = new Node(key, value);
-			usageList.addToFront(newNode);
-			cache.put(key, newNode);
-		}
-	}
+    private int capacity;
+    private Map<Integer, Node> map;
+    private DoublyLinkedList accessList;
 
-	public void set(int... args) {
-		set(args[0], args[1]);
-	}
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        map = new HashMap<>();
+        accessList = new DoublyLinkedList();
+    }
 
-	public int get(int... args) {
-		return get(args[0]);
-	}
+    public int get(int key) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            accessList.remove(node);
+            node.prev = null;
+            node.next = null;
+            accessList.addToFront(node);
+            return node.value;
+        }
+        return -1;
+    }
+
+    public void set(int key, int value) {
+        if (map.containsKey(key)) {
+            Node node = map.get(key);
+            node.value = value;
+            // TODO ??
+            accessList.remove(node);
+            node.prev = null;
+            node.next = null;
+            accessList.addToFront(node);
+        } else {
+            if (map.size() == capacity) {
+                int removeKey = accessList.removeTail();
+                map.remove(removeKey);
+            }
+            Node newNode = new Node(key, value);
+            accessList.addToFront(newNode);
+            map.put(key, newNode);
+        }
+    }
+
+    class Node {
+        public Node prev;
+        public int key;
+        public int value;
+        public Node next;
+
+        public Node(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    class DoublyLinkedList {
+
+        Node head;
+        Node tail;
+
+        public DoublyLinkedList() {
+        }
+
+        public int remove(Node node) {
+            int ret = node.key; // key
+            if (node.next == null && node.prev == null) {
+                // only one case
+                head = null;
+                tail = null;
+                return ret;
+            }
+
+            if (node.prev == null) {
+                // prev null case
+                head = node.next;
+                head.prev = null;
+                return ret;
+            }
+
+            if (node.next == null) {
+                // next null case
+                tail = node.prev;
+                tail.next = null;
+                return ret;
+            }
+
+            // normal
+            node.prev.next = node.next;
+            node.next.prev = node.prev;
+            return ret;
+        }
+
+        public void addToFront(Node node) {
+            if (head == null) {
+                // empty
+                node.next = null;
+                head = node;
+                tail = node;
+                return;
+            }
+
+            // single/multi
+            node.next = head;
+            head.prev = node;
+            head = node;
+        }
+
+        // precondition: non empty
+        public int removeTail() {
+            int ret = tail.key;
+            if (head == tail) {
+                // single case
+                head = null;
+                tail = null;
+                return ret;
+            }
+
+            tail = tail.prev;
+            tail.next = null;
+            return ret;
+        }
+
+        // precondition: non empty
+        public int removeFront() {
+            int ret = head.key;
+            if (head == tail) {
+                // single case
+                head = null;
+                tail = null;
+                return ret;
+            }
+
+            head = head.next;
+            head.prev = null;
+            return ret;
+        }
+    }
 }

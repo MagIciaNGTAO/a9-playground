@@ -4,7 +4,7 @@ import static org.truth0.Truth.ASSERT;
 
 import org.junit.Test;
 import org.junit.Before;
-import org.mingtaoz.leetcode.string.StringToInteger;
+import org.mingtaoz.a9.string.StringToInteger;
 
 public class StringToIntegerTest {
 
