@@ -1,11 +1,11 @@
-package org.mingtaoz.leetcode.graph;
+package org.mingtaoz.a9.graph;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.mingtaoz.leetcode.graph.WordLadder;
+import org.mingtaoz.a9.graph.WordLadder;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

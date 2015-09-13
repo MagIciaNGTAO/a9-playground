@@ -1,4 +1,4 @@
-package org.mingtaoz.leetcode.graph;
+package org.mingtaoz.a9.graph;
 
 import java.util.HashMap;
 import java.util.HashSet;
